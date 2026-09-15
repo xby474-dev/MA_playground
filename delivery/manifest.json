@@ -3,14 +3,14 @@
   "version": "1.1.0",
   "date": "2026-09-15",
   "feature": "Unified Green → planar flux → Gauss → Stokes learning lab",
-  "local_commit": "87a1868cf01413dd3ce78be95d75ddfcb17897f8",
-  "local_branch": "unified-field-lab",
-  "base_commit": "338c32f49f790ed91c6ba7886538b0e13dccfcec",
-  "feature_tree": "060eb2d749d883b258db5c924253d94f17584a7b",
-  "history_notice": "Local history restored from the supplied v1.0 bundle, not verified upstream history. Never force-push it over the real remote.",
-  "remote_updated": false,
-  "publicly_deployed": false,
-  "remote_status": "GitHub integration checked during this turn: not installed/connected; no authorized remote write performed.",
+  "local_commit": "cdec80dfe20e9788b0681501a61e711ec3f5cc59",
+  "local_branch": "main",
+  "base_commit": "ee6acbbec1d087d9710500c862e652a4b69f03d4",
+  "feature_tree": "cdec80dfe20e9788b0681501a61e711ec3f5cc59",
+  "history_notice": "Integrated onto the real remote main history without force-push.",
+  "remote_updated": true,
+  "publicly_deployed": true,
+  "remote_status": "Pushed to xby474-dev/MA_playground; GitHub Actions and GitHub Pages succeeded.",
   "verification": {
     "node": {
       "passed": 76,
@@ -31,8 +31,7 @@
     "http_resources": "Actual Node HTTP requests at / and /MA_playground/; all new and legacy modules checked.",
     "patch_application": "Applied to v1.0 baseline and resulting index tree exactly matches feature commit.",
     "remaining_unverified": [
-      "served-browser ES-module end-to-end load",
-      "GitHub Actions and public Pages",
+      "local Windows Python browser command",
       "Safari/Firefox/iOS",
       "screen-reader full workflow",
       "student learning outcomes"
