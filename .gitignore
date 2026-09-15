@@ -7,3 +7,6 @@ __pycache__/
 !.env.example
 test-results/
 playwright-report/
+
+# Generated delivery bundles and test logs
+delivery/

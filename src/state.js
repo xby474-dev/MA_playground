@@ -1,11 +1,14 @@
+import { fieldDefaults, parseFieldState, serializeFieldState } from './field-state.js';
 import { clamp } from './math.js';
 export function defaults(lab = 'limits') {
+  if(lab === 'fields') return fieldDefaults();
   return { lab, tab: 'explore', path: 'line', k: 1, q: 0.65, sign: 1, zoom: false, view: lab === 'limits' ? 'plane' : 'surface', model: 'counter', angle: 45, metric: 'ratio', pins: [] };
 }
 const pick = (value, options, fallback) => options.includes(value) ? value : fallback;
 const num = (value, fallback, min, max) => value === null || value.trim() === '' || !Number.isFinite(Number(value)) ? fallback : clamp(Number(value), min, max);
 export function parseState(hash) {
   const p = new URLSearchParams(hash.replace(/^#/, ''));
+  if(p.get('lab') === 'fields') return parseFieldState(p);
   const s = defaults(pick(p.get('lab'), ['limits', 'differentiability'], 'limits'));
   s.tab = pick(p.get('tab'), ['explore', 'proof', 'quiz'], s.tab);
   s.path = pick(p.get('path'), ['line', 'parabola', 'vertical'], s.path);
@@ -29,6 +32,7 @@ export function parseState(hash) {
   return s;
 }
 export function serializeState(s) {
+  if(s.lab === 'fields') return serializeFieldState(s);
   const p = new URLSearchParams({ lab: s.lab, tab: s.tab, q: s.q.toFixed(3), view: s.view });
   if (s.lab === 'limits') {
     p.set('path', s.path); p.set('k', String(s.k)); p.set('sign', String(s.sign));

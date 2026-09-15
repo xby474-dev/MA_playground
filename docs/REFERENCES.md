@@ -7,6 +7,12 @@
 - OpenStax, *Calculus Volume 3*, §4.2, Limits and Continuity: https://openstax.org/books/calculus-volume-3/pages/4-2-limits-and-continuity
 - OpenStax, *Calculus Volume 3*, §4.4, Tangent Planes and Linear Approximations: https://openstax.org/books/calculus-volume-3/pages/4-4-tangent-planes-and-linear-approximations
 
+- OpenStax, *Calculus Volume 3*, §6.4, Green’s Theorem: https://openstax.org/books/calculus-volume-3/pages/6-4-greens-theorem
+- OpenStax, *Calculus Volume 3*, §6.7, Stokes’ Theorem: https://openstax.org/books/calculus-volume-3/pages/6-7-stokes-theorem
+- OpenStax, *Calculus Volume 3*, §6.8, The Divergence Theorem: https://openstax.org/books/calculus-volume-3/pages/6-8-the-divergence-theorem
+
+新实验对矩形、长方体与显式图面的推导、所选多项式场与解析积分均为本项目实现。引用教材用于一般定理条件的核对和进一步阅读；参考链接不参与运行，离线时完整证明仍包含在应用中。
+
 ## 技术
 
 - MDN, SVG: https://developer.mozilla.org/en-US/docs/Web/SVG

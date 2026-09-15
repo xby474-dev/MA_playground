@@ -1,17 +1,22 @@
-MA PLAYGROUND · 首版交付
+MA PLAYGROUND · v1.1 · 统一场论直觉实验室
 
-应用已完成并本地验证，尚未 push / 上线。详情：docs/STATUS.md。
+直接体验新实验：双击 dist/field-lab.html。
+原有首页：双击 dist/standalone.html。
+两个入口都包含全部三个实验；不需安装 Node，不加载 CDN/字体/外部 API。
 
-最快体验：双击 dist/standalone.html；不必安装 Node，不加载 CDN。
-开发：在项目根目录运行 npm run dev。
-验证：npm run verify。浏览器测试见 docs/VERIFICATION.md。
+开发与验证：
+  npm run dev
+  npm run verify
+浏览器测试的依赖与验证范围见 docs/VERIFICATION.md。
 
-本地功能 commit：338c32f49f790ed91c6ba7886538b0e13dccfcec
+新学习路线：Green → 平面通量桥梁 → Gauss → Stokes → 统一视角。
+每站：局部量 → 分块累积 → 公共边界抵消 → 整体边界。
+新手指南：docs/FIELD-GUIDE.md
+数学说明：docs/FIELD-MATHEMATICS.md
 
-GitHub 连接/授权及当前环境的 github.com DNS 是发布阻塞。
-本地重建的 README 基线不是远端 commit。不要强制推送覆盖原仓库。
-增量补丁在本地 README fixture 上已验证，可用于将内容应用到真实远端历史。
-Git bundle 保存完整本地历史，方便审阅，不代表远端已发布。
+本地验证通过；本轮未更新远端 GitHub、未公开上线。
+准确本地 commit 与增量补丁见 delivery/manifest.json。
+当前历史从上一轮本地 bundle 恢复，不等同于真实远端 main；禁止强制推送覆盖远端历史。
 
-交付包含源码、生产静态文件、自动测试、UI 截图、数学证明和 CI 配置。
-没有打包 node_modules、登录凭据或字体文件。
+完整交付含源码、生产文件、文档、测试、真实截图、本地历史 bundle、增量补丁。
+无 node_modules、登录凭据或字体文件。

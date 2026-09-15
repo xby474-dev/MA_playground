@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { spawn, spawnSync } from 'node:child_process';
 import { readFile, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { resolve } from 'node:path';
+import { basename, resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
 let server, base;
@@ -36,7 +36,7 @@ after(() => server?.kill());
 test('Production build is deterministic and includes only the intended static files', async () => {
   const first = await digest(resolve(root, 'dist')); build();
   assert.deepEqual(await digest(resolve(root, 'dist')), first);
-  assert.ok(Object.keys(first).some(path => path.endsWith('/.nojekyll')));
+  assert.ok(Object.keys(first).some(path => basename(path) === '.nojekyll'));
   assert.ok(!Object.keys(first).some(path => /(?:\.env|\.github|node_modules|test-results)/.test(path)));
 });
 test('Production server serves identical entry HTML at root and GitHub Pages subpath', async () => {
@@ -76,4 +76,16 @@ test('Offline HTML contains the full application without external styles, script
   assert.ok(!/<script[^>]+src=/.test(html)); assert.ok(!/<link[^>]+rel="stylesheet"/.test(html));
   assert.ok(!/url\(['"]?https?:\/\//.test(html));
   assert.equal((await fetch(base+'/MA_playground/standalone.html')).status,200);
+});
+
+test('New field modules, local stylesheet and authored offline proofs resolve at both deployment paths', async()=>{
+  for(const prefix of ['/','/MA_playground/'])for(const file of ['src/field-math.js','src/field-state.js','src/field-content.js','src/field-plots.js','src/field-lab.js','styles/fields.css','docs/FIELD-MATHEMATICS.md','docs/FIELD-GUIDE.md']) {
+    const r=await fetch(base+prefix+file);assert.equal(r.status,200,file);assert.ok((await r.text()).length>50,file);
+  }
+});
+test('New direct offline entry opens the unified lab but retains all three experiments', async()=>{
+  const r=await fetch(base+'/MA_playground/field-lab.html');assert.equal(r.status,200);
+  const html=await r.text();assert.ok(html.includes('data-initial-lab="fields"'));
+  for(const id of ['nav-limits','nav-differentiability','nav-fields'])assert.ok(html.includes(id));
+  assert.ok(!/<script[^>]+src=/.test(html));assert.ok(!/<link[^>]+rel="stylesheet"/.test(html));
 });
