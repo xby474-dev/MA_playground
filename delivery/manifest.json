@@ -1,0 +1,41 @@
+{
+  "project": "MA Playground",
+  "version": "1.0.0",
+  "prepared_at_utc": "2026-09-15T14:32:18.898930+00:00",
+  "requested_repository": "https://github.com/xby474-dev/MA_playground",
+  "local_commit": "338c32f49f790ed91c6ba7886538b0e13dccfcec",
+  "local_reconstructed_baseline": "83c386fd9f3d9e8d2dce01bf342c4591fe4160ed",
+  "local_history_notice": "Isolated local commits, not a clone of or commits pushed to the remote repository. The baseline reconstructs the public README only.",
+  "git_worktree_clean": true,
+  "build": "passed",
+  "node_tests": {
+    "passed": 44,
+    "failed": 0
+  },
+  "browser_tests": {
+    "passed": 29,
+    "failed": 0,
+    "mode": "standalone injection (no browser network navigation)",
+    "browser": "Chromium 144.0.7559.96"
+  },
+  "production_http_tests": "passed within the 44 Node tests",
+  "incremental_patch_validation": "Applies to locally reconstructed README fixture and produces exactly the same Git tree as the implementation commit.",
+  "push": {
+    "attempted": true,
+    "succeeded": false,
+    "exit_code": 128,
+    "error": "fatal: unable to access 'https://github.com/xby474-dev/MA_playground.git/': Could not resolve host: github.com"
+  },
+  "github_authorization": "GitHub plugin not connected at delivery; no credentials supplied.",
+  "github_actions_executed": false,
+  "public_site_deployed": false,
+  "browser_limitations": "UI checked using the real standalone build injected into about:blank. Browser-to-server ES module navigation, Safari, Firefox, screen readers and production Pages were not exercised.",
+  "files": {
+    "offline_entry": "dist/standalone.html",
+    "source_entry": "index.html",
+    "incremental_patch": "delivery/MA-Playground-v1.patch",
+    "local_history": "delivery/MA-Playground-local-history.bundle",
+    "verification": "docs/VERIFICATION.md",
+    "status": "docs/STATUS.md"
+  }
+}

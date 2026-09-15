@@ -1,0 +1,42 @@
+{
+  "mode": "standalone injection (no browser network navigation)",
+  "browser": "Chromium",
+  "passed": 29,
+  "checks": [
+    "Initial application, MathML and selected navigation render without JS errors",
+    "Inactive camera controls and unfocused skip link are hidden",
+    "Guided counterexample pins a line and shows parabola limit 1/2",
+    "Extreme zoom parameter keeps the parabola value at 1/2",
+    "Skip link moves focus to main without resetting the experiment hash route",
+    "Negative parabola coefficient and negative t preserve the analytic value",
+    "Degenerate parabola and the separate vertical path are handled correctly",
+    "Pin uniqueness, maximum capacity and removal work",
+    "Follow zoom produces finite, equal-scale plane coordinates",
+    "3D rendering responds to keyboard rotation and exact camera reset",
+    "Switching away from Canvas cleans up the surface element",
+    "CSV export creates 101 samples, comparison data and a non-proof disclaimer",
+    "Sharing preserves experiment inputs and has a keyboard-dismissable clipboard fallback",
+    "Reset restores a clean experiment",
+    "Limit proof renders quantifiers, separate vertical path and the contradiction",
+    "Quiz answers, scoring, explanations, tab persistence and reset work",
+    "Differentiability starts with the counterexample and exact worst-case formula",
+    "Axis directions give zero while diagonal relative error remains 1/2",
+    "Metric switch contrasts raw and relative error; smooth error is rho",
+    "Polar direction scan has explicit error-radius semantics and finite endpoints",
+    "Local surface zoom renders without changing the error calculation",
+    "Explicit animation advances the logarithmic scale and pauses cleanly",
+    "ARIA tabs support arrow keys and retain keyboard focus",
+    "Second experiment quiz has consistent correct answers and explanations",
+    "No horizontal document overflow across 360, 390, 768 and 1024 px and all three panels",
+    "Mobile limit controls, exponential values and zoom remain usable",
+    "Malformed deep links cannot inject markup or poison plotting state",
+    "Dialogs, named controls, secure external links and reduced-motion preference are present",
+    "All exercised UI flows are free of uncaught JS errors and external runtime requests"
+  ],
+  "uncaught_errors": [],
+  "notes": [
+    "Native clipboard success is not asserted; denial fallback is tested.",
+    "CSV Blob content is checked; system file-save permission is not assumed.",
+    "Finite math tests check implementation consistency, not theorem validity."
+  ]
+}

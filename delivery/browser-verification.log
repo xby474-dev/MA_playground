@@ -1,0 +1,31 @@
+PASS 01  Initial application, MathML and selected navigation render without JS errors
+PASS 02  Inactive camera controls and unfocused skip link are hidden
+PASS 03  Guided counterexample pins a line and shows parabola limit 1/2
+PASS 04  Extreme zoom parameter keeps the parabola value at 1/2
+PASS 05  Skip link moves focus to main without resetting the experiment hash route
+PASS 06  Negative parabola coefficient and negative t preserve the analytic value
+PASS 07  Degenerate parabola and the separate vertical path are handled correctly
+PASS 08  Pin uniqueness, maximum capacity and removal work
+PASS 09  Follow zoom produces finite, equal-scale plane coordinates
+PASS 10  3D rendering responds to keyboard rotation and exact camera reset
+PASS 11  Switching away from Canvas cleans up the surface element
+PASS 12  CSV export creates 101 samples, comparison data and a non-proof disclaimer
+PASS 13  Sharing preserves experiment inputs and has a keyboard-dismissable clipboard fallback
+PASS 14  Reset restores a clean experiment
+PASS 15  Limit proof renders quantifiers, separate vertical path and the contradiction
+PASS 16  Quiz answers, scoring, explanations, tab persistence and reset work
+PASS 17  Differentiability starts with the counterexample and exact worst-case formula
+PASS 18  Axis directions give zero while diagonal relative error remains 1/2
+PASS 19  Metric switch contrasts raw and relative error; smooth error is rho
+PASS 20  Polar direction scan has explicit error-radius semantics and finite endpoints
+PASS 21  Local surface zoom renders without changing the error calculation
+PASS 22  Explicit animation advances the logarithmic scale and pauses cleanly
+PASS 23  ARIA tabs support arrow keys and retain keyboard focus
+PASS 24  Second experiment quiz has consistent correct answers and explanations
+PASS 25  No horizontal document overflow across 360, 390, 768 and 1024 px and all three panels
+PASS 26  Mobile limit controls, exponential values and zoom remain usable
+PASS 27  Malformed deep links cannot inject markup or poison plotting state
+PASS 28  Dialogs, named controls, secure external links and reduced-motion preference are present
+PASS 29  All exercised UI flows are free of uncaught JS errors and external runtime requests
+
+29 browser checks passed. Mode: standalone injection (no browser network navigation)

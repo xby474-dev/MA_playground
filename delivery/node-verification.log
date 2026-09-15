@@ -1,0 +1,292 @@
+
+> ma-playground@1.0.0 verify
+> npm run check && npm test && npm run build
+
+
+> ma-playground@1.0.0 check
+> node scripts/check.mjs
+
+14 JavaScript files syntax-checked; no external runtime scripts or styles.
+
+> ma-playground@1.0.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: Proof includes vertical path, origin extension and quantifier caveat
+ok 1 - Proof includes vertical path, origin extension and quantifier caveat
+  ---
+  duration_ms: 1.514217
+  type: 'test'
+  ...
+# Subtest: Differentiability proof distinguishes candidate from genuine tangent plane
+ok 2 - Differentiability proof distinguishes candidate from genuine tangent plane
+  ---
+  duration_ms: 0.476975
+  type: 'test'
+  ...
+# Subtest: Each quiz has exactly one valid answer and a substantive explanation
+ok 3 - Each quiz has exactly one valid answer and a substantive explanation
+  ---
+  duration_ms: 0.298063
+  type: 'test'
+  ...
+# Subtest: SVG coordinate output is finite at slider extremes
+ok 4 - SVG coordinate output is finite at slider extremes
+  ---
+  duration_ms: 38.836254
+  type: 'test'
+  ...
+# Subtest: Polar view distinguishes input radius from displayed error magnitude
+ok 5 - Polar view distinguishes input radius from displayed error magnitude
+  ---
+  duration_ms: 38.423
+  type: 'test'
+  ...
+# Subtest: MathML fractions are structured and no placeholder remains
+ok 6 - MathML fractions are structured and no placeholder remains
+  ---
+  duration_ms: 0.489773
+  type: 'test'
+  ...
+# Subtest: Surface slice leaves a genuine hole at a nonzero parabolic path limit
+ok 7 - Surface slice leaves a genuine hole at a nonzero parabolic path limit
+  ---
+  duration_ms: 2.270854
+  type: 'test'
+  ...
+# Subtest: Continuous surface slices contain the actual origin, including the degenerate parabola
+ok 8 - Continuous surface slices contain the actual origin, including the degenerate parabola
+  ---
+  duration_ms: 0.950484
+  type: 'test'
+  ...
+# Subtest: Production build is deterministic and includes only the intended static files
+ok 9 - Production build is deterministic and includes only the intended static files
+  ---
+  duration_ms: 221.731194
+  type: 'test'
+  ...
+# Subtest: Production server serves identical entry HTML at root and GitHub Pages subpath
+ok 10 - Production server serves identical entry HTML at root and GitHub Pages subpath
+  ---
+  duration_ms: 45.791992
+  type: 'test'
+  ...
+# Subtest: CSS, favicon, entry module and complete module graph resolve with correct MIME under a subpath
+ok 11 - CSS, favicon, entry module and complete module graph resolve with correct MIME under a subpath
+  ---
+  duration_ms: 47.715061
+  type: 'test'
+  ...
+# Subtest: Static proof references and no-Jekyll marker are included and served
+ok 12 - Static proof references and no-Jekyll marker are included and served
+  ---
+  duration_ms: 11.084884
+  type: 'test'
+  ...
+# Subtest: Preview refuses dotfile and encoded traversal requests
+ok 13 - Preview refuses dotfile and encoded traversal requests
+  ---
+  duration_ms: 5.218279
+  type: 'test'
+  ...
+# Subtest: Missing assets and malformed encodings are not silently returned as successful HTML
+ok 14 - Missing assets and malformed encodings are not silently returned as successful HTML
+  ---
+  duration_ms: 3.553068
+  type: 'test'
+  ...
+# Subtest: Offline HTML contains the full application without external styles, scripts or font downloads
+ok 15 - Offline HTML contains the full application without external styles, scripts or font downloads
+  ---
+  duration_ms: 11.992131
+  type: 'test'
+  ...
+# Subtest: Origin extensions are values, not limits
+ok 16 - Origin extensions are values, not limits
+  ---
+  duration_ms: 1.703441
+  type: 'test'
+  ...
+# Subtest: line: parametrization and analytic value agree with direct evaluation
+ok 17 - line: parametrization and analytic value agree with direct evaluation
+  ---
+  duration_ms: 1.08986
+  type: 'test'
+  ...
+# Subtest: parabola: parametrization and analytic value agree with direct evaluation
+ok 18 - parabola: parametrization and analytic value agree with direct evaluation
+  ---
+  duration_ms: 0.254991
+  type: 'test'
+  ...
+# Subtest: vertical: parametrization and analytic value agree with direct evaluation
+ok 19 - vertical: parametrization and analytic value agree with direct evaluation
+  ---
+  duration_ms: 0.17431
+  type: 'test'
+  ...
+# Subtest: Every fixed nonzero finite slope gives limit zero; axes handled separately
+ok 20 - Every fixed nonzero finite slope gives limit zero; axes handled separately
+  ---
+  duration_ms: 0.391353
+  type: 'test'
+  ...
+# Subtest: Parabolas give c/(1+c²), with both signs of t and negative c
+ok 21 - Parabolas give c/(1+c²), with both signs of t and negative c
+  ---
+  duration_ms: 0.303609
+  type: 'test'
+  ...
+# Subtest: k=0 is a degenerate parabola, not a counterexample
+ok 22 - k=0 is a degenerate parabola, not a counterexample
+  ---
+  duration_ms: 0.258104
+  type: 'test'
+  ...
+# Subtest: Global F bound and even/odd symmetries
+ok 23 - Global F bound and even/odd symmetries
+  ---
+  duration_ms: 19.776437
+  type: 'test'
+  ...
+# Subtest: Stable evaluation does not lose the narrowing parabola ridge
+ok 24 - Stable evaluation does not lose the narrowing parabola ridge
+  ---
+  duration_ms: 0.718421
+  type: 'test'
+  ...
+# Subtest: Explicit epsilon-delta witnesses falsify limit zero at every tested delta
+ok 25 - Explicit epsilon-delta witnesses falsify limit zero at every tested delta
+  ---
+  duration_ms: 0.683691
+  type: 'test'
+  ...
+# Subtest: Smooth model has a uniform second-order remainder
+ok 26 - Smooth model has a uniform second-order remainder
+  ---
+  duration_ms: 0.695888
+  type: 'test'
+  ...
+# Subtest: Counterexample is continuous: |g| <= rho/2
+ok 27 - Counterexample is continuous: |g| <= rho/2
+  ---
+  duration_ms: 1.174574
+  type: 'test'
+  ...
+# Subtest: Both partial derivatives are zero (difference quotient sequences)
+ok 28 - Both partial derivatives are zero (difference quotient sequences)
+  ---
+  duration_ms: 0.19321
+  type: 'test'
+  ...
+# Subtest: Counterexample diagonal normalized error is exactly 1/2, independent of scale
+ok 29 - Counterexample diagonal normalized error is exactly 1/2, independent of scale
+  ---
+  duration_ms: 0.162093
+  type: 'test'
+  ...
+# Subtest: Counterexample axes have zero normalized error within floating tolerance
+ok 30 - Counterexample axes have zero normalized error within floating tolerance
+  ---
+  duration_ms: 0.130477
+  type: 'test'
+  ...
+# Subtest: Analytic suprema bound all sampled directions and are attained
+ok 31 - Analytic suprema bound all sampled directions and are attained
+  ---
+  duration_ms: 22.70115
+  type: 'test'
+  ...
+# Subtest: Raw error vs normalized error has expected scaling
+ok 32 - Raw error vs normalized error has expected scaling
+  ---
+  duration_ms: 0.154643
+  type: 'test'
+  ...
+# Subtest: The ratio at zero displacement is undefined, not silently zero
+ok 33 - The ratio at zero displacement is undefined, not silently zero
+  ---
+  duration_ms: 0.105237
+  type: 'test'
+  ...
+# Subtest: Radial one-sided behavior must not be mislabeled a two-sided directional derivative
+ok 34 - Radial one-sided behavior must not be mislabeled a two-sided directional derivative
+  ---
+  duration_ms: 0.104805
+  type: 'test'
+  ...
+# Subtest: CSV sampling excludes origin and carries Euclidean radius explicitly
+ok 35 - CSV sampling excludes origin and carries Euclidean radius explicitly
+  ---
+  duration_ms: 15.943272
+  type: 'test'
+  ...
+# Subtest: Sample paths are finite and symmetric in parameter
+ok 36 - Sample paths are finite and symmetric in parameter
+  ---
+  duration_ms: 0.428908
+  type: 'test'
+  ...
+# Subtest: Formatting reports undefined and uses proper scientific exponents
+ok 37 - Formatting reports undefined and uses proper scientific exponents
+  ---
+  duration_ms: 0.51212
+  type: 'test'
+  ...
+# Subtest: Defaults are complete and lab-appropriate
+ok 38 - Defaults are complete and lab-appropriate
+  ---
+  duration_ms: 3.502718
+  type: 'test'
+  ...
+# Subtest: Limits share URL restores all meaningful experiment inputs
+ok 39 - Limits share URL restores all meaningful experiment inputs
+  ---
+  duration_ms: 0.724309
+  type: 'test'
+  ...
+# Subtest: Differentiability share URL restores angle, metric, function and zoom
+ok 40 - Differentiability share URL restores angle, metric, function and zoom
+  ---
+  duration_ms: 0.246523
+  type: 'test'
+  ...
+# Subtest: Untrusted URL values are clamped or rejected
+ok 41 - Untrusted URL values are clamped or rejected
+  ---
+  duration_ms: 0.258825
+  type: 'test'
+  ...
+# Subtest: NaN, empty fields and excessive pin arrays do not crash rendering
+ok 42 - NaN, empty fields and excessive pin arrays do not crash rendering
+  ---
+  duration_ms: 0.284212
+  type: 'test'
+  ...
+# Subtest: Incompatible views fall back to a meaningful visualization
+ok 43 - Incompatible views fall back to a meaningful visualization
+  ---
+  duration_ms: 0.122991
+  type: 'test'
+  ...
+# Subtest: State contains data only; no quiz answers or private information in links
+ok 44 - State contains data only; no quiz answers or private information in links
+  ---
+  duration_ms: 0.39383
+  type: 'test'
+  ...
+1..44
+# tests 44
+# suites 0
+# pass 44
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 743.642706
+
+> ma-playground@1.0.0 build
+> node scripts/build.mjs
+
+Built 15 files · 211.8 KiB · no runtime dependencies → dist/

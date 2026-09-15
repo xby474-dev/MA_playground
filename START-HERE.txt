@@ -1,0 +1,17 @@
+MA PLAYGROUND · 首版交付
+
+应用已完成并本地验证，尚未 push / 上线。详情：docs/STATUS.md。
+
+最快体验：双击 dist/standalone.html；不必安装 Node，不加载 CDN。
+开发：在项目根目录运行 npm run dev。
+验证：npm run verify。浏览器测试见 docs/VERIFICATION.md。
+
+本地功能 commit：338c32f49f790ed91c6ba7886538b0e13dccfcec
+
+GitHub 连接/授权及当前环境的 github.com DNS 是发布阻塞。
+本地重建的 README 基线不是远端 commit。不要强制推送覆盖原仓库。
+增量补丁在本地 README fixture 上已验证，可用于将内容应用到真实远端历史。
+Git bundle 保存完整本地历史，方便审阅，不代表远端已发布。
+
+交付包含源码、生产静态文件、自动测试、UI 截图、数学证明和 CI 配置。
+没有打包 node_modules、登录凭据或字体文件。
