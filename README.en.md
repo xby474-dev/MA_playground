@@ -74,9 +74,9 @@ python -m playwright install chromium
 npm run test:ui
 ```
 
-Actual v1.3 checks: **151 Node tests**; Chromium suites **29 + 37 + 27 + 38 = 131 checks**. The legacy field suite only adjusts its two navigation-count expectations for the fourth lab and additionally checks all IDs; its mathematical and interactive assertions remain.
+Actual v1.3 checks: **154 Node tests**; Chromium suites **29 + 37 + 27 + 38 = 131 checks**. The legacy field suite only adjusts its two navigation-count expectations for the fourth lab and additionally checks all IDs; its mathematical and interactive assertions remain.
 
-Browser scripts normally test the production HTTP build. In this managed environment HTTP navigation was blocked by browser policy, so the real standalone build was injected using explicit `--offline-harness`. HTTP assets and subpaths were checked separately by a real Node server. This is **not** a claim of browser HTTP module-loading E2E, operating-system `file://` access, public deployment, Safari/Firefox, or a complete screen-reader audit. Details: [verification](docs/VERIFICATION.md).
+Browser scripts normally test the production HTTP build. In this managed environment HTTP navigation was blocked by browser policy, so the real standalone build was injected using explicit `--offline-harness`. HTTP assets and subpaths were checked separately by a real Node server. This is **not** a claim of browser HTTP module-loading E2E, operating-system `file://` access, Safari/Firefox, or a complete screen-reader audit. GitHub Actions Run #8 completed all four browser suites, and the public Pages site was verified separately. Details: [verification](docs/VERIFICATION.md).
 
 ## Architecture
 
@@ -88,7 +88,7 @@ Mobile layouts use a vertical directed cycle and synchronized controls near the 
 
 `npm run build` produces static `dist/`, compatible with root and repository subpaths. The existing GitHub Pages workflow now runs all four browser suites through `test:ui`. Repository authorization and Pages settings are still required.
 
-This delivery was developed locally on the supplied v1.2 history. **No remote push or public deployment was performed in this turn.** Local history, incremental patch and verification material are included under `delivery/`. Fetch the actual remote history before merging; never overwrite it with a force push. See [status](docs/STATUS.md).
+This delivery was developed on the supplied v1.2 history and merged into the real `main` history with ordinary commits. **v1.3 was pushed successfully; GitHub Actions Run #8 passed and the public Pages site was verified.** Local history, incremental patch and verification material are included under `delivery/`. Fetch the actual remote history before future merges; never overwrite it with a force push. See [status](docs/STATUS.md).
 
 ## Contribute / license
 

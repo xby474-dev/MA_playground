@@ -8,7 +8,7 @@
 - Added a complete offline entry, responsive vertical graph and synchronized mobile controls. Preserved all three earlier experiments and classic comparison mode.
 - Added 43 mathematical/state/content/plot checks, 2 engineering checks and 38 browser checks. Existing field browser navigation counts were updated from three to four without removing prior assertions.
 - Escaped mathematical inequalities consistently after a real DOM truncation was found during browser review; exact text and unknown HTML elements are checked in regression tests.
-- Updated source documentation, references, delivery status and actual verification boundaries. No public deployment performed.
+- Updated source documentation, references, delivery status and actual verification boundaries. Pushed to `main`; GitHub Actions Run #8 passed and the public GitHub Pages site was verified.
 
 
 ## 1.2.0 — 2026-09-16

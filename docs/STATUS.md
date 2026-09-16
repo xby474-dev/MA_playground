@@ -16,10 +16,10 @@ v1.3 源码包以 v1.2 为基线提供完整增量；本次接入当前远端 `m
 
 ## 验证
 
-151 项 Node 检查；四套 Chromium 流程 29 + 37 + 27 + 38 = 131 项。旧场套件只更新导航数量预期并核对四个导航 ID，没有删除旧数学/交互断言。页面导览的 Node 与浏览器断言也保留。记录与限制见 [VERIFICATION.md](VERIFICATION.md)。
+154 项 Node 检查；四套 Chromium 流程 29 + 37 + 27 + 38 = 131 项。旧场套件只更新导航数量预期并核对四个导航 ID，没有删除旧数学/交互断言。页面导览的 Node 与浏览器断言也保留。记录与限制见 [VERIFICATION.md](VERIFICATION.md)。
 
 ## 远端与发布
 
-本轮将推送至 [`xby474-dev/MA_playground`](https://github.com/xby474-dev/MA_playground)，保留既有远端历史。GitHub Actions 与 Pages 的最终状态以推送后实际运行结果为准；只有 Actions 成功且公开页面可访问后，才标记为已上线。
+v1.3 已以普通提交推送至 [`xby474-dev/MA_playground`](https://github.com/xby474-dev/MA_playground)，当前远端 `main` 为 `bebbb25`。GitHub Actions Run #8 已成功完成四套浏览器检查，GitHub Pages 公开页面已验证包含第四实验。
 
 交付物不含登录凭据、令牌、环境秘密或字体文件。后续更新应先获取真实远端状态，再审查并合并增量，不强制覆盖远端历史。

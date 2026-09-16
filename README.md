@@ -98,9 +98,9 @@ python -m playwright install chromium
 npm run test:ui
 ```
 
-v1.3 实际通过 **151 项 Node 检查**，以及四套 Chromium 检查 **29 + 37 + 27 + 38 = 131 项**。默认浏览器脚本使用生产 HTTP 入口；受环境策略限制时，显式 `--offline-harness` 在空白页中注入实际单文件 HTML，不修改浏览器策略。当前交付采用后者，真实 HTTP 资源由 Node 服务器独立验证。
+v1.3 实际通过 **154 项 Node 检查**，以及四套 Chromium 检查 **29 + 37 + 27 + 38 = 131 项**。默认浏览器脚本使用生产 HTTP 入口；受环境策略限制时，显式 `--offline-harness` 在空白页中注入实际单文件 HTML，不修改浏览器策略。当前交付采用后者，真实 HTTP 资源由 Node 服务器独立验证。
 
-因此不声称已完成浏览器 HTTP 模块加载全链路、操作系统文件权限、公开站点、Safari/Firefox 或完整屏幕阅读器验收。全部记录见 [VERIFICATION.md](docs/VERIFICATION.md)。
+因此不声称已完成浏览器 HTTP 模块加载全链路、操作系统文件权限、Safari/Firefox 或完整屏幕阅读器验收。GitHub Actions Run #8 已完成四套浏览器检查，公开 Pages 已验证可访问。全部记录见 [VERIFICATION.md](docs/VERIFICATION.md)。
 
 ## 工程结构
 
@@ -128,7 +128,7 @@ docs/                       数学全文、指南、架构、验证与部署说�
 
 `npm run build` 输出纯静态 `dist/`，支持根路径与 `/MA_playground/` 子路径。既有 Pages 工作流通过 `test:ui` 调用四套回归，验证成功后才允许部署。仓库管理员仍需授权并配置 Pages 为 GitHub Actions。
 
-**本轮基于 v1.2 交付包和其中的 Git 历史完成本地开发；没有更新远端，也不代表公开部署。** 本地提交、基线、差异补丁、bundle 和核验材料见交付包 `delivery/`。合并前读取真实远端历史，不要用本地 bundle 强制覆盖。详见 [STATUS.md](docs/STATUS.md) 与 [DEPLOYMENT.md](docs/DEPLOYMENT.md)。
+**v1.3 已以普通提交推送到 `xby474-dev/MA_playground`，GitHub Actions Run #8 已通过，GitHub Pages 已公开更新。** 本地提交、基线、差异补丁、bundle 和核验材料见交付包 `delivery/`；后续更新仍应读取真实远端历史，不要用本地 bundle 强制覆盖。详见 [STATUS.md](docs/STATUS.md) 与 [DEPLOYMENT.md](docs/DEPLOYMENT.md)。
 
 ## 贡献与许可
 
