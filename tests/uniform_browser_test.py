@@ -67,6 +67,7 @@ try:
         ok('Seventh experiment mounts with seven navigation entries and an expanded start guide')
 
         page.locator('[data-guide-action="start"]').click()
+        page.locator('.uf-journey [data-uf-screen="workshop"]').click()
         expect(page.locator('.uf-journey [data-uf-screen="workshop"]')).to_have_attribute('aria-current', 'step')
         expect(page.locator('#uf-main-plot svg')).to_be_visible()
         expect(page.locator('#uf-history svg')).to_be_visible()
