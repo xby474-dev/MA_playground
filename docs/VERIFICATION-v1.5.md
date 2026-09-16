@@ -16,13 +16,13 @@
 | 最终 `npm run verify` | 267 / 267 Node 检查；构建通过 |
 | 新模块纯 Node 套件 | 62 / 62；含数学、状态、关系、内容和绘图 |
 | 新模块工程资源检查 | 2 项；模块资源与完整离线入口 |
-| 原极限/经典比较 Chromium | 29 / 29 |
-| Green–Gauss–Stokes Chromium | 37 / 37 |
-| 偏导关系图 Chromium | 27 / 27 |
+| 原极限/经典比较 Chromium | 30 / 30 |
+| Green–Gauss–Stokes Chromium | 38 / 38 |
+| 偏导关系图 Chromium | 28 / 28 |
 | 实数完备性 Chromium | 38 / 38 |
 | Taylor Chromium | 37 / 37 |
 | 新级数条件图 Chromium | 35 / 35 |
-| Chromium 合计 | 203 / 203 |
+| Chromium 合计 | 206 / 206 |
 | 根路径与 `/MA_playground/` HTTP资源 | 通过 |
 | 重复构建 | 字节一致性检查通过 |
 
@@ -69,7 +69,7 @@ http://127.0.0.1:4173/MA_playground/
 
 真实 Node 服务另行请求了根路径、仓库子路径、模块与静态资源。此结果**不等于浏览器通过 HTTP 加载模块的全链路测试**，也不等于操作系统双击本地文件的策略测试。
 
-没有测试 Safari、Firefox 或完整屏幕阅读器流程；没有运行本轮远端 GitHub Actions，也没有公开部署或 push。实际功能提交与交付校验写在 `delivery/manifest.json`，不能把隔离环境的本地历史说成已发布远端。
+没有测试 Safari、Firefox 或完整屏幕阅读器流程。功能提交 `48dd55be00105d1d46e5805f36e9b792dcae201f` 已推送到 `main`；GitHub Actions Run #18 的数学、构建、六套 Chromium 检查和 GitHub Pages 部署均成功。线上地址为 <https://xby474-dev.github.io/MA_playground/>。实际功能提交与交付校验仍写在 `delivery/manifest.json`；其中保留的本地交付包历史不能替代当前远端发布记录。
 
 ## 数学与数值边界
 
@@ -77,4 +77,4 @@ http://127.0.0.1:4173/MA_playground/
 
 ## 交付复核
 
-从当前源码独立复制出的干净目录已执行 npm run verify，267 项通过；本轮额外加入了级数页面四个阶段的导览覆盖。重新生成的 series-lab.html、standalone.html 和 taylor-lab.html 与工作目录逐字节一致。最终 ZIP 独立解压重建、补丁应用与本地提交树一致性的实际结果另见 delivery 日志和 manifest，不把构建脚本存在当成部署完成。
+从当前源码独立复制出的干净目录已执行 npm run verify，267 项通过；本轮额外加入了级数页面四个阶段的导览覆盖。重新生成的 series-lab.html、standalone.html 和 taylor-lab.html 与工作目录逐字节一致。GitHub Actions Run #18 重新执行并通过了远端验证，随后完成 Pages 部署。最终 ZIP 独立解压重建、补丁应用与本地提交树一致性的实际结果另见 delivery 日志和 manifest。

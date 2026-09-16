@@ -60,16 +60,16 @@ npm run test:ui
 npm run test:ui:series
 ```
 
-Actual v1.5 results: **267 Node checks; 203 Chromium checks** (29+37+27+38+37+35). Browser scripts default to the production HTTP build. Managed policy blocked URL navigation in this environment; explicit `--offline-harness` injected the real fully built offline HTML. No browser policies were changed or bypassed. HTTP resources/subpaths were independently exercised through a real Node server.
-The new completeness, Taylor and series pages include stage-aware “Start here” guide cards. This is not browser HTTP-module-loading E2E, OS file-policy validation, public deployment, Safari/Firefox coverage, or a complete screen-reader audit. Numerical tests are not proofs. See [verification](docs/VERIFICATION-v1.5.md).
+Actual v1.5 results: **267 Node checks; 206 Chromium checks** (30+38+28+38+37+35). Browser scripts default to the production HTTP build. Managed policy blocked URL navigation in this environment; explicit `--offline-harness` injected the real fully built offline HTML. No browser policies were changed or bypassed. HTTP resources/subpaths were independently exercised through a real Node server. GitHub Actions Run #18 passed and deployed GitHub Pages; the public URL was checked.
+The new completeness, Taylor and series pages include stage-aware “Start here” guide cards. This is not browser HTTP-module-loading E2E, OS file-policy validation, Safari/Firefox coverage, or a complete screen-reader audit. Numerical tests are not proofs. See [verification](docs/VERIFICATION-v1.5.md).
 
 The usual explicit animation takes about 1.2 seconds per order. Reduced-motion preference uses completed-step playback instead. Navigation, hidden-page events and reset clean up animation and local handlers. Mobile layouts retain controls and textual alternatives.
 
-Not claimed: browser HTTP-module-loading E2E, operating-system file policy validation, public deployment, Safari/Firefox coverage, or a full screen-reader audit. Numerical tests are not proofs. Detailed limits and actual reports: [verification](docs/VERIFICATION-v1.5.md).
+Not claimed: browser HTTP-module-loading E2E, operating-system file policy validation, Safari/Firefox coverage, or a full screen-reader audit. Numerical tests are not proofs. Detailed limits and actual reports: [verification](docs/VERIFICATION-v1.5.md).
 
 ## Engineering / delivery
 
 The new `series-math`, `series-state`, `series-content`, `series-plots` and `series-lab` preserve the existing separation of analytic models, whitelist state, authored explanations, SVG and lifecycle-managed interaction. User-started animation stops on navigation/hidden pages; mobile layouts reflow the map and support keyboard controls.
-The no-dependency bundler inlines the same modules, not a separate demo. `npm run build` emits static dist for both root and repository subpaths. The existing Pages workflow runs all six UI suites. Patch, full local-history bundle and reports are in `delivery/`. Read the real remote before merging; do not force-overwrite its history. See [status](docs/STATUS.md).
+The no-dependency bundler inlines the same modules, not a separate demo. `npm run build` emits static dist for both root and repository subpaths. The existing Pages workflow runs all six UI suites. Run #18 passed and deployed <https://xby474-dev.github.io/MA_playground/>. Patch, full local-history bundle and reports are in `delivery/`. Read the real remote before merging; do not force-overwrite its history. See [status](docs/STATUS.md).
 
 MIT. No tracking, arbitrary-expression evaluator, distributed system fonts or embedded credentials. New material needs explicit hypotheses, proof/counterexample, pedagogical purpose and tests.

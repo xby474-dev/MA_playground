@@ -6,6 +6,7 @@
 - Add ratio/root and quotient views, monotone integral rectangles, finite-prefix growth, signed/absolute ledgers, accessible graph controls, share state and CSV.
 - Preserve previous five experiments and all their tests; only six-lab navigation expectations are updated.
 - Add a sixth complete offline entry and dependency-free static deployment support.
+- 267 Node checks and 206 Chromium checks passed; GitHub Actions Run #18 passed and GitHub Pages was deployed and verified.
 
 # v1.4.0 — 2026-09-16
 

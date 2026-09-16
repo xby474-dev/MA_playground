@@ -30,3 +30,5 @@ MA PLAYGROUND v1.5 — START HERE
 
 本轮包含第六个级数实验；推送和 Pages 验证结果以本次交付后的 `docs/STATUS.md` 与 `docs/VERIFICATION.md` 为准。
 浏览器使用真实构建离线 HTML 注入测试；HTTP 资源另测，不等于 Safari/Firefox 或屏幕阅读器验收。
+当前 v1.5 已推送到 GitHub，Actions Run #18 通过，Pages 已上线：
+  https://xby474-dev.github.io/MA_playground/
