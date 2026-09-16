@@ -5,13 +5,21 @@
 
 **让数学直觉，经得起证明。**
 
-六个完整实验，把观察、计算、定义与证明接起来。无后端、无登录、无 CDN，可完全离线运行。
+七个完整实验，把观察、计算、定义与证明接起来。无后端、无登录、无 CDN，可完全离线运行。
 
-[English](README.en.md) · [新实验指南](docs/SERIES-GUIDE.md) · [数学条件与证明](docs/SERIES-MATHEMATICS.md) · [实际验证](docs/VERIFICATION-v1.5.md) · [交付状态](docs/STATUS.md)
+[English](README.en.md) · [一致收敛指南](docs/UNIFORM-GUIDE.md) · [级数数学证明](docs/SERIES-MATHEMATICS.md) · [实际验证](docs/VERIFICATION-v1.6.md) · [交付状态](docs/STATUS.md)
 
 </div>
 
 ![实际运行：级数判别的条件关系图](docs/images/series-map-desktop.png)
+
+## v1.6 · 每个点，还是所有点
+
+**逐点收敛时，什么时候能找到一个同时控制整个定义域的 N？**
+
+第七个实验把一致收敛放回量词、误差和极限交换中：先看固定点，再追踪随 N 逃跑的点；再用解析上确界、面积、斜率和 M 预算检查“同一个 N”到底能否保护所有点。四个页面都带默认展开的「本页导览」卡片：核心问题、三步操作、重点观察、本页结论、常见误区和完整指南入口。
+
+实验覆盖 xᴺ 的定义域反例、几何级数、交错但不正规、移动尖峰、细小波纹和常数漂移，并明确区分有限采样与解析证明。详细操作见 [UNIFORM-GUIDE.md](docs/UNIFORM-GUIDE.md)，推导见 [UNIFORM-MATHEMATICS.md](docs/UNIFORM-MATHEMATICS.md)。
 
 ## v1.5 · 不是谁更强，而是谁够用
 
@@ -51,7 +59,7 @@
 
 详细证明及参考教材见 [SERIES-MATHEMATICS.md](docs/SERIES-MATHEMATICS.md)。
 
-## 全部六个实验
+## 全部七个实验
 
 | 实验 | 完整离线入口 | 内容 |
 |---|---|---|
@@ -61,8 +69,9 @@
 | 04 五种定理，同一终点 | `dist/completeness-lab.html` | 实数完备性的有向证明环、精确有理数二分、ℝ/ℚ。 |
 | 05 一点信息，长出曲线 | `dist/taylor-lab.html` | 0→12 阶逐层生长、展开点、余项和收敛边界。 |
 | 06 不是谁强，是谁够用 | `dist/series-lab.html` | 级数判别条件图、比较参照、符号抵消与失效边界。 |
+| 07 每个点，还是所有点 | `dist/uniform-lab.html` | 逐点/一致/正规收敛、极限交换、逃跑点与解析证书。 |
 
-**每个离线入口都包含完整六模块应用，只是初始页面不同。** 原有双函数比较仍可由 `#lab=differentiability&mode=classic` 进入。既有数学与浏览器检查保留；只有导航总数随新模块增至 6。
+**每个离线入口都包含完整七模块应用，只是初始页面不同。** 原有双函数比较仍可由 `#lab=differentiability&mode=classic` 进入。既有数学与浏览器检查保留；导航总数随新模块增至 7。
 
 操作/证明：[偏导关系](docs/RELATIONS-GUIDE.md)、[统一积分](docs/FIELD-GUIDE.md)、[完备性](docs/COMPLETENESS-GUIDE.md)、[Taylor](docs/TAYLOR-GUIDE.md)。
 
@@ -89,12 +98,12 @@ npm run build
 # 下列仅为开发测试依赖，不参与应用运行
 python -m pip install -r tests/requirements.txt
 python -m playwright install chromium
-npm run test:ui         # 全部六套，默认真实 HTTP 模块版
+npm run test:ui         # 全部七套，默认真实 HTTP 模块版
 npm run test:ui:series  # 仅第六套
+npm run test:ui:uniform # 仅第七套
 ```
 
-v1.5 实际通过 **267 项 Node 检查**、**206 项 Chromium 检查**（30+38+28+38+37+35）。完整日志和报告在交付包中。
-新增的完备性、Taylor 与级数页面均带有按页面阶段切换的本页导览卡片。
+本地 v1.6 已通过 **275 项 Node 检查**；七套 Chromium 检查由 GitHub Actions 在推送后执行并记录在 [v1.6 验证记录](docs/VERIFICATION-v1.6.md)。新增实验及 v1.5 页面均带有按页面阶段切换的本页导览卡片。
 
 当前环境的浏览器策略阻止 HTTP 导航；浏览器检查显式采用 `--offline-harness`，注入**真实构建的完整离线 HTML** 执行，没有修改或规避浏览器策略。HTTP 资源及根路径/仓库子路径另由真实 Node 服务请求检查。GitHub Actions Run #18 已通过并完成 Pages 部署，线上地址已做基本验收；仍不声称浏览器 HTTP 模块加载全链路、操作系统文件策略、Safari/Firefox 或完整屏幕阅读器验收。见 [验证记录](docs/VERIFICATION-v1.5.md)。测试不是一般数学证明。
 
@@ -111,11 +120,12 @@ src/
   series-math.js            独立解析案例、判别状态、稳定读数
   series-state.js           白名单、参数范围、路线恢复
   series-plots.js           有向图、不同条件透镜、两本账
-  series-content.js         路线、完整推导、解释型自测
   series-lab.js             生命周期、逐项动画、答案草稿
+  series-content.js         路线、完整推导、解释型自测
+  uniform-*.js              一致收敛解析模型、量词地图、证明与交互
 styles/                     纸白/鼠尾草绿的笔记本视觉
 scripts/                    无依赖构建、完整离线合并、本地服务器
-tests/                      数学/状态/内容/工程、六套浏览器检查
+tests/                      数学/状态/内容/工程、七套浏览器检查
 docs/                       操作、数学、验证和实际截图
 .github/workflows/          测试成功后从 main 部署 Pages
 ```

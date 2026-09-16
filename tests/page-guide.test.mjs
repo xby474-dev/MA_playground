@@ -9,6 +9,8 @@ import { taylorPage } from '../src/taylor-content.js';
 import { taylorDefaults } from '../src/taylor-state.js';
 import { seriesPage } from '../src/series-content.js';
 import { seriesDefaults } from '../src/series-state.js';
+import { uniformPage } from '../src/uniform-content.js';
+import { uniformDefaults } from '../src/uniform-state.js';
 import { defaults } from '../src/state.js';
 import { fieldDefaults } from '../src/field-state.js';
 import { relationsDefaults } from '../src/relations-state.js';
@@ -23,6 +25,7 @@ test('Every experiment header includes a first-entry guide with the approved lea
     completenessPage(completenessDefaults()),
     taylorPage(taylorDefaults()),
     seriesPage(seriesDefaults()),
+    uniformPage(uniformDefaults()),
   ];
   for (const html of pages) {
     assert.ok(html.includes('class="page-guide"'));
@@ -45,6 +48,7 @@ test('Guide content links the three experiments to their full documentation', ()
     ['completeness', 'COMPLETENESS-GUIDE.md', '完备性实验'],
     ['taylor', 'TAYLOR-GUIDE.md', 'Taylor 实验'],
     ['series', 'SERIES-GUIDE.md', '级数实验'],
+    ['uniform', 'UNIFORM-GUIDE.md', '一致收敛'],
   ]) {
     const html = pageGuide(type);
     assert.ok(html.includes(doc));
@@ -78,5 +82,10 @@ test('The new completeness and Taylor screens each receive screen-specific guida
     const html = seriesPage({ ...seriesDefaults(), screen });
     assert.match(html, /data-guide="series"/);
     assert.match(html, new RegExp(`page-guide-series-${screen}`));
+  }
+  for (const screen of ['map', 'workshop', 'proof', 'challenge']) {
+    const html = uniformPage({ ...uniformDefaults(), screen });
+    assert.match(html, /data-guide="uniform"/);
+    assert.match(html, new RegExp(`page-guide-uniform-${screen}`));
   }
 });

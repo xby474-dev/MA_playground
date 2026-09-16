@@ -36,7 +36,7 @@ try:
   page.on('pageerror',lambda e:errors.append(str(e)));page.on('request',lambda r:requests.append(r.url))
   if args.offline_harness:page.set_content((ROOT/'dist/series-lab.html').read_text(),wait_until='load')
   else:page.goto(args.url,wait_until='networkidle');page.locator('#nav-series').click()
-  expect(page.locator('#se-title')).to_have_text('不是谁更强，而是谁够用。');expect(page.locator('#nav-series')).to_have_attribute('aria-current','page');assert page.locator('.lab-nav').count()==6
+  expect(page.locator('#se-title')).to_have_text('不是谁更强，而是谁够用。');expect(page.locator('#nav-series')).to_have_attribute('aria-current','page');assert page.locator('.lab-nav').count()==7
   ok('Sixth full experiment mounts with all five old experiments still navigable')
   assert page.locator('.se-graph-desktop .se-graph-node').count()==9;assert page.locator('.se-graph-desktop .se-graph-edge').count()==8
   expect(page.locator('.se-graph-desktop [data-se-node="root"]')).to_have_class('se-graph-node selected not-holds');assert page.locator('.se-graph-desktop [data-se-node="absolute"].holds').count()==1

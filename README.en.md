@@ -1,12 +1,18 @@
-# MA Playground · v1.5
+# MA Playground · v1.6
 
-**Mathematical intuition, accountable to proof.** Six complete experiments. No backend, account, CDN, external fonts, or runtime API. Main interface and proof pages are Chinese; this README does not imply a translated UI.
+**Mathematical intuition, accountable to proof.** Seven complete experiments. No backend, account, CDN, external fonts, or runtime API. Main interface and proof pages are Chinese; this README does not imply a translated UI.
 
-[中文](README.md) · [Series guide](docs/SERIES-GUIDE.md) · [Mathematics](docs/SERIES-MATHEMATICS.md) · [Actual verification](docs/VERIFICATION-v1.5.md)
+[中文](README.md) · [Uniform convergence guide](docs/UNIFORM-GUIDE.md) · [Series mathematics](docs/SERIES-MATHEMATICS.md) · [Actual verification](docs/VERIFICATION-v1.6.md)
 
 ![Actual condition-map screenshot](docs/images/series-map-desktop.png)
 
-## New: convergence-test conditions, not a leaderboard
+## New: uniform convergence, not a grid illusion
+
+The seventh lab asks when pointwise convergence can be upgraded to one shared deadline for the whole domain. It contrasts fixed points with escaping points, analytic suprema with finite samples, and height/area/slope evidence with the hypotheses needed for continuity, integration, and differentiation.
+
+Every uniform-convergence screen begins with an expanded “Start here” guide: question, three steps, observations, takeaway, warnings, and a link to the full `docs` guide.
+
+## Also included: convergence-test conditions, not a leaderboard
 
 Follow **condition map → investigate the same series → prove the relationship → check understanding**.
 
@@ -25,7 +31,7 @@ Eight term families: geometric, p-series, telescoping, jagged geometric, oscilla
 
 See [the independent derivations and cited textbooks](docs/SERIES-MATHEMATICS.md). This is a proved catalogue, not an arbitrary-series solver or a formal proof assistant.
 
-## Run all six labs
+## Run all seven labs
 
 Double-click `dist/series-lab.html` in the delivery archive. Every offline entry contains the whole application:
 
@@ -37,6 +43,7 @@ Double-click `dist/series-lab.html` in the delivery archive. Every offline entry
 | `completeness-lab.html` | Real completeness and ℝ/ℚ |
 | `taylor-lab.html` | Progressive Taylor growth |
 | `series-lab.html` | Convergence-test condition graph |
+| `uniform-lab.html` | Pointwise and uniform convergence |
 
 The old two-function view remains at `#lab=differentiability&mode=classic`. No prior mathematical or interaction tests were removed.
 
@@ -60,16 +67,16 @@ npm run test:ui
 npm run test:ui:series
 ```
 
-Actual v1.5 results: **267 Node checks; 206 Chromium checks** (30+38+28+38+37+35). Browser scripts default to the production HTTP build. Managed policy blocked URL navigation in this environment; explicit `--offline-harness` injected the real fully built offline HTML. No browser policies were changed or bypassed. HTTP resources/subpaths were independently exercised through a real Node server. GitHub Actions Run #18 passed and deployed GitHub Pages; the public URL was checked.
-The new completeness, Taylor and series pages include stage-aware “Start here” guide cards. This is not browser HTTP-module-loading E2E, OS file-policy validation, Safari/Firefox coverage, or a complete screen-reader audit. Numerical tests are not proofs. See [verification](docs/VERIFICATION-v1.5.md).
+Local v1.6 results: **275 Node checks passed**. Seven Chromium suites run in GitHub Actions after push; the actual count and run URL are recorded in [verification](docs/VERIFICATION-v1.6.md). Browser scripts default to the production HTTP build; when managed policy blocks navigation, `--offline-harness` injects the real fully built offline HTML without changing browser policy.
+The completeness, Taylor, series and uniform pages include stage-aware “Start here” guide cards. This is not browser HTTP-module-loading E2E, OS file-policy validation, Safari/Firefox coverage, or a complete screen-reader audit. Numerical tests are not proofs.
 
 The usual explicit animation takes about 1.2 seconds per order. Reduced-motion preference uses completed-step playback instead. Navigation, hidden-page events and reset clean up animation and local handlers. Mobile layouts retain controls and textual alternatives.
 
-Not claimed: browser HTTP-module-loading E2E, operating-system file policy validation, Safari/Firefox coverage, or a full screen-reader audit. Numerical tests are not proofs. Detailed limits and actual reports: [verification](docs/VERIFICATION-v1.5.md).
+Not claimed: browser HTTP-module-loading E2E, operating-system file policy validation, Safari/Firefox coverage, or a full screen-reader audit. Numerical tests are not proofs. Detailed limits and actual reports: [verification](docs/VERIFICATION-v1.6.md).
 
 ## Engineering / delivery
 
 The new `series-math`, `series-state`, `series-content`, `series-plots` and `series-lab` preserve the existing separation of analytic models, whitelist state, authored explanations, SVG and lifecycle-managed interaction. User-started animation stops on navigation/hidden pages; mobile layouts reflow the map and support keyboard controls.
-The no-dependency bundler inlines the same modules, not a separate demo. `npm run build` emits static dist for both root and repository subpaths. The existing Pages workflow runs all six UI suites. Run #18 passed and deployed <https://xby474-dev.github.io/MA_playground/>. Patch, full local-history bundle and reports are in `delivery/`. Read the real remote before merging; do not force-overwrite its history. See [status](docs/STATUS.md).
+The no-dependency bundler inlines the same modules, not a separate demo. `npm run build` emits static dist for both root and repository subpaths. The Pages workflow runs all seven UI suites. Patch, full local-history bundle and reports are in `delivery/`. Read the real remote before merging; do not force-overwrite its history. See [status](docs/STATUS.md).
 
 MIT. No tracking, arbitrary-expression evaluator, distributed system fonts or embedded credentials. New material needs explicit hypotheses, proof/counterexample, pedagogical purpose and tests.

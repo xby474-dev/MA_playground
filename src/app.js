@@ -1,3 +1,5 @@
+import { uniformPage } from './uniform-content.js';
+import { mountUniformLab } from './uniform-lab.js';
 import { seriesPage } from './series-content.js';
 import { mountSeriesLab } from './series-lab.js';
 import { taylorPage } from './taylor-content.js';
@@ -16,6 +18,7 @@ import { icon } from './icons.js';
 import { initializeGuide, guideStorageKey, persistGuideState, setGuideOpen } from './page-guide.js';
 
 let state = parseState(location.hash || '#lab='+(document.body.dataset.initialLab ?? 'limits'));
+let uniformLab = null;
 let seriesLab = null;
 let taylorLab = null;
 let completenessLab = null;
@@ -41,10 +44,11 @@ function currentGuideKey(s) {
     lab: s.lab,
     mode: s.mode,
     tab: s.tab,
-    screen: s.mode === 'relations' || s.lab === 'completeness' || s.lab === 'taylor' || s.lab === 'series' ? s.screen : '',
+    screen: s.mode === 'relations' || s.lab === 'completeness' || s.lab === 'taylor' || s.lab === 'series' || s.lab === 'uniform' ? s.screen : '',
   });
 }
 function render() {
+  uniformLab?.destroy(); uniformLab = null;
   seriesLab?.destroy(); seriesLab = null;
   taylorLab?.destroy(); taylorLab = null;
   completenessLab?.destroy(); completenessLab = null;
@@ -53,17 +57,23 @@ function render() {
   stopAnimation();
   surface?.destroy(); surface = null; plotType = '';
   main.classList.toggle('se-mode', state.lab === 'series');
+  main.classList.toggle('uf-mode', state.lab === 'uniform');
   main.classList.toggle('ty-mode', state.lab === 'taylor');
   main.classList.toggle('cp-mode', state.lab === 'completeness');
   main.classList.toggle('field-mode', state.lab === 'fields');
   main.classList.toggle('rel-mode', state.mode === 'relations');
-  main.innerHTML = state.lab === 'series' ? seriesPage(state) + footer : state.lab === 'taylor' ? taylorPage(state) + footer : state.lab === 'completeness' ? completenessPage(state) + footer : state.mode === 'relations' ? relationsPage(state) + footer : state.lab === 'fields' ? fieldHeader(state) + ({explore:fieldExplore,proof:fieldProof,quiz:fieldQuiz}[state.tab])(state) + footer : header(state) + ({ explore, proof, quiz }[state.tab])(state) + footer;
-  for (const lab of ['limits', 'differentiability', 'fields', 'completeness', 'taylor', 'series']) {
+  main.innerHTML = state.lab === 'uniform' ? uniformPage(state) + footer : state.lab === 'series' ? seriesPage(state) + footer : state.lab === 'taylor' ? taylorPage(state) + footer : state.lab === 'completeness' ? completenessPage(state) + footer : state.mode === 'relations' ? relationsPage(state) + footer : state.lab === 'fields' ? fieldHeader(state) + ({explore:fieldExplore,proof:fieldProof,quiz:fieldQuiz}[state.tab])(state) + footer : header(state) + ({ explore, proof, quiz }[state.tab])(state) + footer;
+  for (const lab of ['limits', 'differentiability', 'fields', 'completeness', 'taylor', 'series', 'uniform']) {
     const nav = $(`nav-${lab}`);
     if (state.lab === lab) nav.setAttribute('aria-current', 'page'); else nav.removeAttribute('aria-current');
   }
   document.title = `${state.lab === 'fields' ? '内部的累积，边界的回声' : state.lab === 'limits' ? '所有直线，都不够' : '偏导存在，也不够'} · MA Playground`;
   initializeGuide(main, currentGuideKey(state));
+  if(state.lab === 'uniform') {
+    document.title = '每个点，还是所有点 · MA Playground';
+    uniformLab = mountUniformLab(main, () => state, (rebuild=false) => {syncURL(rebuild); if(rebuild) render();}, toast);
+    return;
+  }
   if(state.lab === 'series') {
     document.title = '不是谁更强，而是谁够用 · MA Playground';
     seriesLab = mountSeriesLab(main, () => state, (rebuild=false) => {syncURL(rebuild); if(rebuild) render();}, toast);

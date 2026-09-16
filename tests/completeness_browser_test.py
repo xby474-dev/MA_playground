@@ -43,7 +43,7 @@ try:
   if args.offline_harness:page.set_content((ROOT/'dist/completeness-lab.html').read_text(),wait_until='load')
   else:page.goto(args.url,wait_until='networkidle');page.locator('#nav-completeness').click()
   expect(page.locator('#cp-title')).to_have_text('五种定理，同一个终点。');expect(page.locator('#nav-completeness')).to_have_attribute('aria-current','page')
-  assert page.locator('.lab-nav').count()==6
+  assert page.locator('.lab-nav').count()==7
   assert page.locator('.cp-desktop-graph [data-cp-node]').count()==5
   assert page.locator('.cp-desktop-graph [data-cp-edge]').count()==5
   expect(page.locator('.page-guide[data-guide="completeness"]')).to_be_visible();expect(page.locator('.page-guide[data-guide="completeness"] [data-guide-action="start"]')).to_be_visible()

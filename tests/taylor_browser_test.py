@@ -36,7 +36,7 @@ try:
   page=ctx.new_page();page.set_default_timeout(7000);page.on('pageerror',lambda e:errors.append(str(e)));page.on('request',lambda r:requests.append(r.url))
   if args.offline_harness:page.set_content((ROOT/'dist/taylor-lab.html').read_text(),wait_until='load')
   else:page.goto(args.url,wait_until='networkidle');page.locator('#nav-taylor').click()
-  expect(page.locator('#ty-title')).to_have_text('从一个点，长出一条曲线。');expect(page.locator('#nav-taylor')).to_have_attribute('aria-current','page');assert page.locator('.lab-nav').count()==6;assert progress(page)==0
+  expect(page.locator('#ty-title')).to_have_text('从一个点，长出一条曲线。');expect(page.locator('#nav-taylor')).to_have_attribute('aria-current','page');assert page.locator('.lab-nav').count()==7;assert progress(page)==0
   expect(page.locator('.page-guide[data-guide="taylor"]')).to_be_visible();expect(page.locator('.page-guide[data-guide="taylor"] [data-guide-action="start"]')).to_be_visible()
   ok('Fifth complete experiment opens at T0 with an in-page guide and retains all five prior labs')
   assert page.locator('.ty-guaranteed').count()==1;expect(page.locator('#ty-observation')).to_contain_text('水平线');expect(page.locator('#ty-current-term')).to_contain_text('f(a)');assert unknown(page)==[]

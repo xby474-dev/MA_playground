@@ -60,6 +60,12 @@ const GUIDE_CONTENT = {
     proof: { title: '沿一条箭头，把前提走到结论。', question: '判别法的每一步估计究竟用到了什么条件？', steps: ['先选择一条关系，读清它的假设与目标。', '逐步查看缓冲常数、比较不等式或部分和构造。', '再用案例检查反向命题为什么需要另一个见证。'], observe: '看量词、尾部条件、正性/单调性、符号和参照的敛散；不要把数值样本当作证明。', takeaway: '真正的判别不是“图像看起来收敛”，而是前提如何控制所有足够晚的尾部。', warning: '定理箭头不能自动反向；分组收敛、比值振荡和临界值都需要额外论证。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/SERIES-MATHEMATICS.md', guideLabel: '查看级数数学证明' },
     challenge: { title: '最后判断：是方法没回答，还是级数真的发散？', question: '面对新参数，你能区分判别法失败、前提不适用和真正的敛散结论吗？', steps: ['先独立选择路线或判断，不急着看反馈。', '查看理由，标出使用的前提与被排除的误读。', '回到地图或实验，用一个反例检验你的方向。'], observe: '重点看“无法判断”“前提未满足”“原级数发散”三种不同标签，以及绝对值账本。', takeaway: '会选择一条足够的路线，并知道它没有保证什么，才是真正理解级数判别。', warning: '交错不自动等于条件收敛，绝对值发散也不自动等于原级数发散，未画箭头更不等于互不蕴含。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/SERIES-GUIDE.md', guideLabel: '查看级数完整指南' },
   },
+  uniform: {
+    map: { title: '先分清“每个点”与“所有点”。', question: '函数项级数逐点收敛时，什么时候能找到一个同时控制整个定义域的 N？', steps: ['先看 xᴺ 在 [0,1] 上的固定点误差与逃跑点。', '切换定义域、部分和 N 和 ε，比较固定点与全域证书。', '再进入证明页，核对量词顺序和解析上确界。'], observe: '看误差带、探针、上确界是否取到，以及 N 是否依赖 x；有限网格不代表全域。', takeaway: '一致收敛的关键是给定 ε 后先选一个对所有 x 和后续 m 都有效的 N。', warning: '逐点收敛、图线看起来贴近、有限采样最大误差变小，都不能自动推出一致收敛。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/UNIFORM-GUIDE.md', guideLabel: '查看一致收敛实验指南' },
+    workshop: { title: '让同一个 N 接受全域检查。', question: '固定一个点的好表现，能不能升级成整个定义域的统一保证？', steps: ['先锁住 x，观察部分和与极限的误差。', '切换“追踪逃跑点”，观察 x_N 如何随 N 改变。', '用统一 N、面积、斜率或 M 预算视图检查条件。'], observe: '重点看固定点/追踪点、所有后续项、整体面积和局部斜率；不同视图回答不同问题。', takeaway: '一致性不是误差更小，而是同一个 N 能在量词顺序中保护所有点。', warning: '一个点的证书不是全域证书；不满足某个充分条件也不等于极限交换一定失败。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/UNIFORM-GUIDE.md', guideLabel: '查看一致收敛实验指南' },
+    proof: { title: '沿一条箭头，把量词和条件走完。', question: '一致收敛为什么能推出逐点收敛、连续性或逐项积分，而求导需要额外条件？', steps: ['先选择一条定理或反例路线，读清定义域和前提。', '逐步查看尾部估计、误差分解或反例构造。', '回到实验，用参数案例检查结论适用的范围。'], observe: '看 ε、N、x、m 的量词顺序，以及闭区间、可积性、导数一致和锚点条件。', takeaway: '极限交换不是图像效果，而是由统一误差与明确附加条件共同保证的结论。', warning: '一致收敛本身不控制导数；逐点收敛也不能自动交换积分、保持连续或产生统一 N。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/UNIFORM-MATHEMATICS.md', guideLabel: '查看一致收敛数学证明' },
+    challenge: { title: '最后判断：缺条件，还是结论真的失败？', question: '面对一个函数项级数，你能区分逐点、一致、正规收敛以及极限交换的不同要求吗？', steps: ['先独立判断量词和结论，不急着看反馈。', '查看解析理由，标出坏点、上确界或缺失前提。', '回到地图或实验，用一个正例和一个反例复核判断。'], observe: '重点看“没有统一 N”“上确界不取到”“积分面积”“导数斜率”和锚点信息。', takeaway: '真正理解一致收敛，是知道一个条件能保证什么，也知道它没有保证什么。', warning: '没有找到统一证书不等于必然发散；有限图形、连续极限或小面积也不能替代定理条件。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/UNIFORM-GUIDE.md', guideLabel: '查看一致收敛完整指南' },
+  },
 };
 
 function resolveGuideContent(type, screen) {
@@ -72,6 +78,7 @@ function defaultTarget(type, tab, mode, screen) {
   if (type === 'completeness') return { map: '[data-cp-action="start"]', explore: '#cp-depth', proof: '[data-cp-proof-step="0"]', challenge: '#cp-quiz' }[screen] ?? '#cp-title';
   if (type === 'taylor') return { grow: '[data-ty-action="play"]', error: '#ty-h', boundary: '[data-ty-scenario="nonmonotone"]', proof: '[data-ty-proof="coefficients"]', challenge: '#ty-quiz' }[screen] ?? '#ty-title';
   if (type === 'series') return { map: '#se-graph', workshop: '#se-main-plot', proof: '[data-se-step="0"]', challenge: '#se-quiz' }[screen] ?? '#se-title';
+  if (type === 'uniform') return { map: '#uf-graph', workshop: '#uf-main-plot', proof: '[data-uf-step="0"]', challenge: '#uf-quiz' }[screen] ?? '#uf-title';
   if (type === 'relations') return '[data-r-stage="0"]';
   if (tab !== 'explore') return '#tab-explore';
   if (type === 'limits') return '[data-set="path"]';

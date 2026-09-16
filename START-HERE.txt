@@ -1,14 +1,15 @@
-MA PLAYGROUND v1.5 — START HERE
+MA PLAYGROUND v1.6 — START HERE
 
 最快体验 / Quick start
-  双击 dist/series-lab.html：进入“级数判别法条件图”。
-  单文件含完整六个实验，无需 Node、网络、CDN、字体下载或 API。
+  双击 dist/uniform-lab.html：进入“每个点，还是所有点”。
+  单文件含完整七个实验，无需 Node、网络、CDN、字体下载或 API。
 
 推荐路线
   在条件地图从默认 1/n² 开始：比值/根值=1，比较/积分仍能判断。
   点击“根值 ⇏ 比值”试齿状几何，比较两个比值子列和整体根值。
   切换交错调和，查看 S_N 与 A_N 两本账。
   同一参数可继续进入“为什么能推出”和“自己判断”。
+  一致收敛实验先锁住一个点，再追踪逃跑点；对照解析上确界、面积、斜率和 M 预算。
 
 其他完整离线入口（只是初始页面不同）
   dist/standalone.html       多元极限
@@ -16,6 +17,7 @@ MA PLAYGROUND v1.5 — START HERE
   dist/field-lab.html        Green–Gauss–Stokes
   dist/completeness-lab.html 实数完备性
   dist/taylor-lab.html       Taylor 逐层生长
+  dist/uniform-lab.html      逐点/一致/正规收敛与极限交换
 
 开发
   Node 22+；npm run dev / npm run verify / npm run preview
@@ -25,10 +27,10 @@ MA PLAYGROUND v1.5 — START HERE
 交付
   README.md / README.en.md
   docs/SERIES-GUIDE.md / SERIES-MATHEMATICS.md
-  docs/VERIFICATION-v1.5.md：实际测试与限制
+  docs/VERIFICATION-v1.6.md：实际测试与限制
   delivery/manifest.json：提交、基线、补丁、bundle 与校验
 
-本轮包含第六个级数实验；推送和 Pages 验证结果以本次交付后的 `docs/STATUS.md` 与 `docs/VERIFICATION.md` 为准。
+本轮包含第七个一致收敛实验；推送和 Pages 验证结果以本次交付后的 `docs/STATUS.md` 与 `docs/VERIFICATION-v1.6.md` 为准。
 浏览器使用真实构建离线 HTML 注入测试；HTTP 资源另测，不等于 Safari/Firefox 或屏幕阅读器验收。
 当前 v1.5 已推送到 GitHub，Actions Run #18 通过，Pages 已上线：
   https://xby474-dev.github.io/MA_playground/
