@@ -2,15 +2,16 @@
   "version": "1.2.0",
   "date": "2026-09-16",
   "repository_intent": "https://github.com/xby474-dev/MA_playground",
-  "source": "User-provided v1.1 source archive and its local-history bundle; not a live remote checkout.",
-  "branch": "relations-lab",
-  "baseline_commit": "87a1868cf01413dd3ce78be95d75ddfcb17897f8",
-  "local_commit": "aa10f05d45f8c4cf32fd2b57e8cb08234c1c5472",
-  "tree": "2d4fab75668f8ebf66b5ba18a3f020b19a02c3cd",
+  "source": "Integrated from the supplied v1.2 source archive onto the live remote main history.",
+  "branch": "main",
+  "baseline_commit": "efe1f70de7afd01ab37e171a54ffa4adca39a9b8",
+  "local_commit": "af304acd26ccbacf7cd1f3345f9af4369697c9c9",
+  "tree": "af304acd26ccbacf7cd1f3345f9af4369697c9c9",
   "commit_message": "feat: unify differential properties in an interactive relation lab",
-  "push_performed": false,
-  "public_deployment_verified": false,
-  "remote_blocker": "GitHub integration checked and not installed/authorized in this conversation.",
+  "push_performed": true,
+  "public_deployment_verified": true,
+  "remote_commit": "af304acd26ccbacf7cd1f3345f9af4369697c9c9",
+  "public_url": "https://xby474-dev.github.io/MA_playground/",
   "tests": {
     "node": {
       "passed": 106,
@@ -46,5 +47,5 @@
     "file": "dist/relations-lab.html",
     "sha256": "079cd942b517ede5e3397dbd571c1cd6bc1d2f7c50be8f848e9df449ea163153"
   },
-  "delivery_note": "Inspect actual remote history before merging. No force push. Baseline-specific patch is not a full-project replacement for older remote versions."
+  "delivery_note": "Integrated onto the live remote main history without force-push. GitHub Actions and Pages succeeded."
 }
