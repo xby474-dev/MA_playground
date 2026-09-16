@@ -98,7 +98,7 @@ try:
   ok('Returning from proofs keeps the exact same function, order and experimental parameters')
   route(page,'#lab=taylor&fn=log&a=.25&n=7&p=2.5&h=.8&span=3');page.locator('[data-action="share"]').click()
   if page.locator('#share-dialog').is_visible():
-   url=page.locator('#share-url').input_value();assert 'lab=taylor' in url and 'p=2.5' in url and 'a=0.25' in url;page.locator('#share-dialog [data-action="close-dialog"]').click()
+   url=page.locator('#share-url').input_value();assert 'lab=taylor' in url and 'p=2.5' in url and 'a=0.25' in url;page.locator('#share-dialog [data-action="close-dialog"]').click();page.locator('#share-dialog').evaluate('(d)=>d.close()');expect(page.locator('#share-dialog')).to_be_hidden()
   else:assert 'p=2.5' in page.url
   ok('Sharing and deep linking preserve the fractional growth stage, not a falsely completed polynomial')
   page.evaluate('''()=>{const old=URL.createObjectURL;URL.createObjectURL=blob=>{window.__tyBlob=blob;return old(blob)}}''');page.locator('.ty-controls .ty-options summary').click();page.locator('[data-ty-action="export"]').click();csv=page.evaluate('window.__tyBlob.text()');assert 'FINITE DATA' in csv and 'fn=log' in csv and 'growth=2.5' in csv;assert len([x for x in csv.splitlines() if x and x[0].isdigit()])==13
