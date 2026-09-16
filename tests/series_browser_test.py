@@ -103,6 +103,7 @@ try:
   route(page,'#lab=series&screen=workshop&family=wavy&p=1.27&q=.66&signed=1&ref=square&N=71&probe=17&node=comparison&edge=comparison-not-limit');page.locator('[data-action="share"]').click()
   if page.locator('#share-dialog').is_visible():
    url=page.locator('#share-url').input_value();assert 'family=wavy' in url and 'p=1.27' in url and 'probe=17' in url and 'ref=square' in url;page.locator('#share-dialog [data-action="close-dialog"]').click()
+  page.locator('#share-dialog').evaluate('(d)=>{if(d.open)d.close()}');expect(page.locator('#share-dialog')).to_be_hidden()
   ok('Share links preserve the exact series, sign, reference, selected relation and finite prefix')
   page.evaluate('''()=>{const old=URL.createObjectURL;URL.createObjectURL=blob=>{window.__seBlob=blob;return old(blob)}}''');page.locator('[data-se-action="export"]').click();csv=page.evaluate('window.__seBlob.text()');assert 'not convergence proofs' in csv and '"family":"wavy"' in csv and '"signed":true' in csv;assert len([x for x in csv.splitlines() if x and x[0].isdigit()])==71
   ok('CSV contains actual finite data and metadata for the independent signed and absolute ledgers')
