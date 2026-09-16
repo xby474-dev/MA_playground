@@ -25,5 +25,5 @@ Taylor 操作
   docs/VERIFICATION.md：实际验证范围与限制
   delivery/manifest.json：本地提交、基线、补丁、bundle 与校验
 
-本轮未推送远端、未公开部署；不要用 bundle 强制覆盖真实仓库。
-浏览器验证使用实际离线 HTML 注入；HTTP 资源另测，不等同线上验收。
+v1.4 已推送至 xby474-dev/MA_playground；GitHub Actions Run #13 通过，Pages 已公开更新。
+浏览器验证使用实际离线 HTML 注入；HTTP 资源另测，不等同于 Safari/Firefox 或屏幕阅读器验收。

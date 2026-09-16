@@ -136,7 +136,7 @@ docs/                       完整数学、操作指南、验证记录和实际�
 
 `npm run build` 输出纯静态 `dist/`，支持根路径和 `/MA_playground/`。既有 GitHub Pages 工作流的 `test:ui` 已接入第五套检查，全部通过才允许部署。
 
-**v1.4 的远端推送与公开 Pages 验证将在本次本地验证通过后完成。** 本地提交、基线、差异补丁、bundle 和核验材料见交付包 `delivery/`；后续更新仍应读取真实远端历史，不要用本地 bundle 强制覆盖。详见 [STATUS.md](docs/STATUS.md) 与 [DEPLOYMENT.md](docs/DEPLOYMENT.md)。
+**v1.4 已以普通提交推送到 `xby474-dev/MA_playground`；GitHub Actions Run #13 通过，GitHub Pages 已公开更新并验证。** 本地提交、基线、差异补丁、bundle 和核验材料见交付包 `delivery/`；后续更新仍应读取真实远端历史，不要用本地 bundle 强制覆盖。详见 [STATUS.md](docs/STATUS.md) 与 [DEPLOYMENT.md](docs/DEPLOYMENT.md)。
 
 ## 贡献与许可
 

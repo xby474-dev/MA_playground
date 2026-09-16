@@ -74,7 +74,7 @@ Pure formulas (`taylor-math`), validated state (`taylor-state`), SVG views (`tay
 
 ## Delivery and deployment
 
-`npm run build` produces static `dist/` for root or repository subpaths. The existing Pages workflow now runs all five browser suites. This iteration was developed from the supplied v1.3 local history; **the v1.4 remote push and public deployment are pending the final local verification in this task**. Incremental patch and full local bundle are in `delivery/`. Inspect the actual remote before merging; do not force-overwrite its history. See [status](docs/STATUS.md).
+`npm run build` produces static `dist/` for root or repository subpaths. The existing Pages workflow now runs all five browser suites. This iteration was developed from the supplied v1.3 local history; **v1.4 was pushed normally, GitHub Actions Run #13 passed, and the public GitHub Pages site was verified.** Incremental patch and full local bundle are in `delivery/`. Inspect the actual remote before merging; do not force-overwrite its history. See [status](docs/STATUS.md).
 
 ## Contribute / license
 

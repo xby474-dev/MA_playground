@@ -18,10 +18,10 @@
 
 ## 验证与限制
 
-预计 **203 项 Node 检查**；五套 Chromium 共 **168 项**。浏览器 URL 导航受管理策略阻止时，使用实际完整离线 HTML 注入运行；真实 HTTP 资源另测。详见 [VERIFICATION.md](VERIFICATION.md)。不声称公共部署、跨浏览器或形式化数学证明。
+**203 项 Node 检查**；五套 Chromium 共 **168 项**。浏览器 URL 导航受管理策略阻止时，使用实际完整离线 HTML 注入运行；真实 HTTP 资源另测。详见 [VERIFICATION.md](VERIFICATION.md)。不声称跨浏览器或形式化数学证明。
 
 ## 远端
 
-本地验证通过后正常推送至 [`xby474-dev/MA_playground`](https://github.com/xby474-dev/MA_playground)，再等待 GitHub Actions 五套检查和 Pages 页面验证。不得使用本地 bundle 强制覆盖远端历史。
+已正常推送至 [`xby474-dev/MA_playground`](https://github.com/xby474-dev/MA_playground)，当前功能提交为 `88e7909`；GitHub Actions Run #13 的五套检查通过，GitHub Pages 已验证包含 Taylor 实验与新增页面导览。不得使用本地 bundle 强制覆盖远端历史。
 
 交付物不含登录凭据、令牌、环境秘密或字体文件。后续更新应先获取真实远端状态，再审查并合并增量。
