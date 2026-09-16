@@ -28,7 +28,7 @@ npm run preview
 
 ## 离线使用
 
-直接打开构建后的 `dist/standalone.html`，或用 `dist/field-lab.html` 直接进入新统一实验。两个入口都包含三个完整实验。分享本机 `file://` 链接不能让其他设备访问你的文件；部署后再分享 URL。网络版与单文件版使用同一组数学函数和教学内容。
+直接打开构建后的 `dist/completeness-lab.html`，从完备性关系图开始。`dist/standalone.html`、`dist/relations-lab.html`、`dist/field-lab.html` 分别从极限、偏导关系和场实验开始。四个入口都包含四个完整实验。分享本机 `file://` 链接不能让其他设备访问你的文件；部署后再分享 URL。网络版与单文件版使用同一组数学函数和教学内容。
 
 ## 发布完成的判断
 

@@ -1,55 +1,95 @@
+<div align="center">
+
 # MA Playground
+### Mathematical Analysis Visual Lab
 
-**Multivariable Calculus Visual Lab — intuition that can stand up to proof.**
+**Build intuition. Then inspect the proof.**
 
-A dependency-free, offline-capable application for undergraduate multivariable calculus. The interface is currently Chinese. [中文说明](README.md)
+Four complete, offline-capable experiments. No backend, CDN, account, external API or runtime dependencies.
 
-## v1.2: One map, four properties
+[中文](README.md) · [Completeness guide (中文)](docs/COMPLETENESS-GUIDE.md) · [Mathematics (中文)](docs/COMPLETENESS-MATHEMATICS.md) · [Verification](docs/VERIFICATION.md)
 
-The second experiment is now a connected learning experience rather than separate fact cards:
+</div>
 
-**Build the logical map → understand the implications with smooth examples → try reversing them → find counterexamples → classify new functions.**
+![The actual v1.3 completeness lab](docs/images/completeness-map-desktop.png)
 
-The nodes are partial existence at the origin, continuity at the origin, Fréchet differentiability at the origin, and partials defined on a neighbourhood and continuous at the origin. The last condition is not labelled “C¹ throughout the neighbourhood”. Green solid arrows open theorem explanations; dashed non-implications open counterexample experiments. A separate conditional arrow retains the assumption that all partials exist and are bounded on a neighbourhood before concluding continuity.
+## v1.3 — Five theorems, one missing endpoint
 
-Four smooth examples, the three requested counterexamples, the original continuous-but-nondifferentiable bridge, and three transfer tasks are implemented. Surface, two-sided sections, candidate/tangent planes, shrinking-scale errors and derivative sequences use the same mathematical model. Undefined derivatives remain null; sampled trends never certify a universal theorem.
+Why can every step be rational while the required endpoint is not?
 
-![Actual relation-map screenshot](docs/images/relations-map-desktop.png)
+The fourth lab connects the least-upper-bound principle, monotone convergence, shrinking nested closed intervals, Bolzano–Weierstrass, and Cauchy completeness in a **directed proof cycle**. Nodes open a common experiment through a different lens; edges open four-step proofs. A route planner makes reverse implications explicit instead of drawing unproved two-way arrows.
 
-## Existing experiments remain
+The learning journey is **map → one construction → change the field → close the proof cycle → transfer questions**.
 
-1. Multivariable limits: checking every straight line is insufficient.
-2. Differential properties: the new relation experiment. The original two-function UI is retained under `#lab=differentiability&mode=classic` for compatibility and regression coverage.
-3. Green–Gauss–Stokes: local quantities, subdivision, shared-boundary cancellation and the exterior boundary. Its mathematics and interactions were not changed in this release.
+Starting with `[1,2]`, exact rational bisection compares `m²` with `d`. Choose targets √2, √3 or the rational control 3/2. Preserve the same construction when switching ℝ/ℚ, changing the theorem lens or inspecting a proof.
+
+| Lens | Interaction |
+|---|---|
+| Supremum | Enter a rational candidate and construct a larger set element or a smaller upper bound exactly. |
+| Monotone convergence | Follow increasing lower endpoints with a common upper bound and a tail enclosure. |
+| Nested intervals | Shrink and zoom, retain exact widths, distinguish each finite intersection from the infinite intersection. |
+| Bolzano–Weierstrass | Select even/odd subsequences from `zⱼ=(−1)ʲaⱼ` without reordering indices; inspect why no rationally convergent subsequence exists for the irrational targets. |
+| Cauchy completeness | Pick independently distant tail indices and adjust epsilon; inspect a uniform bound, not merely adjacent differences. |
+
+Six explained questions address fields, quantifiers, subsequences, the harmonic-series trap, open intervals and uniqueness.
+
+### Mathematical scope
+
+The equivalence cycle is stated for an **Archimedean ordered field K**. Both ℝ and ℚ meet the shared assumptions. The nested-interval node includes nonempty closed bounded intervals, nesting and widths tending to zero, yielding a **unique point in K**. We do not silently remove the Archimedean assumption from Cauchy-complete ⇒ least upper bounds.
+
+Conditional arrows remain valid in ℚ, while all five universal properties fail there. A successful rational example does not make ℚ complete. The missing-point marker is an ambient real reference, not a positive-width hole in dense ℚ.
+
+BigInt rational arithmetic determines branches, witnesses, tail differences and CSV data. Floating-point square roots are used only as optional drawing references, not in the construction algorithm. Proofs cover infinitely many indices; finite pixels and tests do not establish universal theorems.
+
+## Earlier experiments remain available
+
+1. **Every line is not enough.** Multivariable limit paths for `x²y/(x⁴+y²)`.
+2. **Four properties, one relation map.** Partial derivatives, continuity, differentiability and continuity of partial derivatives, with smooth examples, counterexamples and transfer tasks. The original two-function comparison remains at `#lab=differentiability&mode=classic`.
+3. **Local accumulation, boundary effect.** Green circulation → planar flux → Gauss → curved Stokes → a common view, with independent analytical boundary/interior calculations and orientation/cancellation controls.
+
+No existing mathematical modules or tests have been removed. The project subtitle broadens from multivariable calculus to mathematical analysis; the name remains MA Playground.
 
 ## Run
 
-Open `dist/relations-lab.html` for the complete offline application starting at the new experiment. `dist/standalone.html` and `dist/field-lab.html` are alternative complete starting points. No backend, CDN, external fonts, API key or installation is required for these files.
+For completely offline use, double-click **`dist/completeness-lab.html`** in the delivery archive. It contains all four labs. `standalone.html`, `relations-lab.html`, and `field-lab.html` are also complete offline builds with different starting views.
 
-For development, use Node.js 22+ in the source directory:
+For source development, use Node.js 22+:
 
-```sh
+```bash
 npm run dev
 npm run verify
 npm run preview
 ```
 
-The ordinary ES-module `index.html` should be served over HTTP. There are no npm runtime or build dependencies.
+There are no npm runtime or build-tool dependencies. Serve the modular `index.html` over HTTP; use an inlined HTML for offline file use. Sharing a local file URL does not upload the file.
 
-Browser tests use Python and Playwright only during development:
+## Test
 
-```sh
+```bash
+npm test
+npm run check
+npm run build
 python -m pip install -r tests/requirements.txt
 python -m playwright install chromium
 npm run test:ui
 ```
 
-Default browser tests exercise served ES modules. An explicit `--offline-harness` mode loads the actual generated single-file application when browser navigation is prohibited; it does not change browser policies or claim served-module validation. See [verification](docs/VERIFICATION.md) for actual results and limitations.
+Actual v1.3 checks: **151 Node tests**; Chromium suites **29 + 37 + 27 + 38 = 131 checks**. The legacy field suite only adjusts its two navigation-count expectations for the fourth lab and additionally checks all IDs; its mathematical and interactive assertions remain.
 
-## Engineering and delivery
+Browser scripts normally test the production HTTP build. In this managed environment HTTP navigation was blocked by browser policy, so the real standalone build was injected using explicit `--offline-harness`. HTTP assets and subpaths were checked separately by a real Node server. This is **not** a claim of browser HTTP module-loading E2E, operating-system `file://` access, public deployment, Safari/Firefox, or a complete screen-reader audit. Details: [verification](docs/VERIFICATION.md).
 
-All new state, mathematics, content, drawing and lifecycle handling live in `src/relations-*.js`, integrated into the existing second experiment. The original mathematical tests are retained, and the legacy UI suite explicitly opens its compatibility route before exercising the old assertions. New tests cover the relation UI separately.
+## Architecture
 
-Build output supports both a root deployment and a GitHub Pages repository subpath. The workflow runs all tests before deployment. This delivery is a local update restored from the v1.1 bundle, not a claim that the remote repository or public Pages site was updated. Preserve the real remote history when merging the supplied patch; do not force-push the local bundle.
+`completeness-math/state/plots/content/lab.js` follow the existing separation of pure mathematics, validated route state, SVG views, authored teaching content and controller lifecycle. A custom no-dependency bundler builds the same modules into standalone HTML; there is no separate demo implementation.
 
-MIT. Authored mathematical details and reference distinctions are in [RELATIONS-MATHEMATICS.md](docs/RELATIONS-MATHEMATICS.md), [guide](docs/RELATIONS-GUIDE.md), and [references](docs/REFERENCES.md). No user answers, telemetry or credentials are transmitted.
+Mobile layouts use a vertical directed cycle and synchronized controls near the plot. SVG nodes and edges have keyboard equivalents. Form inputs keep focus during updates; explicit animations stop on navigation or visibility changes. Quiz drafts stay in memory and are not shared or uploaded.
+
+## Deployment and delivery
+
+`npm run build` produces static `dist/`, compatible with root and repository subpaths. The existing GitHub Pages workflow now runs all four browser suites through `test:ui`. Repository authorization and Pages settings are still required.
+
+This delivery was developed locally on the supplied v1.2 history. **No remote push or public deployment was performed in this turn.** Local history, incremental patch and verification material are included under `delivery/`. Fetch the actual remote history before merging; never overwrite it with a force push. See [status](docs/STATUS.md).
+
+## Contribute / license
+
+MIT. The primary UI is Chinese; this README is not a claim of a fully translated interface. No arbitrary formula parser, CAS or automatic proof engine. New content needs precise assumptions, proofs/counterexamples and tests, not empty sections. See [CONTRIBUTING.md](CONTRIBUTING.md) and [references](docs/REFERENCES.md).

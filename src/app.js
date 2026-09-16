@@ -1,3 +1,5 @@
+import { completenessPage } from './completeness-content.js';
+import { mountCompletenessLab } from './completeness-lab.js';
 import { relationsPage } from './relations-content.js';
 import { mountRelationsLab } from './relations-lab.js';
 import { fieldHeader, fieldExplore, fieldProof, fieldQuiz } from './field-content.js';
@@ -10,6 +12,7 @@ import { icon } from './icons.js';
 import { initializeGuide, guideStorageKey, persistGuideState, setGuideOpen } from './page-guide.js';
 
 let state = parseState(location.hash || '#lab='+(document.body.dataset.initialLab ?? 'limits'));
+let completenessLab = null;
 let fieldLab = null;
 let relationsLab = null;
 let surface = null, plotType = '', playing = false, frame = null, lastTick = 0, toastTimer;
@@ -36,19 +39,26 @@ function currentGuideKey(s) {
   });
 }
 function render() {
+  completenessLab?.destroy(); completenessLab = null;
   relationsLab?.destroy(); relationsLab = null;
   fieldLab?.destroy(); fieldLab = null;
   stopAnimation();
   surface?.destroy(); surface = null; plotType = '';
+  main.classList.toggle('cp-mode', state.lab === 'completeness');
   main.classList.toggle('field-mode', state.lab === 'fields');
   main.classList.toggle('rel-mode', state.mode === 'relations');
-  main.innerHTML = state.mode === 'relations' ? relationsPage(state) + footer : state.lab === 'fields' ? fieldHeader(state) + ({explore:fieldExplore,proof:fieldProof,quiz:fieldQuiz}[state.tab])(state) + footer : header(state) + ({ explore, proof, quiz }[state.tab])(state) + footer;
-  for (const lab of ['limits', 'differentiability', 'fields']) {
+  main.innerHTML = state.lab === 'completeness' ? completenessPage(state) + footer : state.mode === 'relations' ? relationsPage(state) + footer : state.lab === 'fields' ? fieldHeader(state) + ({explore:fieldExplore,proof:fieldProof,quiz:fieldQuiz}[state.tab])(state) + footer : header(state) + ({ explore, proof, quiz }[state.tab])(state) + footer;
+  for (const lab of ['limits', 'differentiability', 'fields', 'completeness']) {
     const nav = $(`nav-${lab}`);
     if (state.lab === lab) nav.setAttribute('aria-current', 'page'); else nav.removeAttribute('aria-current');
   }
   document.title = `${state.lab === 'fields' ? '内部的累积，边界的回声' : state.lab === 'limits' ? '所有直线，都不够' : '偏导存在，也不够'} · MA Playground`;
   initializeGuide(main, currentGuideKey(state));
+  if(state.lab === 'completeness') {
+    document.title = '五种定理，同一个终点 · MA Playground';
+    completenessLab = mountCompletenessLab(main, () => state, (rebuild=false) => {syncURL(rebuild); if(rebuild) render();}, toast);
+    return;
+  }
   if(state.mode === 'relations') {
     document.title = '四个性质，一张关系图 · MA Playground';
     relationsLab = mountRelationsLab(main, () => state, (rebuild=false) => {syncURL(rebuild); if(rebuild) render();}, toast);
@@ -260,7 +270,7 @@ document.addEventListener('click',event=>{
   }
 });
 document.addEventListener('input',event=>{
-  if(state.lab==='fields'||state.mode==='relations') return;
+  if(state.lab==='fields'||state.lab==='completeness'||state.mode==='relations') return;
   const el=event.target;
   if(el.matches('input[type="radio"]')){answers[state.lab][el.name.replace('question-','')]=Number(el.value);return;}
   if(!['scale','coefficient','angle'].includes(el.id))return;

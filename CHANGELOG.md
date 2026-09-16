@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.3.0 · 2026-09-16
+
+- Added the fourth complete experiment: equivalent forms of real completeness, with a clickable five-node proof cycle and route planner.
+- Unified exact rational bisection across supremum, monotone convergence, nested intervals, subsequences and Cauchy tails. Added ℝ/ℚ comparison, √2/√3 counterexamples and the 3/2 normal control.
+- Added BigInt fractions, exact upper-bound witnesses, independent distant tail indices, shrinking-interval zoom, six explained transfer questions and full noncircular proofs under explicit Archimedean assumptions.
+- Added a complete offline entry, responsive vertical graph and synchronized mobile controls. Preserved all three earlier experiments and classic comparison mode.
+- Added 43 mathematical/state/content/plot checks, 2 engineering checks and 38 browser checks. Existing field browser navigation counts were updated from three to four without removing prior assertions.
+- Escaped mathematical inequalities consistently after a real DOM truncation was found during browser review; exact text and unknown HTML elements are checked in regression tests.
+- Updated source documentation, references, delivery status and actual verification boundaries. No public deployment performed.
+
+
 ## 1.2.0 — 2026-09-16
 
 将第二个实验重构为“偏导、连续、可微、偏导连续”的统一有向关系图。绿色定理箭头和虚线非蕴含分别进入证明与反例；保留教材图中邻域偏导有界的附加条件。连续五阶段从光滑正例推进到逆推、反例和三道迁移判断。

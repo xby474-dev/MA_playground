@@ -36,7 +36,7 @@
     "Mobile geometry is reframed, not just shrunk to illegible desktop labels",
     "Malformed deep links cannot inject markup or non-finite geometry",
     "Skip link retains the full field route and moves keyboard focus into the experiment",
-    "Direct offline entry opens the unified lab without a hash and retains all three experiments",
+    "Direct offline entry opens the unified lab without a hash and retains all four experiments",
     "Exercised flows have no uncaught errors and no external runtime requests"
   ],
   "errors": [],

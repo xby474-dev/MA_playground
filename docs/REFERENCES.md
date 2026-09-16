@@ -37,3 +37,11 @@
 
 - https://github.com/actions/setup-node
 - https://github.com/actions/checkout/releases
+
+
+## v1.3 · 实数完备性（作者资料核对）
+
+- James Forsythe Hall, *Completeness of Ordered Fields*, arXiv:1101.5652，尤其有序域、阿基米德性与各类完备性的范围：https://arxiv.org/abs/1101.5652 。HTML：https://arxiv.org/html/1101.5652 。
+- Jiří Lebl, *Basic Analysis I*, Cauchy sequences，Cauchy 与收敛、尾部和数系内极限：https://www.jirka.org/ra/html/sec_cauchy.html 。
+
+以上用于核对术语、前提与标准结论；实验的证明环编排、精确二分/有理见证、动画、题目和实现由本项目独立撰写，并非转载原书。完整推导见 COMPLETENESS-MATHEMATICS.md。资料核对日期：2026-09-16；应用运行不访问这些站点。

@@ -1,7 +1,9 @@
+import { completenessDefaults, parseCompletenessState, serializeCompletenessState } from './completeness-state.js';
 import { parseRelationsState, serializeRelationsState } from './relations-state.js';
 import { fieldDefaults, parseFieldState, serializeFieldState } from './field-state.js';
 import { clamp } from './math.js';
 export function defaults(lab = 'limits') {
+  if(lab === 'completeness') return completenessDefaults();
   if(lab === 'fields') return fieldDefaults();
   return { lab, tab: 'explore', path: 'line', k: 1, q: 0.65, sign: 1, zoom: false, view: lab === 'limits' ? 'plane' : 'surface', model: 'counter', angle: 45, metric: 'ratio', pins: [] };
 }
@@ -9,6 +11,7 @@ const pick = (value, options, fallback) => options.includes(value) ? value : fal
 const num = (value, fallback, min, max) => value === null || value.trim() === '' || !Number.isFinite(Number(value)) ? fallback : clamp(Number(value), min, max);
 export function parseState(hash) {
   const p = new URLSearchParams(hash.replace(/^#/, ''));
+  if(p.get('lab') === 'completeness') return parseCompletenessState(p);
   if(p.get('lab') === 'fields') return parseFieldState(p);
   if(p.get('lab') === 'differentiability' && p.get('mode') === 'relations') return parseRelationsState(p);
   const s = defaults(pick(p.get('lab'), ['limits', 'differentiability'], 'limits'));
@@ -34,6 +37,7 @@ export function parseState(hash) {
   return s;
 }
 export function serializeState(s) {
+  if(s.lab === 'completeness') return serializeCompletenessState(s);
   if(s.lab === 'fields') return serializeFieldState(s);
   if(s.mode === 'relations') return serializeRelationsState(s);
   const p = new URLSearchParams({ lab: s.lab, tab: s.tab, q: s.q.toFixed(3), view: s.view });

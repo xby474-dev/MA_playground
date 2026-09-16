@@ -4,14 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#174d43">
-  <meta name="description" content="MA Playground 多元微积分可视化实验室。从路径陷阱到偏导与可微的关系图，动手连接几何直觉、公式、严格定义与证明。免费、开源、无需登录。">
+  <meta name="description" content="MA Playground 数学分析可视化实验室。从实数完备性到偏导与可微的关系图，动手连接几何直觉、公式、严格定义与证明。免费、开源、无需登录。">
   <meta property="og:title" content="MA Playground · 让数学直觉，经得起证明。">
-  <meta property="og:description" content="从极限、可微性，到 Green–Gauss–Stokes 统一实验：局部累积，内部抵消，边界回声。">
-  <title>MA Playground · 多元微积分可视化实验室</title>
+  <meta property="og:description" content="从极限、可微性、Green–Gauss–Stokes，到实数完备性的等价关系：一个问题，连接直觉与证明。">
+  <title>MA Playground · 数学分析可视化实验室</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles/app.css">
   <link rel="stylesheet" href="./styles/fields.css">
   <link rel="stylesheet" href="./styles/relations.css">
+  <link rel="stylesheet" href="./styles/completeness.css">
   <script type="module" src="./src/app.js"></script>
 </head>
 <body>
@@ -19,28 +20,29 @@
   <header class="topbar">
     <a class="brand" href="#lab=limits" aria-label="MA Playground 首页">
       <span class="brand-mark" aria-hidden="true">m<span>∂</span></span>
-      <span>MA <strong>Playground</strong><span class="brand-caption">MULTIVARIABLE CALCULUS VISUAL LAB</span></span>
+      <span>MA <strong>Playground</strong><span class="brand-caption">MATHEMATICAL ANALYSIS VISUAL LAB</span></span>
     </a>
     <div class="top-actions"><span class="edition"><i></i> 数学直觉，也需要证明</span><a class="github-link" href="https://github.com/xby474-dev/MA_playground" target="_blank" rel="noopener noreferrer" aria-label="在 GitHub 查看源代码（新窗口）"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.99c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.33 4.69-4.57 4.94.36.31.68.92.68 1.85v2.58c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg><span>GitHub</span><span aria-hidden="true">↗</span></a></div>
   </header>
   <div class="layout">
     <aside class="sidebar" aria-label="实验导航">
       <div class="sidebar-inner">
-        <div class="sidebar-label">THE LAB NOTEBOOK <span>01—03</span></div>
+        <div class="sidebar-label">THE LAB NOTEBOOK <span>01—04</span></div>
         <div class="nav-group-title">从局部出发，理解整体。</div>
         <nav>
           <a class="lab-nav" id="nav-limits" href="#lab=limits"><span class="nav-num">01</span><span><strong>所有直线，都不够</strong><small>多元极限 · 路径陷阱</small></span><span class="nav-arrow">↗</span></a>
           <a class="lab-nav" id="nav-differentiability" href="#lab=differentiability&mode=relations"><span class="nav-num">02</span><span><strong>四个性质，一张图</strong><small>偏导 · 连续 · 可微</small></span><span class="nav-arrow">↗</span></a>
           <a class="lab-nav" id="nav-fields" href="#lab=fields"><span class="nav-num">03</span><span><strong>局部累积，边界回声</strong><small>Green · Gauss · Stokes</small></span><span class="nav-arrow">↗</span></a>
+          <a class="lab-nav" id="nav-completeness" href="#lab=completeness"><span class="nav-num">04</span><span><strong>五种定理，同一终点</strong><small>实数完备性 · ℝ 与 ℚ</small></span><span class="nav-arrow">↗</span></a>
         </nav>
         <div class="sidebar-note"><span class="little-orbit" aria-hidden="true">↗</span><h3>别急着接受结论。</h3><p>先预测，再拖动。<br>让反例挑战直觉，<br>让证明完成理解。</p><button class="text-button" data-action="about">如何使用实验室 <span>→</span></button></div>
-        <div class="sidebar-footer"><span class="version-pill">v1.2</span> OPEN SOURCE · NO TRACKING<br><small>数学分析我爱你～</small></div>
+        <div class="sidebar-footer"><span class="version-pill">v1.3</span> OPEN SOURCE · NO TRACKING<br><small>数学分析我爱你～</small></div>
       </div>
     </aside>
     <main id="main" tabindex="-1"></main>
   </div>
   <div id="toast" role="status" aria-live="polite"></div>
-  <dialog id="about-dialog" aria-labelledby="about-title"><div class="dialog-top"><span class="eyebrow">A NOTE BEFORE YOU BEGIN</span><button class="icon-button" data-action="close-dialog" aria-label="关闭说明">×</button></div><h2 id="about-title">探索不是证明，<br>但可以成为证明的起点。</h2><p>每个实验都把三件事分开：拖动得到的<strong>数值观察</strong>、代入得到的<strong>精确公式</strong>，以及覆盖所有情况的<strong>数学证明</strong>。</p><ol><li>先在“探索”里选择一条路径或一个函数，尝试推翻自己的预测。</li><li>把尺度缩小，观察函数值和归一化误差分别怎样变化。</li><li>在第三个实验中，逐步检查局部累积、公共边界抵消与定向；到“定义与证明”核对条件，完成“检查理解”中的新问题。</li></ol><p>所有计算都在你的浏览器中完成。没有登录、分析追踪、AI 问答或上传。分享链接只包含当前实验参数。</p><p class="muted">图形是有限采样。曲面高度使用独立显示比例；投影中的视觉角度不等于真实导数。浏览器数值不能代替极限的严格证明。</p><a href="https://github.com/xby474-dev/MA_playground/issues" target="_blank" rel="noopener noreferrer">发现数学或界面问题？提交 Issue ↗</a></dialog>
+  <dialog id="about-dialog" aria-labelledby="about-title"><div class="dialog-top"><span class="eyebrow">A NOTE BEFORE YOU BEGIN</span><button class="icon-button" data-action="close-dialog" aria-label="关闭说明">×</button></div><h2 id="about-title">探索不是证明，<br>但可以成为证明的起点。</h2><p>每个实验都把三件事分开：拖动得到的<strong>数值观察</strong>、代入得到的<strong>精确公式</strong>，以及覆盖所有情况的<strong>数学证明</strong>。</p><ol><li>先在“探索”里选择一条路径或一个函数，尝试推翻自己的预测。</li><li>把尺度缩小，观察函数值和归一化误差分别怎样变化。</li><li>在第三个实验中，逐步检查局部累积、公共边界抵消与定向；到“定义与证明”核对条件，完成“检查理解”中的新问题。</li></ol><p>所有计算都在你的浏览器中完成。第四个实验用精确有理数二分连接五个完备性命题；数值与像素不会判定无限过程。没有登录、分析追踪、AI 问答或上传。分享链接只包含当前实验参数。</p><p class="muted">图形是有限采样。曲面高度使用独立显示比例；投影中的视觉角度不等于真实导数。浏览器数值不能代替极限的严格证明。</p><a href="https://github.com/xby474-dev/MA_playground/issues" target="_blank" rel="noopener noreferrer">发现数学或界面问题？提交 Issue ↗</a></dialog>
   <dialog id="share-dialog" aria-labelledby="share-title"><div class="dialog-top"><h2 id="share-title">分享当前实验</h2><button class="icon-button" data-action="close-dialog" aria-label="关闭分享">×</button></div><p>复制下面的链接。对方会看到相同的函数、路径、尺度与比较项。</p><input id="share-url" type="text" readonly aria-label="实验分享链接"><p id="share-warning" class="muted"></p></dialog>
   <noscript><section class="noscript"><h1>MA Playground 需要启用 JavaScript</h1><p>交互和计算完全在浏览器中运行。你仍可阅读仓库中的 <a href="https://github.com/xby474-dev/MA_playground/blob/main/docs/MATHEMATICS.md">数学定义与完整证明</a>。</p></section></noscript>
 </body>

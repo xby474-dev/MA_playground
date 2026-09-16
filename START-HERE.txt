@@ -1,25 +1,25 @@
-MA PLAYGROUND · v1.2 · 四个性质，一张关系图
+MA PLAYGROUND v1.3 — START HERE
 
-直接体验这次重构：双击 dist/relations-lab.html。
-从极限开始：dist/standalone.html。
-从 Green–Gauss–Stokes 开始：dist/field-lab.html。
-三个文件都包含全部实验，无需 Node、网络、CDN、外部 API 或字体服务。
+最快体验 / Quick start
+  双击 dist/completeness-lab.html：进入实数完备性的等价关系图。
+  完整应用包含全部四个实验，无需网络、Node、CDN、外部字体或 API。
 
-学习路线：建立关系 → 正例走通 → 尝试逆推 → 反例破局 → 自己判断。
-绿色实线箭头点击“为什么成立”，虚线 ⇏ 点击“反例在哪里”。
-切换函数后先填四个判断，再揭晓；进入同一个案例查看曲面、截面、候选平面、偏导序列和误差。
-原比较界面兼容路由：#lab=differentiability&mode=classic。
+其他完整离线入口
+  dist/standalone.html     多元极限
+  dist/relations-lab.html 偏导/连续/可微关系图
+  dist/field-lab.html      Green–Gauss–Stokes
 
-开发与验证：
-  npm run dev
-  npm run verify
-浏览器测试依赖及环境限制：docs/VERIFICATION.md。
-新实验指南：docs/RELATIONS-GUIDE.md。
-条件、定义及每个函数的证明：docs/RELATIONS-MATHEMATICS.md。
+开发
+  Node 22+；npm run dev / npm run verify / npm run preview
+  模块入口 index.html 要经 HTTP 打开，直接双击请用 dist 中合并版本。
 
-本地代码已提交并验证。此交付不表示已推送远端或公开上线。
-准确提交、补丁、验证日志：delivery/manifest.json。
-增量基于上次 v1.1 本地提交 87a1868；并非真实远端 main 的克隆。合并前需检查真实仓库，不要强制推送。
+交付
+  README.md / README.en.md：功能与运行
+  docs/COMPLETENESS-GUIDE.md：连续学习路线
+  docs/COMPLETENESS-MATHEMATICS.md：前提、证明、反例
+  docs/VERIFICATION.md：实际检查及未覆盖范围
+  delivery/manifest.json：本地提交、基线、核验材料
+  delivery/*.patch / *.bundle：增量补丁与本地历史
 
-包含源码、构建、文档、测试、实际截图、增量补丁和本地 Git bundle。
-不含 node_modules、登录凭据、环境秘密或字体文件。
+本轮未更新远端、未公开部署。不要将 bundle 强制覆盖远端。
+浏览器检查使用实际单文件注入；真实 HTTP 资源另测；不等同线上验收。

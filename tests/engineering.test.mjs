@@ -101,3 +101,15 @@ test('New offline relation entry opens the reworked second lab and contains the 
   for(const name of ['relations-math','relations-content','relations-plots','relations-lab','field-lab','app'])assert.ok(html.includes(`__modules["${name}"]`));
   assert.ok(!/<script[^>]+src=/.test(html));assert.ok(!/<link[^>]+rel="stylesheet"/.test(html));assert.ok(!/url\(['"]?https?:\/\//.test(html));
 });
+
+test('Completeness module and offline mathematics are served at both static deployment paths',async()=>{
+ for(const prefix of ['/','/MA_playground/'])for(const file of ['src/completeness-math.js','src/completeness-state.js','src/completeness-content.js','src/completeness-plots.js','src/completeness-lab.js','styles/completeness.css','docs/COMPLETENESS-MATHEMATICS.md','docs/COMPLETENESS-GUIDE.md']){
+  const r=await fetch(base+prefix+file);assert.equal(r.status,200,file);assert.ok((await r.text()).length>50,file);
+ }
+});
+test('Completeness offline entry retains the whole app and requires no external assets',async()=>{
+ const r=await fetch(base+'/MA_playground/completeness-lab.html');assert.equal(r.status,200);const html=await r.text();assert.ok(html.includes('data-initial-lab="completeness"'));
+ for(const id of ['nav-limits','nav-differentiability','nav-fields','nav-completeness'])assert.ok(html.includes(id));
+ for(const module of ['completeness-math','completeness-lab','relations-lab','field-lab'])assert.ok(html.includes(`__modules["${module}"]`));
+ assert.ok(!/<script[^>]+src=/.test(html));assert.ok(!/<link[^>]+rel="stylesheet"/.test(html));assert.ok(!/url\(['"]?https?:\/\//.test(html));
+});
