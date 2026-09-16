@@ -10,7 +10,7 @@ await writeFile(resolve(out, '.nojekyll'), '');
 // Hash routing means the same relative assets work at / and /MA_playground/.
 await writeFile(resolve(out, '404.html'), await readFile(resolve(root, 'index.html')));
 await mkdir(resolve(out, 'docs'), { recursive: true });
-for (const name of ['MATHEMATICS.md', 'ACCESSIBILITY.md', 'FIELD-MATHEMATICS.md', 'FIELD-GUIDE.md', 'RELATIONS-MATHEMATICS.md', 'RELATIONS-GUIDE.md', 'COMPLETENESS-MATHEMATICS.md', 'COMPLETENESS-GUIDE.md']) {
+for (const name of ['MATHEMATICS.md', 'ACCESSIBILITY.md', 'FIELD-MATHEMATICS.md', 'FIELD-GUIDE.md', 'RELATIONS-MATHEMATICS.md', 'RELATIONS-GUIDE.md', 'COMPLETENESS-MATHEMATICS.md', 'COMPLETENESS-GUIDE.md', 'TAYLOR-MATHEMATICS.md', 'TAYLOR-GUIDE.md']) {
   try { await cp(resolve(root, 'docs', name), resolve(out, 'docs', name)); } catch (err) { if (err.code !== 'ENOENT') throw err; }
 }
 await cp(resolve(root, 'LICENSE'), resolve(out, 'LICENSE'));
@@ -20,6 +20,7 @@ const standalone = await readFile(resolve(out, 'standalone.html'), 'utf8');
 await writeFile(resolve(out, 'field-lab.html'), standalone.replace('<body>', '<body data-initial-lab="fields">'));
 await writeFile(resolve(out, 'relations-lab.html'), standalone.replace('<body>', '<body data-initial-lab="differentiability&mode=relations">'));
 await writeFile(resolve(out, 'completeness-lab.html'), standalone.replace('<body>', '<body data-initial-lab="completeness">'));
+await writeFile(resolve(out, 'taylor-lab.html'), standalone.replace('<body>', '<body data-initial-lab="taylor">'));
 let bytes = 0, files = 0;
 async function size(dir) { for (const e of await readdir(dir, { withFileTypes: true })) { const f = resolve(dir, e.name); if (e.isDirectory()) await size(f); else { bytes += (await readFile(f)).length; files++; } } }
 await size(out);

@@ -51,3 +51,9 @@
 证明页每一步用 aria-live 提供更新；挑战为 fieldset、legend 和原生单选，作答可离开再回来，错误理由和状态有明确反馈。重置清空草稿。分享使用既有手动复制降级。
 
 实际检查 Chromium 的 360/390/768/1024px 布局、键盘图导航、滑块焦点、异常输入及四个实验往返；这仍不等于完整屏幕阅读器审计或 WCAG 认证。
+
+## v1.4 Taylor
+
+No autoplay. Explicit playback follows reduced-motion preference: continuous 1.2s-per-layer growth normally, discrete completed layers under reduced motion. Progress is also a native range; layer cards and both plot handles have keyboard alternatives. Handles use role=slider and bounds; Left/Right adjust, Shift accelerates, Home/End select defined endpoints. Focus is restored after a SVG redraw. Derivative tables and text explain the same mathematics as the plots. The route cleans up animation and listeners; hidden-page events pause playback.
+
+Checks include 360/390/768/1024px layouts, narrow tables, long proofs, actual pointer drag and keyboard interaction. This is not a complete assistive-technology audit or WCAG certification.

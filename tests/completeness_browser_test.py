@@ -43,10 +43,11 @@ try:
   if args.offline_harness:page.set_content((ROOT/'dist/completeness-lab.html').read_text(),wait_until='load')
   else:page.goto(args.url,wait_until='networkidle');page.locator('#nav-completeness').click()
   expect(page.locator('#cp-title')).to_have_text('五种定理，同一个终点。');expect(page.locator('#nav-completeness')).to_have_attribute('aria-current','page')
-  assert page.locator('.lab-nav').count()==4
+  assert page.locator('.lab-nav').count()==5
   assert page.locator('.cp-desktop-graph [data-cp-node]').count()==5
   assert page.locator('.cp-desktop-graph [data-cp-edge]').count()==5
-  ok('Fourth lab opens a five-node, five-edge proof cycle without removing the existing experiments')
+  expect(page.locator('.page-guide[data-guide="completeness"]')).to_be_visible();expect(page.locator('.page-guide[data-guide="completeness"] [data-guide-action="start"]')).to_be_visible()
+  ok('Fourth lab opens a five-node, five-edge proof cycle with an in-page guide')
   page.locator('.cp-assumptions summary').click();expect(page.locator('.cp-assumptions')).to_contain_text('阿基米德有序域');expect(page.locator('.cp-assumptions')).to_contain_text('长度趋零');page.locator('.cp-assumptions summary').click()
   ok('The map makes ordered-field, Archimedean and shrinking-interval assumptions available')
   page.locator('#cp-from').select_option('mono');page.locator('#cp-to').select_option('sup');expect(page.locator('#cp-route-description')).to_contain_text('4 条箭头');assert page.locator('.cp-graph-edge.on-route').count()==4
@@ -142,7 +143,7 @@ try:
    if width<690:
     assert page.locator('.cp-mobile-graph [data-cp-node]:visible').count()==5;assert page.locator('.cp-mobile-graph [data-cp-edge]:visible').count()==5
    if width==390:screenshot(page,'completeness-map-mobile.png')
-  ok('Map and four-lab navigation reflow at 360, 390, 768 and 1024px without document overflow')
+  ok('Map and five-lab navigation reflow at 360, 390, 768 and 1024px without document overflow')
   page.set_viewport_size({'width':360,'height':844});visible(page,'[data-cp-node="nested"]').click();expect(page.locator('#cp-depth-mobile')).to_be_visible();page.locator('#cp-depth-mobile').focus();slide(page,'cp-depth-mobile',21);expect(page.locator('#cp-depth-mobile')).to_be_focused();expect(page.locator('#cp-depth')).to_have_value('21');expect(page.locator('#cp-context-n')).to_have_text('21');no_overflow(page);screenshot(page,'completeness-nested-mobile.png')
   ok('Mobile plot has its own synchronized depth control with focus preserved during updates')
   visible(page,'[data-cp-node="cauchy"]').click();slide(page,'cp-depth-mobile',32);slide(page,'cp-m',120);slide(page,'cp-k',180);page.locator('.cp-proof-detail summary').click();page.locator('.cp-ledger summary').click();no_overflow(page);assert 'NaN' not in page.locator('#cp-primary-plot').inner_html();page.locator('.cp-proof-detail summary').click();page.locator('.cp-ledger summary').click()

@@ -103,3 +103,9 @@ completeness-state → completeness-lab → completeness-math (BigInt rational)
 Cauchy 视角允许 m 与 j 独立落在较远尾部；精确差值不会因屏幕像素重合被清零。页面明确区分“这个充分界尚未达到 epsilon”和“数列不是 Cauchy”。上确界候选见证也由分数运算生成，不用 sqrt 判断。
 
 构建合并器新增五个本地模块，产出第四个完整入口 completeness-lab.html，数学和指南复制到 dist/docs。只增加 test:ui 的第四套命令，既有 CI 工作流自动覆盖它。原 Node 测试全部保留；旧场浏览器套件仅调整两处导航数量预期，并新增全部四个 ID 检查。
+
+## v1.4 Taylor integration
+
+`taylor-math/state/plots/content/lab.js` follow the same five-way separation. The global router handles `lab=taylor`, cleans up the active controller and supplies the common share dialog. Fractional growth is a mathematical state `p` serialized to the hash, distinct from the target order `n`. An explicit loop updates `p`; reduced-motion users receive completed-step updates. Every new listener uses an AbortController and every animation is cleaned up on unmount.
+
+Plots never choose coefficients. Analytical formulas compute data; SVG draws clipped segments and leaves singularities disconnected. During pointer dragging the coordinate window is frozen, while the numerical a or h is updated. The standalone builder inlines these exact modules; it is not a second demo codebase.

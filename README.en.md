@@ -5,55 +5,42 @@
 
 **Build intuition. Then inspect the proof.**
 
-Four complete, offline-capable experiments. No backend, CDN, account, external API or runtime dependencies.
+Five complete, offline-capable experiments. No backend, CDN, account, external API or runtime dependencies.
 
-[中文](README.md) · [Completeness guide (中文)](docs/COMPLETENESS-GUIDE.md) · [Mathematics (中文)](docs/COMPLETENESS-MATHEMATICS.md) · [Verification](docs/VERIFICATION.md)
+[中文](README.md) · [Taylor guide (中文)](docs/TAYLOR-GUIDE.md) · [Mathematics (中文)](docs/TAYLOR-MATHEMATICS.md) · [Verification](docs/VERIFICATION.md)
 
 </div>
 
-![The actual v1.3 completeness lab](docs/images/completeness-map-desktop.png)
+![Recorded from the actual app: Taylor growth](docs/images/taylor-growth.gif)
 
-## v1.3 — Five theorems, one missing endpoint
+## v1.4 — A curve, one derivative at a time
 
-Why can every step be rational while the required endpoint is not?
+Starting with the horizontal line T₀, build a local polynomial from the derivatives at one point. The learning path is **grow → examine errors → test the limits → inspect proofs → transfer questions**.
 
-The fourth lab connects the least-upper-bound principle, monotone convergence, shrinking nested closed intervals, Bolzano–Weierstrass, and Cauchy completeness in a **directed proof cycle**. Nodes open a common experiment through a different lens; edges open four-step proofs. A route planner makes reverse implications explicit instead of drawing unproved two-way arrows.
+Choose exp, sin, cos, ln(1+x), 1/(1−x), or the smooth nonanalytic example exp(−1/x²) extended by zero. Move the expansion center and probe with sliders, direct SVG dragging or keyboard controls. Select orders 0…12 and watch terms grow continuously. Pause or scrub inside a term: `T₂+0.4c₃h³` is explicitly an intermediate curve Q, not an already completed T₃.
 
-The learning journey is **map → one construction → change the field → close the proof cycle → transfer questions**.
+A live derivative table distinguishes guaranteed matching, partial correction and coincidental zeros. The second derivative is not mislabeled as geometric curvature. Coefficients are analytical, not finite differences or a fit to sampled points.
 
-Starting with `[1,2]`, exact rational bisection compares `m²` with `d`. Choose targets √2, √3 or the rational control 3/2. Preserve the same construction when switching ℝ/ℚ, changing the theorem lens or inspecting a proof.
+Two error views independently hold the order or the observation point fixed. The remainder panel uses a bound over the entire connecting interval, never a sampled maximum. A conservative dyadic neighborhood is selected using the analytical bound; floating evaluation is not presented as certified interval arithmetic.
 
-| Lens | Interaction |
-|---|---|
-| Supremum | Enter a rational candidate and construct a larger set element or a smaller upper bound exactly. |
-| Monotone convergence | Follow increasing lower endpoints with a common upper bound and a tail enclosure. |
-| Nested intervals | Shrink and zoom, retain exact widths, distinguish each finite intersection from the infinite intersection. |
-| Bolzano–Weierstrass | Select even/odd subsequences from `zⱼ=(−1)ʲaⱼ` without reordering indices; inspect why no rationally convergent subsequence exists for the irrational targets. |
-| Cauchy completeness | Pick independently distant tail indices and adjust epsilon; inspect a uniform bound, not merely adjacent differences. |
+Four boundary presets expose real counterexamples: increasing order can worsen error; a function's domain is not its series' convergence interval; the logarithm's right endpoint requires a separate check; and a smooth function may differ from its Taylor series. The flat example's zero series has **infinite** radius but agrees with the function only at zero.
 
-Six explained questions address fields, quantifiers, subsequences, the harmonic-series trap, open intervals and uniqueness.
+Four complete four-step proofs and eight explained, balanced-position questions finish the route. State sharing preserves fractional growth. CSV contains complete T₀…T₁₂ evaluations, assumptions and numerical-method metadata, not a mislabeled intermediate animation.
 
-### Mathematical scope
+## Earlier labs remain intact
 
-The equivalence cycle is stated for an **Archimedean ordered field K**. Both ℝ and ℚ meet the shared assumptions. The nested-interval node includes nonempty closed bounded intervals, nesting and widths tending to zero, yielding a **unique point in K**. We do not silently remove the Archimedean assumption from Cauchy-complete ⇒ least upper bounds.
+1. Multivariable limits: every straight line is not enough.
+2. Partial derivatives, continuity, differentiability and continuous partials: a theorem/counterexample map.
+3. Green, Gauss and Stokes: local accumulation and boundary effects.
+4. Real completeness: a directed equivalence-proof cycle, exact rational bisection and ℝ/ℚ comparison.
 
-Conditional arrows remain valid in ℚ, while all five universal properties fail there. A successful rational example does not make ℚ complete. The missing-point marker is an ambient real reference, not a positive-width hole in dense ℚ.
-
-BigInt rational arithmetic determines branches, witnesses, tail differences and CSV data. Floating-point square roots are used only as optional drawing references, not in the construction algorithm. Proofs cover infinitely many indices; finite pixels and tests do not establish universal theorems.
-
-## Earlier experiments remain available
-
-1. **Every line is not enough.** Multivariable limit paths for `x²y/(x⁴+y²)`.
-2. **Four properties, one relation map.** Partial derivatives, continuity, differentiability and continuity of partial derivatives, with smooth examples, counterexamples and transfer tasks. The original two-function comparison remains at `#lab=differentiability&mode=classic`.
-3. **Local accumulation, boundary effect.** Green circulation → planar flux → Gauss → curved Stokes → a common view, with independent analytical boundary/interior calculations and orientation/cancellation controls.
-
-No existing mathematical modules or tests have been removed. The project subtitle broadens from multivariable calculus to mathematical analysis; the name remains MA Playground.
+The old two-function comparison also remains at `#lab=differentiability&mode=classic`. No prior mathematical or interactive tests were removed.
 
 ## Run
 
-For completely offline use, double-click **`dist/completeness-lab.html`** in the delivery archive. It contains all four labs. `standalone.html`, `relations-lab.html`, and `field-lab.html` are also complete offline builds with different starting views.
+Double-click **`dist/taylor-lab.html`** from the delivery archive. It contains all five labs. `standalone.html`, `field-lab.html`, `relations-lab.html` and `completeness-lab.html` are complete offline entries with different starting views. A source-only Git checkout requires a build first.
 
-For source development, use Node.js 22+:
+For development, Node.js 22+:
 
 ```bash
 npm run dev
@@ -61,9 +48,9 @@ npm run verify
 npm run preview
 ```
 
-There are no npm runtime or build-tool dependencies. Serve the modular `index.html` over HTTP; use an inlined HTML for offline file use. Sharing a local file URL does not upload the file.
+No npm runtime or build-framework dependencies. Serve modular `index.html` over HTTP; use an inlined build for offline files. Sharing a local URL does not upload a file.
 
-## Test
+## Test and scope
 
 ```bash
 npm test
@@ -72,24 +59,23 @@ npm run build
 python -m pip install -r tests/requirements.txt
 python -m playwright install chromium
 npm run test:ui
+npm run test:ui:taylor
 ```
 
-Actual v1.3 checks: **154 Node tests**; Chromium suites **29 + 37 + 27 + 38 = 131 checks**. The legacy field suite only adjusts its two navigation-count expectations for the fourth lab and additionally checks all IDs; its mathematical and interactive assertions remain.
+Actual v1.4 result: **203 Node tests** and **168 Chromium checks** (29+37+27+38+37). The new completeness and Taylor pages include a stage-aware “Start here” guide card. Browser scripts normally use the production HTTP build. Managed browser policy blocked HTTP navigation here, so the real built HTML was injected with explicit `--offline-harness`; policies were not altered. HTTP resources and subpaths were independently checked with a real Node server.
 
-Browser scripts normally test the production HTTP build. In this managed environment HTTP navigation was blocked by browser policy, so the real standalone build was injected using explicit `--offline-harness`. HTTP assets and subpaths were checked separately by a real Node server. This is **not** a claim of browser HTTP module-loading E2E, operating-system `file://` access, Safari/Firefox, or a complete screen-reader audit. GitHub Actions Run #8 completed all four browser suites, and the public Pages site was verified separately. Details: [verification](docs/VERIFICATION.md).
+This is not browser HTTP module-loading E2E, OS file-policy validation, public deployment, a Safari/Firefox test, or a complete screen-reader audit. Numerical tests are not general mathematical proofs. See [verification](docs/VERIFICATION.md).
+
+The usual explicit animation takes about 1.2 seconds per order. Reduced-motion preference uses completed-step playback instead. Navigation, hidden-page events and reset clean up animation and local handlers. Mobile layouts retain controls and textual/derivative alternatives.
 
 ## Architecture
 
-`completeness-math/state/plots/content/lab.js` follow the existing separation of pure mathematics, validated route state, SVG views, authored teaching content and controller lifecycle. A custom no-dependency bundler builds the same modules into standalone HTML; there is no separate demo implementation.
+Pure formulas (`taylor-math`), validated state (`taylor-state`), SVG views (`taylor-plots`), authored lessons/proofs (`taylor-content`) and lifecycle-managed interaction (`taylor-lab`) follow the existing separation. The custom no-dependency bundler inlines the same source modules, not a separate demo.
 
-Mobile layouts use a vertical directed cycle and synchronized controls near the plot. SVG nodes and edges have keyboard equivalents. Form inputs keep focus during updates; explicit animations stop on navigation or visibility changes. Quiz drafts stay in memory and are not shared or uploaded.
+## Delivery and deployment
 
-## Deployment and delivery
-
-`npm run build` produces static `dist/`, compatible with root and repository subpaths. The existing GitHub Pages workflow now runs all four browser suites through `test:ui`. Repository authorization and Pages settings are still required.
-
-This delivery was developed on the supplied v1.2 history and merged into the real `main` history with ordinary commits. **v1.3 was pushed successfully; GitHub Actions Run #8 passed and the public Pages site was verified.** Local history, incremental patch and verification material are included under `delivery/`. Fetch the actual remote history before future merges; never overwrite it with a force push. See [status](docs/STATUS.md).
+`npm run build` produces static `dist/` for root or repository subpaths. The existing Pages workflow now runs all five browser suites. This iteration was developed from the supplied v1.3 local history; **the v1.4 remote push and public deployment are pending the final local verification in this task**. Incremental patch and full local bundle are in `delivery/`. Inspect the actual remote before merging; do not force-overwrite its history. See [status](docs/STATUS.md).
 
 ## Contribute / license
 
-MIT. The primary UI is Chinese; this README is not a claim of a fully translated interface. No arbitrary formula parser, CAS or automatic proof engine. New content needs precise assumptions, proofs/counterexamples and tests, not empty sections. See [CONTRIBUTING.md](CONTRIBUTING.md) and [references](docs/REFERENCES.md).
+MIT. Main UI and authored proof pages are Chinese; this README is not a claim of full interface translation. No arbitrary-expression parser, CAS, tracking or automatic proof engine. New content needs explicit assumptions, proof/counterexample, pedagogical purpose and tests. See [contributing](CONTRIBUTING.md) and [references](docs/REFERENCES.md).

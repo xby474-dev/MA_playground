@@ -3,6 +3,10 @@ import assert from 'node:assert/strict';
 import { header } from '../src/content.js';
 import { fieldHeader } from '../src/field-content.js';
 import { relationsHeader } from '../src/relations-content.js';
+import { completenessPage } from '../src/completeness-content.js';
+import { completenessDefaults } from '../src/completeness-state.js';
+import { taylorPage } from '../src/taylor-content.js';
+import { taylorDefaults } from '../src/taylor-state.js';
 import { defaults } from '../src/state.js';
 import { fieldDefaults } from '../src/field-state.js';
 import { relationsDefaults } from '../src/relations-state.js';
@@ -14,6 +18,8 @@ test('Every experiment header includes a first-entry guide with the approved lea
     header(defaults('differentiability')),
     fieldHeader(fieldDefaults()),
     relationsHeader(relationsDefaults()),
+    completenessPage(completenessDefaults()),
+    taylorPage(taylorDefaults()),
   ];
   for (const html of pages) {
     assert.ok(html.includes('class="page-guide"'));
@@ -33,6 +39,8 @@ test('Guide content links the three experiments to their full documentation', ()
     ['limits', 'MATHEMATICS.md', '多元极限'],
     ['differentiability', 'RELATIONS-GUIDE.md', '关系实验'],
     ['fields', 'FIELD-GUIDE.md', '场实验'],
+    ['completeness', 'COMPLETENESS-GUIDE.md', '完备性实验'],
+    ['taylor', 'TAYLOR-GUIDE.md', 'Taylor 实验'],
   ]) {
     const html = pageGuide(type);
     assert.ok(html.includes(doc));
@@ -49,4 +57,17 @@ test('Guide state keys separate experiments, modes, tabs and relation screens', 
   assert.notEqual(limits, proof);
   assert.notEqual(relationMap, relationCase);
   assert.notEqual(limits, relationMap);
+});
+
+test('The new completeness and Taylor screens each receive screen-specific guidance', () => {
+  for (const screen of ['map', 'explore', 'proof', 'challenge']) {
+    const html = completenessPage({ ...completenessDefaults(), screen });
+    assert.match(html, /data-guide="completeness"/);
+    assert.match(html, new RegExp(`page-guide-completeness-${screen}`));
+  }
+  for (const screen of ['grow', 'error', 'boundary', 'proof', 'challenge']) {
+    const html = taylorPage({ ...taylorDefaults(), screen });
+    assert.match(html, /data-guide="taylor"/);
+    assert.match(html, new RegExp(`page-guide-taylor-${screen}`));
+  }
 });

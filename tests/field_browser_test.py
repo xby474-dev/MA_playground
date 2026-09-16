@@ -52,11 +52,11 @@ try:
         if args.offline_harness:page.set_content((ROOT/'dist/standalone.html').read_text(),wait_until='load')
         else:page.goto(args.url,wait_until='networkidle')
         page.locator('#nav-fields').click();expect(page.locator('#nav-fields')).to_have_attribute('aria-current','page')
-        expect(page.locator('#field-scene svg')).to_be_visible();assert page.locator('.lab-nav').count()==4  # v1.3 adds completeness; all existing navigation remains
+        expect(page.locator('#field-scene svg')).to_be_visible();assert page.locator('.lab-nav').count()==5  # v1.4 adds Taylor; all existing navigation remains
         expect(page.locator('.page-guide[data-guide="fields"]')).to_be_visible()
         expect(page.locator('.page-guide[data-guide="fields"] [data-guide-action="start"]')).to_be_visible()
         ok('Field experiment opens with an in-page guide that explains the local-to-boundary question')
-        for nav_id in ['nav-limits','nav-differentiability','nav-fields','nav-completeness']: assert page.locator('#'+nav_id).count()==1
+        for nav_id in ['nav-limits','nav-differentiability','nav-fields','nav-completeness','nav-taylor']: assert page.locator('#'+nav_id).count()==1
         assert value(page)==6 and value(page,'outside')==6
         ok('Third lab mounts in the existing app; legacy navigation and analytical readouts are present')
         expect(page.locator('.field-journey [data-field-stage="green"]')).to_have_attribute('aria-current','step')
@@ -207,9 +207,9 @@ try:
         if args.offline_harness:direct.set_content((ROOT/'dist/field-lab.html').read_text(),wait_until='load')
         else:direct.goto(args.url+'field-lab.html',wait_until='networkidle')
         expect(direct.locator('#nav-fields')).to_have_attribute('aria-current','page')
-        expect(direct.locator('#field-scene svg')).to_be_visible();assert direct.locator('.lab-nav').count()==4
+        expect(direct.locator('#field-scene svg')).to_be_visible();assert direct.locator('.lab-nav').count()==5
         direct.close()
-        ok('Direct offline entry opens the unified lab without a hash and retains all four experiments')
+        ok('Direct offline entry opens the unified lab without a hash and retains all five experiments')
         assert not errors,errors
         external=[r for r in requests if r.startswith('http') and not r.startswith(('http://127.0.0.1','http://localhost'))]
         assert not external,external

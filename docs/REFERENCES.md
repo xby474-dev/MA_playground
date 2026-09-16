@@ -45,3 +45,9 @@
 - Jiří Lebl, *Basic Analysis I*, Cauchy sequences，Cauchy 与收敛、尾部和数系内极限：https://www.jirka.org/ra/html/sec_cauchy.html 。
 
 以上用于核对术语、前提与标准结论；实验的证明环编排、精确二分/有理见证、动画、题目和实现由本项目独立撰写，并非转载原书。完整推导见 COMPLETENESS-MATHEMATICS.md。资料核对日期：2026-09-16；应用运行不访问这些站点。
+
+## Taylor（v1.4）
+
+OpenStax, Calculus Volume 2, §6.3 Taylor and Maclaurin Series.
+https://openstax.org/books/calculus-volume-2/pages/6-3-taylor-and-maclaurin-series
+核对日期：2026-09-16。用于系数、有限阶余项与级数收敛的定理框架；项目采用明确充分的 C^(n+1) 假设。有限几何和、对数积分余项与光滑非解析反例的完整独立推导见 TAYLOR-MATHEMATICS.md。链接不参与运行时加载。

@@ -113,3 +113,15 @@ test('Completeness offline entry retains the whole app and requires no external 
  for(const module of ['completeness-math','completeness-lab','relations-lab','field-lab'])assert.ok(html.includes(`__modules["${module}"]`));
  assert.ok(!/<script[^>]+src=/.test(html));assert.ok(!/<link[^>]+rel="stylesheet"/.test(html));assert.ok(!/url\(['"]?https?:\/\//.test(html));
 });
+
+test('Taylor formulas, views, style and authored proofs resolve under root and Pages paths',async()=>{
+ for(const prefix of ['/','/MA_playground/'])for(const file of ['src/taylor-math.js','src/taylor-state.js','src/taylor-content.js','src/taylor-plots.js','src/taylor-lab.js','styles/taylor.css','docs/TAYLOR-MATHEMATICS.md','docs/TAYLOR-GUIDE.md']){
+  const response=await fetch(base+prefix+file);assert.equal(response.status,200,file);assert.ok((await response.text()).length>50,file);
+ }
+});
+test('Taylor offline entry retains all five labs without remote runtime downloads',async()=>{
+ const response=await fetch(base+'/MA_playground/taylor-lab.html');assert.equal(response.status,200);const html=await response.text();assert.ok(html.includes('data-initial-lab="taylor"'));
+ for(const id of ['nav-limits','nav-differentiability','nav-fields','nav-completeness','nav-taylor'])assert.ok(html.includes(id));
+ for(const name of ['taylor-math','taylor-lab','completeness-lab','relations-lab','field-lab'])assert.ok(html.includes(`__modules["${name}"]`));
+ assert.ok(!/<script[^>]+src=/.test(html));assert.ok(!/<link[^>]+rel="stylesheet"/.test(html));assert.ok(!/url\(['"]?https?:\/\//.test(html));
+});
