@@ -3,7 +3,7 @@
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
-const order = ['math','relations-math','relations-state','field-math','field-state','state','icons','plots','content','relations-plots','relations-content','relations-lab','field-plots','field-content','field-lab','app'];
+const order = ['math','relations-math','relations-state','field-math','field-state','state','icons','page-guide','plots','content','relations-plots','relations-content','relations-lab','field-plots','field-content','field-lab','app'];
 export async function makeStandalone(root, out) {
   let js='(() => {\n"use strict";\nconst __modules = {};\n';
   for (const name of order) {

@@ -47,6 +47,11 @@ try:
     else:
         page.goto(args.url,wait_until='networkidle');page.locator('#nav-differentiability').click()
     expect(page.locator('h1')).to_have_text('四个性质，一张关系图。');expect(page.locator('#nav-differentiability')).to_have_attribute('aria-current','page')
+    expect(page.locator('.page-guide[data-guide="differentiability"]')).to_be_visible()
+    expect(page.locator('.page-guide[data-guide="differentiability"]')).to_contain_text('哪些方向可以推出')
+    page.locator('.page-guide[data-guide="differentiability"] [data-guide-action="collapse"]').click()
+    expect(page.locator('.page-guide[data-guide="differentiability"] [data-guide-action="expand"]')).to_be_visible()
+    ok('Relation experiment opens with a collapsible guide for reading nodes, arrows and counterexamples')
     assert page.locator('.rel-desktop-graph .rel-edge.theorem').count()==3
     assert page.locator('.rel-desktop-graph .rel-edge.inverse').count()==5
     assert page.locator('.rel-desktop-graph .rel-node.unknown').count()==4

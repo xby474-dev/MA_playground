@@ -7,6 +7,7 @@ import { pathPoint, pathValue, pathLimit, directionPoint, remainder, normalizedE
 import { header, explore, proof, quiz, footer, formulas, quizzes } from './content.js';
 import { planeSVG, convergenceSVG, polarSVG, pathName, palette, SurfaceView } from './plots.js';
 import { icon } from './icons.js';
+import { initializeGuide, guideStorageKey, persistGuideState, setGuideOpen } from './page-guide.js';
 
 let state = parseState(location.hash || '#lab='+(document.body.dataset.initialLab ?? 'limits'));
 let fieldLab = null;
@@ -25,6 +26,15 @@ function toast(message) {
   const el = $('toast'); el.textContent = message; el.classList.add('visible');
   clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('visible'), 4200);
 }
+function currentGuideKey(s) {
+  return guideStorageKey({
+    type: s.mode === 'relations' ? 'differentiability' : s.lab,
+    lab: s.lab,
+    mode: s.mode,
+    tab: s.tab,
+    screen: s.mode === 'relations' ? s.screen : '',
+  });
+}
 function render() {
   relationsLab?.destroy(); relationsLab = null;
   fieldLab?.destroy(); fieldLab = null;
@@ -38,6 +48,7 @@ function render() {
     if (state.lab === lab) nav.setAttribute('aria-current', 'page'); else nav.removeAttribute('aria-current');
   }
   document.title = `${state.lab === 'fields' ? '内部的累积，边界的回声' : state.lab === 'limits' ? '所有直线，都不够' : '偏导存在，也不够'} · MA Playground`;
+  initializeGuide(main, currentGuideKey(state));
   if(state.mode === 'relations') {
     document.title = '四个性质，一张关系图 · MA Playground';
     relationsLab = mountRelationsLab(main, () => state, (rebuild=false) => {syncURL(rebuild); if(rebuild) render();}, toast);
@@ -198,6 +209,22 @@ document.addEventListener('click',event=>{
   // The skip target is not a hash route: preserve every experiment parameter.
   if(event.target.closest('.skip-link')){event.preventDefault();main.focus();main.scrollIntoView({block:'start'});return;}
   const button=event.target.closest('button');
+  const guideAction=event.target.closest('[data-guide-action]');
+  if(guideAction){
+    const guide=guideAction.closest('.page-guide');
+    if(!guide)return;
+    const action=guideAction.dataset.guideAction;
+    if(action==='collapse'||action==='expand'){
+      const open=action==='expand';setGuideOpen(guide,open);persistGuideState(currentGuideKey(state),open);return;
+    }
+    if(action==='start'){
+      const target=main.querySelector(guide.dataset.guideTarget);
+      guide.classList.add('is-started');
+      window.setTimeout(()=>guide.classList.remove('is-started'),900);
+      if(target){target.scrollIntoView({block:'center',behavior:'smooth'});if(typeof target.focus==='function')target.focus({preventScroll:true});}
+      return;
+    }
+  }
   const nav=event.target.closest('.lab-nav, .brand');
   if(nav){event.preventDefault();state=parseState(nav.getAttribute('href'));syncURL(true);render();window.scrollTo(0,0);return;}
   if(!button)return;

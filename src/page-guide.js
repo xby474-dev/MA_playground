@@ -90,10 +90,11 @@ export function setGuideOpen(guide, open) {
 export function initializeGuide(root, key) {
   const guide = root.querySelector('.page-guide');
   if (!guide) return;
-  const saved = storage()?.getItem(key);
+  let saved;
+  try { saved = storage()?.getItem(key); } catch { saved = null; }
   setGuideOpen(guide, saved !== 'collapsed');
 }
 
 export function persistGuideState(key, open) {
-  storage()?.setItem(key, open ? 'open' : 'collapsed');
+  try { storage()?.setItem(key, open ? 'open' : 'collapsed'); } catch { /* private browsing can disable sessionStorage */ }
 }

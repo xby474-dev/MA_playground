@@ -53,6 +53,9 @@ try:
         else:page.goto(args.url,wait_until='networkidle')
         page.locator('#nav-fields').click();expect(page.locator('#nav-fields')).to_have_attribute('aria-current','page')
         expect(page.locator('#field-scene svg')).to_be_visible();assert page.locator('.lab-nav').count()==3
+        expect(page.locator('.page-guide[data-guide="fields"]')).to_be_visible()
+        expect(page.locator('.page-guide[data-guide="fields"] [data-guide-action="start"]')).to_be_visible()
+        ok('Field experiment opens with an in-page guide that explains the local-to-boundary question')
         assert value(page)==6 and value(page,'outside')==6
         ok('Third lab mounts in the existing app; legacy navigation and analytical readouts are present')
         expect(page.locator('.field-journey [data-field-stage="green"]')).to_have_attribute('aria-current','step')

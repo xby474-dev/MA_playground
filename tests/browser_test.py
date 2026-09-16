@@ -73,6 +73,14 @@ try:
         expect(page.locator('math').first).to_be_visible()
         assert not errors, errors
         ok('Initial application, MathML and selected navigation render without JS errors')
+        expect(page.locator('.page-guide')).to_be_visible()
+        expect(page.locator('[data-guide-action="collapse"]')).to_be_visible()
+        page.locator('[data-guide-action="collapse"]').click()
+        expect(page.locator('[data-guide-action="expand"]')).to_be_visible()
+        page.locator('[data-guide-action="expand"]').click()
+        page.locator('[data-guide-action="start"]').click()
+        expect(page.locator('[data-set="path"]').first).to_be_focused()
+        ok('First-entry guide is expanded, collapsible, restorable and locates the first experiment control')
         assert page.locator('[data-action="camera-reset"]').is_hidden()
         assert page.locator('.skip-link').evaluate('(el)=>el.getBoundingClientRect().width')==1
         ok('Inactive camera controls and unfocused skip link are hidden')
