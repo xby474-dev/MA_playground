@@ -1,6 +1,7 @@
 import { properties, models, modelIds, relations, getModel, getRelation, relationVerdict, planeLabel } from './relations-math.js';
 import { relationGraph } from './relations-plots.js';
 import { icon } from './icons.js';
+import { pageGuide } from './page-guide.js';
 const mi=x=>`<mi>${x}</mi>`, mn=x=>`<mn>${x}</mn>`, mo=x=>`<mo>${x}</mo>`;
 const power=(x,n)=>`<msup>${mi(x)}${mn(n)}</msup>`;
 const frac=(a,b)=>`<mfrac><mrow>${a}</mrow><mrow>${b}</mrow></mfrac>`;
@@ -13,7 +14,7 @@ export function functionFormula(id){
 export const journeys=['建立关系','正例走通','尝试逆推','反例破局','自己判断'];
 export function relationsHeader(s){
  const title=s.screen==='map'?'四个性质，一张关系图。':s.screen==='challenge'?'把判断权交还给你。':getRelation(s.edge).label;
- return `<section class="page-heading rel-heading"><div><div class="breadcrumb">实验室 <span>/</span> 偏导与可微 <span>/</span> 关系实验</div><span class="eyebrow">EXPERIMENT 02 <span>—</span> THE LOGIC OF DIFFERENTIABILITY</span><h1 tabindex="-1" id="rel-page-title">${title}</h1><p class="page-subtitle">不靠记住一串结论。选一个函数，走一条箭头，让观察接受证明的检验。</p></div><div class="heading-actions"><button class="button subtle" data-r-action="reset">${icon('reset')} 重置</button><button class="button subtle" data-action="share">${icon('share')} 分享实验</button></div></section>
+ return `<section class="page-heading rel-heading"><div><div class="breadcrumb">实验室 <span>/</span> 偏导与可微 <span>/</span> 关系实验</div><span class="eyebrow">EXPERIMENT 02 <span>—</span> THE LOGIC OF DIFFERENTIABILITY</span><h1 tabindex="-1" id="rel-page-title">${title}</h1><p class="page-subtitle">不靠记住一串结论。选一个函数，走一条箭头，让观察接受证明的检验。</p></div><div class="heading-actions"><button class="button subtle" data-r-action="reset">${icon('reset')} 重置</button><button class="button subtle" data-action="share">${icon('share')} 分享实验</button></div></section>${pageGuide('differentiability',{mode:'relations'})}
  <nav class="rel-journey" aria-label="连续学习路径">${journeys.map((x,i)=>`<button data-r-stage="${i}" aria-current="${s.stage===i?'step':'false'}"><span>0${i+1}</span><strong>${x}</strong><i aria-hidden="true">${i<4?'→':'✓'}</i></button>`).join('')}</nav>`;
 }
 export function functionPicker(s,compact=false){

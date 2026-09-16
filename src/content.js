@@ -1,5 +1,6 @@
 import { icon } from './icons.js';
 import { format } from './math.js';
+import { pageGuide } from './page-guide.js';
 
 // All markup below is trusted, authored mathematical content. URL input is never HTML.
 export const math = (body, label = '', display = false) => `<math xmlns="http://www.w3.org/1998/Math/MathML" ${display?'display="block"':''} ${label?`aria-label="${label}"`:''}>${body}</math>`;
@@ -19,6 +20,7 @@ export const formulas = {
 export function header(s) {
   const is=s.lab==='limits';
   return `<div class="page-heading"><div><div class="breadcrumb">实验室 <span>/</span> ${is?'多元极限':'偏导与可微性'}</div><div class="eyebrow">EXPERIMENT ${is?'01':'02'} <span>—</span> ${is?'THE PATH TRAP':'BEYOND PARTIAL DERIVATIVES'}</div><h1>${is?'所有直线，都不够。':'偏导存在，也不够。'}</h1><p class="page-subtitle">${is?'如果沿每条直线都趋于 0，二元极限就一定是 0 吗？':'曲面靠近了平面，就足够了吗？把误差放到正确的尺度上。'}</p></div><div class="heading-actions"><button class="button subtle" data-action="reset">${icon('reset')}<span>重置</span></button><button class="button subtle" data-action="share">${icon('share')}<span>分享实验</span></button></div></div>
+    ${pageGuide(is?'limits':'differentiability',{tab:s.tab,mode:s.mode})}
     <div class="workspace-tabs" role="tablist" aria-label="学习阶段"><button id="tab-explore" role="tab" data-tab="explore" aria-selected="${s.tab==='explore'}" aria-controls="panel-explore" tabindex="${s.tab==='explore'?0:-1}">${icon('eye')}<span>动手探索</span><small>01</small></button><button id="tab-proof" role="tab" data-tab="proof" aria-selected="${s.tab==='proof'}" aria-controls="panel-proof" tabindex="${s.tab==='proof'?0:-1}">${icon('book')}<span>定义与证明</span><small>02</small></button><button id="tab-quiz" role="tab" data-tab="quiz" aria-selected="${s.tab==='quiz'}" aria-controls="panel-quiz" tabindex="${s.tab==='quiz'?0:-1}">${icon('quiz')}<span>检查理解</span><small>03</small></button><span class="tabs-note">观察 → 猜想 → 证明</span></div>`;
 }
 const choice = (key,value,label) => `<button data-set="${key}" data-value="${value}" aria-pressed="false">${label}</button>`;
