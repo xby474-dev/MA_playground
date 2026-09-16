@@ -102,10 +102,10 @@ try:
         ok('Proof screen exposes all four authored steps and the complete argument')
 
         page.locator('[data-uf-screen="challenge"]').click()
-        assert page.locator('#uf-quiz fieldset').count() == 6
+        assert page.locator('#uf-quiz fieldset').count() == 8
         page.locator('#uf-quiz button[type="submit"]').click()
-        expect(page.locator('#uf-quiz-score')).to_contain_text('/ 6')
-        ok('Challenge screen keeps six explanations instead of only a score')
+        expect(page.locator('#uf-quiz-score')).to_contain_text('/ 8')
+        ok('Challenge screen keeps eight explanations instead of only a score')
 
         page.locator('[data-action="share"]').click()
         if page.locator('#share-dialog').is_visible():
