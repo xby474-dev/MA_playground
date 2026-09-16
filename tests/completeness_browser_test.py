@@ -112,6 +112,8 @@ try:
   page.locator('[data-cp-action="export"]').click();csv=page.evaluate('window.__cpBlob.text()');assert 'NOT an infinite-process proof' in csv;assert 'domain=Q' in csv;assert '1/64' in csv
   ok('CSV export contains exact fractions, the selected domain and an explicit finite-data disclaimer')
   page.locator('[data-action="share"]').click()
+  # Clipboard fallback is async; let the native dialog settle before the next control.
+  page.wait_for_timeout(150)
   if page.locator('#share-dialog').is_visible():
    url=page.locator('#share-url').input_value();assert 'lab=completeness' in url;assert 'target=two' in url;assert 'domain=Q' in url;assert 'n=6' in url;page.locator('#share-dialog [data-action="close-dialog"]').click()
   else:assert 'lab=completeness' in page.url
