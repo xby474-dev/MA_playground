@@ -89,3 +89,15 @@ test('New direct offline entry opens the unified lab but retains all three exper
   for(const id of ['nav-limits','nav-differentiability','nav-fields'])assert.ok(html.includes(id));
   assert.ok(!/<script[^>]+src=/.test(html));assert.ok(!/<link[^>]+rel="stylesheet"/.test(html));
 });
+
+test('Relation mathematics, controller, views, stylesheet and authored proofs resolve at both deployment paths', async()=>{
+  for(const prefix of ['/','/MA_playground/'])for(const file of ['src/relations-math.js','src/relations-state.js','src/relations-content.js','src/relations-plots.js','src/relations-lab.js','styles/relations.css','docs/RELATIONS-MATHEMATICS.md','docs/RELATIONS-GUIDE.md']){
+    const r=await fetch(base+prefix+file);assert.equal(r.status,200,file);assert.ok((await r.text()).length>50,file);
+  }
+});
+test('New offline relation entry opens the reworked second lab and contains the complete application without runtime downloads', async()=>{
+  const html=await (await fetch(base+'/MA_playground/relations-lab.html')).text();
+  assert.ok(html.includes('data-initial-lab="differentiability&mode=relations"'));
+  for(const name of ['relations-math','relations-content','relations-plots','relations-lab','field-lab','app'])assert.ok(html.includes(`__modules["${name}"]`));
+  assert.ok(!/<script[^>]+src=/.test(html));assert.ok(!/<link[^>]+rel="stylesheet"/.test(html));assert.ok(!/url\(['"]?https?:\/\//.test(html));
+});

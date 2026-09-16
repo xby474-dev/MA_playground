@@ -3,7 +3,7 @@
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
-const order = ['math','field-math','field-state','state','icons','plots','content','field-plots','field-content','field-lab','app'];
+const order = ['math','relations-math','relations-state','field-math','field-state','state','icons','plots','content','relations-plots','relations-content','relations-lab','field-plots','field-content','field-lab','app'];
 export async function makeStandalone(root, out) {
   let js='(() => {\n"use strict";\nconst __modules = {};\n';
   for (const name of order) {
@@ -24,9 +24,11 @@ export async function makeStandalone(root, out) {
   let html=await readFile(`${root}/index.html`,'utf8');
   const css=await readFile(`${root}/styles/app.css`,'utf8');
   const fieldCss=await readFile(`${root}/styles/fields.css`,'utf8');
+  const relationsCss=await readFile(`${root}/styles/relations.css`,'utf8');
   const favicon=await readFile(`${root}/assets/favicon.svg`,'utf8');
-  html=html.replace('<link rel="stylesheet" href="./styles/app.css">',`<style>${css}\n${fieldCss}</style>`)
+  html=html.replace('<link rel="stylesheet" href="./styles/app.css">',`<style>${css}\n${fieldCss}\n${relationsCss}</style>`)
     .replace('<link rel="stylesheet" href="./styles/fields.css">','')
+    .replace('<link rel="stylesheet" href="./styles/relations.css">','')
     .replace('<script type="module" src="./src/app.js"></script>','')
     .replace('href="./assets/favicon.svg"',`href="data:image/svg+xml,${encodeURIComponent(favicon)}"`)
     .replace('</body>',`<script>${js.replace(/<\/script/gi,'<\\/script')}</script>\n</body>`);

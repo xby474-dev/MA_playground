@@ -1,3 +1,5 @@
+import { relationsPage } from './relations-content.js';
+import { mountRelationsLab } from './relations-lab.js';
 import { fieldHeader, fieldExplore, fieldProof, fieldQuiz } from './field-content.js';
 import { mountFieldLab } from './field-lab.js';
 import { defaults, parseState, serializeState } from './state.js';
@@ -8,6 +10,7 @@ import { icon } from './icons.js';
 
 let state = parseState(location.hash || '#lab='+(document.body.dataset.initialLab ?? 'limits'));
 let fieldLab = null;
+let relationsLab = null;
 let surface = null, plotType = '', playing = false, frame = null, lastTick = 0, toastTimer;
 const answers = { limits: {}, differentiability: {} };
 const $ = id => document.getElementById(id);
@@ -23,16 +26,23 @@ function toast(message) {
   clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('visible'), 4200);
 }
 function render() {
+  relationsLab?.destroy(); relationsLab = null;
   fieldLab?.destroy(); fieldLab = null;
   stopAnimation();
   surface?.destroy(); surface = null; plotType = '';
   main.classList.toggle('field-mode', state.lab === 'fields');
-  main.innerHTML = state.lab === 'fields' ? fieldHeader(state) + ({explore:fieldExplore,proof:fieldProof,quiz:fieldQuiz}[state.tab])(state) + footer : header(state) + ({ explore, proof, quiz }[state.tab])(state) + footer;
+  main.classList.toggle('rel-mode', state.mode === 'relations');
+  main.innerHTML = state.mode === 'relations' ? relationsPage(state) + footer : state.lab === 'fields' ? fieldHeader(state) + ({explore:fieldExplore,proof:fieldProof,quiz:fieldQuiz}[state.tab])(state) + footer : header(state) + ({ explore, proof, quiz }[state.tab])(state) + footer;
   for (const lab of ['limits', 'differentiability', 'fields']) {
     const nav = $(`nav-${lab}`);
     if (state.lab === lab) nav.setAttribute('aria-current', 'page'); else nav.removeAttribute('aria-current');
   }
   document.title = `${state.lab === 'fields' ? '内部的累积，边界的回声' : state.lab === 'limits' ? '所有直线，都不够' : '偏导存在，也不够'} · MA Playground`;
+  if(state.mode === 'relations') {
+    document.title = '四个性质，一张关系图 · MA Playground';
+    relationsLab = mountRelationsLab(main, () => state, (rebuild=false) => {syncURL(rebuild); if(rebuild) render();}, toast);
+    return;
+  }
   if(state.lab === 'fields') {
     fieldLab = mountFieldLab(main, () => state, (rebuild=false) => {syncURL(rebuild); if(rebuild) render();}, toast);
     return;
@@ -189,7 +199,7 @@ document.addEventListener('click',event=>{
   if(event.target.closest('.skip-link')){event.preventDefault();main.focus();main.scrollIntoView({block:'start'});return;}
   const button=event.target.closest('button');
   const nav=event.target.closest('.lab-nav, .brand');
-  if(nav){event.preventDefault();const lab=parseState(nav.getAttribute('href')).lab;state=defaults(lab);syncURL(true);render();window.scrollTo(0,0);return;}
+  if(nav){event.preventDefault();state=parseState(nav.getAttribute('href'));syncURL(true);render();window.scrollTo(0,0);return;}
   if(!button)return;
   if(button.dataset.tab){changeTab(button.dataset.tab);return;}
   if(button.dataset.set){
@@ -223,7 +233,7 @@ document.addEventListener('click',event=>{
   }
 });
 document.addEventListener('input',event=>{
-  if(state.lab==='fields') return;
+  if(state.lab==='fields'||state.mode==='relations') return;
   const el=event.target;
   if(el.matches('input[type="radio"]')){answers[state.lab][el.name.replace('question-','')]=Number(el.value);return;}
   if(!['scale','coefficient','angle'].includes(el.id))return;

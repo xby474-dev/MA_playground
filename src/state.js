@@ -1,3 +1,4 @@
+import { parseRelationsState, serializeRelationsState } from './relations-state.js';
 import { fieldDefaults, parseFieldState, serializeFieldState } from './field-state.js';
 import { clamp } from './math.js';
 export function defaults(lab = 'limits') {
@@ -9,6 +10,7 @@ const num = (value, fallback, min, max) => value === null || value.trim() === ''
 export function parseState(hash) {
   const p = new URLSearchParams(hash.replace(/^#/, ''));
   if(p.get('lab') === 'fields') return parseFieldState(p);
+  if(p.get('lab') === 'differentiability' && p.get('mode') === 'relations') return parseRelationsState(p);
   const s = defaults(pick(p.get('lab'), ['limits', 'differentiability'], 'limits'));
   s.tab = pick(p.get('tab'), ['explore', 'proof', 'quiz'], s.tab);
   s.path = pick(p.get('path'), ['line', 'parabola', 'vertical'], s.path);
@@ -33,6 +35,7 @@ export function parseState(hash) {
 }
 export function serializeState(s) {
   if(s.lab === 'fields') return serializeFieldState(s);
+  if(s.mode === 'relations') return serializeRelationsState(s);
   const p = new URLSearchParams({ lab: s.lab, tab: s.tab, q: s.q.toFixed(3), view: s.view });
   if (s.lab === 'limits') {
     p.set('path', s.path); p.set('k', String(s.k)); p.set('sign', String(s.sign));

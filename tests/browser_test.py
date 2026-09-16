@@ -192,6 +192,9 @@ try:
         ok('Quiz answers, scoring, explanations, tab persistence and reset work')
 
         page.locator('#nav-differentiability').click()
+        # v1.2 navigation opens the relation graph. Original v1.0 UI remains
+        # reachable for this unchanged legacy regression flow. New UI has its own suite.
+        page.evaluate('location.hash="lab=differentiability&mode=classic"')
         expect(page.locator('h1')).to_have_text('偏导存在，也不够。')
         expect(page.locator('#surface')).to_be_visible()
         expect(page.locator('#live-data .data-value').last).to_have_text('0.5')

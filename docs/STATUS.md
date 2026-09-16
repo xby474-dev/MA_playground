@@ -1,27 +1,29 @@
-# v1.1 交付状态
+# v1.2 交付状态
 
 日期：2026-09-16。
 
-**v1.1 已推送到真实 GitHub 远端，GitHub Actions 与 GitHub Pages 均已成功运行。**
+**现有第二个实验已重构为“偏导、连续、可微、偏导连续”的统一关系实验；本轮未更新远端 GitHub，也未公开部署。**
 
-## 当前成果
+## 完成范围
 
-保留两个原有实验，新增 Green → 平面通量桥梁 → Gauss → Stokes → 统一视角的单一实验。包含局部/分块/抵消/整体四阶段、独立解析积分、共边/面账本、参数化与定向、固定边界曲面形变、奇点与内边界对照、证明拆解、八题自测、分享、CSV、手机适配及无外部运行依赖的完整离线入口。
+关系图是默认导航入口。绿色实线对应定理，虚线 ⇏ 对应不成立的逆推。课堂路径是建立关系、光滑正例、尝试逆推、经典反例、自己判断；同一个实验中连接曲面、双侧截面、候选线性平面、偏导序列、误差比例与严格证明。
 
-76 项 Node 测试、原有 29 项与新增 37 项 Chromium 检查通过。GitHub Actions 已再次执行 CI 与 Pages 部署并成功；本地环境无法启动 Python 浏览器命令，但远端 CI 完成了完整浏览器检查。详见 [VERIFICATION.md](VERIFICATION.md)。
+四个光滑正例、三个用户指定反例、原连续且偏导存在但不可微的桥梁反例，以及三个新的迁移题均已完成。图中有界偏导的附加条件明确保留。原多元极限、Green–Gauss–Stokes 实验和旧比较模式保留。
 
-## 仓库来源与历史
+106 项 Node 检查通过；29 项原界面、37 项场实验和 27 项关系实验 Chromium 检查通过。浏览器实际使用完整离线构建注入；HTTP 资源另测。精确限制见 [VERIFICATION.md](VERIFICATION.md)。
 
-本轮基于用户提供的 `MA-Playground-v1.0.zip`。先读取源代码、界面、数学说明和测试，再恢复包内本地 Git bundle；确认源码对应基线提交 `338c32f49f790ed91c6ba7886538b0e13dccfcec` 后在其上开发。
+## 仓库来源与本地历史
 
-该基线属于上一轮的隔离环境历史，**不是本轮从真实远端 main 克隆得到的历史**。本轮先保留真实远端已有历史，再以普通合并提交接入 v1.1；没有执行 force push。当前远端功能提交为 `cdec80dfe20e9788b0681501a61e711ec3f5cc59`。
+来源是本对话交付的 `MA-Playground-v1.1.zip`，不是新建空项目。读取现有模块、样式、数学文档和测试，先运行 76 项基线测试，再恢复包内 Git bundle。
 
-## 远端与权限
+源码基线：`87a1868cf01413dd3ce78be95d75ddfcb17897f8`。本轮在分支 `relations-lab` 上开发。本轮提交 hash、基线、差异补丁和本地历史 bundle 见交付包 `delivery/manifest.json`。
 
-v1.1 已推送至 [`xby474-dev/MA_playground`](https://github.com/xby474-dev/MA_playground)。
+这条历史来自上一轮隔离环境，**不是本轮从真实远端 main 克隆的历史**。提交用于审阅和合并，不表示已经 push。
 
-GitHub Pages 已选择 `GitHub Actions` 作为 Source。部署成功链接为 [`https://xby474-dev.github.io/MA_playground/`](https://xby474-dev.github.io/MA_playground/)，统一场实验离线入口为 [`https://xby474-dev.github.io/MA_playground/field-lab.html`](https://xby474-dev.github.io/MA_playground/field-lab.html)。
+## 远端状态
 
-## 后续维护约束
+本轮实际检查 GitHub 集成仍未安装/连接授权。没有获得可用的仓库写权限，没有远端推送、强制推送或替代发布。交付物不含登录凭据、令牌、环境秘密或字体文件。
 
-后续更新应先获取真实远端状态，再审查并应用增量；保留远端历史，不执行 force push。源码、测试和 GitHub Actions 通过后，再以真实工作流和站点结果更新本状态文件。
+既有 Pages 工作流保留，`test:ui` 已接入三套浏览器检查。只有在授权环境中获取真实仓库、审查合并、推送并确认工作流成功后，才可以声称公开网址可用。
+
+若远端已有 v1.1，可以审查本次增量补丁；若远端版本不同，先比较并合并完整源码。不要将本地 bundle 强制覆盖远端分支。

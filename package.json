@@ -1,10 +1,12 @@
 {
   "name": "ma-playground",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "type": "module",
   "description": "Interactive, proof-aware multivariable calculus experiments. 数学分析我爱你～",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "node scripts/serve.mjs --port 5173",
     "start": "node scripts/serve.mjs --port 5173",
@@ -12,9 +14,10 @@
     "preview": "node scripts/serve.mjs --dir dist --port 4173",
     "test": "node --test tests/*.test.mjs",
     "check": "node scripts/check.mjs",
-    "test:ui": "python tests/browser_test.py && python tests/field_browser_test.py",
+    "test:ui": "python tests/browser_test.py && python tests/field_browser_test.py && python tests/relations_browser_test.py",
     "test:ui:fields": "python tests/field_browser_test.py",
-    "verify": "npm run check && npm test && npm run build"
+    "verify": "npm run check && npm test && npm run build",
+    "test:ui:relations": "python tests/relations_browser_test.py"
   },
   "license": "MIT"
 }

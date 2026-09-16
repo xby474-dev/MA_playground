@@ -21,3 +21,19 @@
 - Playwright Python, installation: https://playwright.dev/python/docs/intro
 - GitHub Pages custom workflows: https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
 - GitHub Actions, setup-node: https://github.com/actions/setup-node
+
+## v1.2 关系图来源与独立补充（核对：2026-09-16）
+
+用户本轮上传的教材关系图用于确定逻辑骨架，特别是“邻域内偏导有界”的条件。未提供书名页码，不编造引用，也不在开源包重新分发扫描图。新增第四节点、所有函数案例、统一余项估计、序列反例和练习按本轮要求独立实现，并在 RELATIONS-MATHEMATICS.md 中逐项推导。
+
+再次核对 OpenStax §4.4 的可微性、切平面和连续偏导充分条件；页面文字并非逐字转录。桌面关系图的键盘实现参考官方 SVG tabindex / focus 接口：
+
+- https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/tabindex
+- https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/focus
+
+这些链接仅用于进一步阅读；断网不影响公式、图形、完整推导或答题。
+
+工作流兼容性核对（2026-09-16）：actions/setup-node 官方仓库与 actions/checkout 官方 releases 确认既有 v7 / v6 主版本可用。本轮保留已有工作流版本，不将文档检查等同于实际执行远端 Actions。
+
+- https://github.com/actions/setup-node
+- https://github.com/actions/checkout/releases

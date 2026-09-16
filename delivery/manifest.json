@@ -1,51 +1,50 @@
 {
-  "project": "MA Playground",
-  "version": "1.1.0",
-  "date": "2026-09-15",
-  "feature": "Unified Green → planar flux → Gauss → Stokes learning lab",
-  "local_commit": "cdec80dfe20e9788b0681501a61e711ec3f5cc59",
-  "local_branch": "main",
-  "base_commit": "ee6acbbec1d087d9710500c862e652a4b69f03d4",
-  "feature_tree": "cdec80dfe20e9788b0681501a61e711ec3f5cc59",
-  "history_notice": "Integrated onto the real remote main history without force-push.",
-  "remote_updated": true,
-  "publicly_deployed": true,
-  "remote_status": "Pushed to xby474-dev/MA_playground; GitHub Actions and GitHub Pages succeeded.",
-  "verification": {
+  "version": "1.2.0",
+  "date": "2026-09-16",
+  "repository_intent": "https://github.com/xby474-dev/MA_playground",
+  "source": "User-provided v1.1 source archive and its local-history bundle; not a live remote checkout.",
+  "branch": "relations-lab",
+  "baseline_commit": "87a1868cf01413dd3ce78be95d75ddfcb17897f8",
+  "local_commit": "aa10f05d45f8c4cf32fd2b57e8cb08234c1c5472",
+  "tree": "2d4fab75668f8ebf66b5ba18a3f020b19a02c3cd",
+  "commit_message": "feat: unify differential properties in an interactive relation lab",
+  "push_performed": false,
+  "public_deployment_verified": false,
+  "remote_blocker": "GitHub integration checked and not installed/authorized in this conversation.",
+  "tests": {
     "node": {
-      "passed": 76,
-      "failed": 0,
-      "original": 44,
-      "new": 32
+      "passed": 106,
+      "failed": 0
     },
-    "original_browser": {
+    "legacy_browser": {
       "passed": 29,
       "failed": 0
     },
-    "new_browser": {
+    "field_browser": {
       "passed": 37,
       "failed": 0
     },
-    "browser_mode": "Chromium running the actual generated standalone HTML via Playwright set_content; served-browser navigation blocked by environment policy.",
-    "browser_version": "144.0.7559.96",
-    "http_resources": "Actual Node HTTP requests at / and /MA_playground/; all new and legacy modules checked.",
-    "patch_application": "Applied to v1.0 baseline and resulting index tree exactly matches feature commit.",
-    "remaining_unverified": [
-      "local Windows Python browser command",
-      "Safari/Firefox/iOS",
-      "screen-reader full workflow",
-      "student learning outcomes"
-    ]
+    "relations_browser": {
+      "passed": 27,
+      "failed": 0
+    }
   },
-  "entries": {
-    "new_lab": "dist/field-lab.html",
-    "classic_home": "dist/standalone.html",
-    "served_site": "dist/index.html"
+  "browser_mode": "Actual built standalone HTML injected into about:blank; browser HTTP navigation denied by environment policy.",
+  "http_resources": "Real Node HTTP requests tested root and repository subpath; not a browser module-loading E2E claim.",
+  "patch": {
+    "file": "MA-Playground-v1.2.patch",
+    "sha256": "af84f0b16a866ce94af83eaed4b03edeb0494c8ce55ba6141f0d964a4e50f319",
+    "baseline": "87a1868cf01413dd3ce78be95d75ddfcb17897f8",
+    "applied_tree_matches_commit": true
   },
-  "sha256": {
-    "dist/field-lab.html": "85f6f8b2538f30e32007bb1b969dd834697f88c8455f62a3e02144ec32c4c29f",
-    "dist/standalone.html": "ef05155bf257c451fb5d1525bc2533a3dc34a4b510626d7bcd99e42f423136b6",
-    "delivery/MA-Playground-v1.1.patch": "320d1a6a688ae4abc77c6b8e4a9e14cade382ac8d7334164ede1d559028ecec9",
-    "delivery/MA-Playground-v1.1-local-history.bundle": "f181c918dde2e89249fb15dfedd46830d8034cae078737308190a539ad012874"
-  }
+  "bundle": {
+    "file": "MA-Playground-v1.2-local-history.bundle",
+    "sha256": "806a832c2fb339c023f6d11e4f3822e2f95d98dc25937885fa90f0a345645361",
+    "verified": true
+  },
+  "offline_entry": {
+    "file": "dist/relations-lab.html",
+    "sha256": "079cd942b517ede5e3397dbd571c1cd6bc1d2f7c50be8f848e9df449ea163153"
+  },
+  "delivery_note": "Inspect actual remote history before merging. No force push. Baseline-specific patch is not a full-project replacement for older remote versions."
 }

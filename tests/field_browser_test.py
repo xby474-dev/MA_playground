@@ -174,7 +174,9 @@ try:
         ok('Animation plays, pauses and finishes at the outer boundary')
         page.locator('[data-field-action="play"]').click();page.locator('#nav-limits').click();page.wait_for_timeout(200)
         expect(page.locator('#nav-limits')).to_have_attribute('aria-current','page');expect(page.locator('#coefficient')).to_be_visible()
-        page.locator('#nav-differentiability').click();expect(page.locator('#angle')).to_be_visible()
+        # v1.2 exposes the relation graph by default; retain the old comparison assertion as well.
+        page.locator('#nav-differentiability').click();expect(page.locator('#rel-map-graph')).to_be_visible()
+        page.evaluate('location.hash="lab=differentiability&mode=classic"');expect(page.locator('#angle')).to_be_visible()
         ok('Leaving a playing field lab cleans up animation and preserves both original experiments')
         page.locator('#nav-fields').click();page.emulate_media(reduced_motion='reduce')
         for width in [360,390,768,1024]:

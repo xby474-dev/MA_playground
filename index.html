@@ -4,13 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#174d43">
-  <meta name="description" content="MA Playground 多元微积分可视化实验室。从路径陷阱到可微性，动手连接几何直觉、公式、严格定义与证明。免费、开源、无需登录。">
+  <meta name="description" content="MA Playground 多元微积分可视化实验室。从路径陷阱到偏导与可微的关系图，动手连接几何直觉、公式、严格定义与证明。免费、开源、无需登录。">
   <meta property="og:title" content="MA Playground · 让数学直觉，经得起证明。">
   <meta property="og:description" content="从极限、可微性，到 Green–Gauss–Stokes 统一实验：局部累积，内部抵消，边界回声。">
   <title>MA Playground · 多元微积分可视化实验室</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles/app.css">
   <link rel="stylesheet" href="./styles/fields.css">
+  <link rel="stylesheet" href="./styles/relations.css">
   <script type="module" src="./src/app.js"></script>
 </head>
 <body>
@@ -29,11 +30,11 @@
         <div class="nav-group-title">从局部出发，理解整体。</div>
         <nav>
           <a class="lab-nav" id="nav-limits" href="#lab=limits"><span class="nav-num">01</span><span><strong>所有直线，都不够</strong><small>多元极限 · 路径陷阱</small></span><span class="nav-arrow">↗</span></a>
-          <a class="lab-nav" id="nav-differentiability" href="#lab=differentiability"><span class="nav-num">02</span><span><strong>偏导存在，也不够</strong><small>线性近似 · 可微性</small></span><span class="nav-arrow">↗</span></a>
+          <a class="lab-nav" id="nav-differentiability" href="#lab=differentiability&mode=relations"><span class="nav-num">02</span><span><strong>四个性质，一张图</strong><small>偏导 · 连续 · 可微</small></span><span class="nav-arrow">↗</span></a>
           <a class="lab-nav" id="nav-fields" href="#lab=fields"><span class="nav-num">03</span><span><strong>局部累积，边界回声</strong><small>Green · Gauss · Stokes</small></span><span class="nav-arrow">↗</span></a>
         </nav>
         <div class="sidebar-note"><span class="little-orbit" aria-hidden="true">↗</span><h3>别急着接受结论。</h3><p>先预测，再拖动。<br>让反例挑战直觉，<br>让证明完成理解。</p><button class="text-button" data-action="about">如何使用实验室 <span>→</span></button></div>
-        <div class="sidebar-footer"><span class="version-pill">v1.1</span> OPEN SOURCE · NO TRACKING<br><small>数学分析我爱你～</small></div>
+        <div class="sidebar-footer"><span class="version-pill">v1.2</span> OPEN SOURCE · NO TRACKING<br><small>数学分析我爱你～</small></div>
       </div>
     </aside>
     <main id="main" tabindex="-1"></main>

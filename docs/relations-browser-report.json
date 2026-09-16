@@ -1,0 +1,41 @@
+{
+  "mode": "actual standalone HTML injected into about:blank",
+  "browser": "Chromium",
+  "passed": 27,
+  "checks": [
+    "Default differential experiment is the single relation map, with true and false arrows distinguished",
+    "Property definition explicitly distinguishes existence in a neighbourhood from continuity at the origin",
+    "Predictions reveal the authored four-node truth table without treating samples as proof",
+    "All four smooth positive examples are selectable and changing example resets the reveal",
+    "Graph arrows are keyboard-operable and navigate to the corresponding explanation/experiment",
+    "True-arrow explanation unfolds a uniform epsilon-delta proof rather than a list of observations",
+    "Guided path visits all three implications before explicitly attempting the inverse on a smooth example",
+    "Differentiability without continuous partials uses analytic -1/+1 sequences and a uniform vanishing remainder bound",
+    "Neighbourhood partial existence versus discontinuity: axes, diagonal, both sides and punctured origin are distinct",
+    "The discontinuity example exposes unbounded nearby partials, not a violation of the bounded-partials theorem",
+    "Continuous cusp has genuinely undefined partials, disabled derivative plane and explicitly labelled reference height",
+    "CSV exports undefined derivative quantities as blank rather than zero, with finite-sampling provenance",
+    "Original counterexample still establishes that continuity and both partials together do not imply differentiability",
+    "The textbook conditional arrow is present and refuses an example that lacks bounded partials",
+    "A false antecedent does not turn a theorem red or falsely force its conclusion to fail",
+    "Three-dimensional surface camera supports keyboard rotation and exact reset",
+    "Explicit approach animation advances and pauses without replacing the focused input",
+    "Deep links restore example, arrow, observation view, direction, metric and scale but no student answers",
+    "Shared link fallback works in a browser without clipboard permission",
+    "All three unseen-function challenges validate four properties plus a reason and unfold substantive proofs",
+    "Incorrect classifications and reasons are reported separately; drafts survive exploration without leaking to URLs",
+    "Map, cases, long proofs and assessments have no document overflow at 360/390/768/1024 pixels",
+    "Mobile uses a readable directed tree and touchable inverse arrows rather than shrinking the desktop map",
+    "Switching between relation lab, limits and field lab cleans up controllers and keeps existing experiments available",
+    "Malformed relation routes are rejected or clamped in the live app",
+    "Reset clears relation state and session prediction drafts",
+    "All exercised controls are named, no uncaught JS errors, and no external runtime requests"
+  ],
+  "errors": [],
+  "external_requests": [],
+  "notes": [
+    "Numerical checks validate implementation consistency, not general theorems.",
+    "Clipboard denial and Blob construction tested; native OS saving not assumed.",
+    "No Safari, Firefox or full screen-reader audit."
+  ]
+}

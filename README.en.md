@@ -1,52 +1,55 @@
 # MA Playground
 
-**Multivariable Calculus Visual Lab — let intuition stand up to proof.**
+**Multivariable Calculus Visual Lab — intuition that can stand up to proof.**
 
-[中文](README.md) · [Mathematical notes](docs/MATHEMATICS.md) · [Verification](docs/VERIFICATION.md)
+A dependency-free, offline-capable application for undergraduate multivariable calculus. The interface is currently Chinese. [中文说明](README.md)
 
-MA Playground is a dependency-free, browser-based learning notebook for undergraduate multivariable calculus. Each experiment connects an interactive observation to exact substitutions, rigorous definitions, a proof, and short diagnostic questions. The current teaching interface is in Chinese.
+## v1.2: One map, four properties
 
-## Three complete experiments
+The second experiment is now a connected learning experience rather than separate fact cards:
 
-**The path trap.** Explore $F(x,y)=x^2y/(x^4+y^2)$ away from the origin, extended by $F(0,0)=0$. Every fixed line has limit zero, but the parabolas $y=cx^2$ have limits $c/(1+c^2)$. Compare paths, approach from either parameter sign, and inspect a sequential or epsilon–delta contradiction.
+**Build the logical map → understand the implications with smooth examples → try reversing them → find counterexamples → classify new functions.**
 
-**Beyond partial derivatives.** Compare $f(x,y)=x^2+y^2$ and $g(x,y)=xy/\sqrt{x^2+y^2}$, with $g(0,0)=0$. Both partial derivatives at the origin vanish. However, only the first function has a remainder that is uniformly little-o of displacement. Switch between absolute and normalized error, rotate the direction, and inspect the analytic worst-direction error.
+The nodes are partial existence at the origin, continuity at the origin, Fréchet differentiability at the origin, and partials defined on a neighbourhood and continuous at the origin. The last condition is not labelled “C¹ throughout the neighbourhood”. Green solid arrows open theorem explanations; dashed non-implications open counterexample experiments. A separate conditional arrow retains the assumption that all partials exist and are bounded on a neighbourhood before concluding continuity.
 
-**The boundary principle — new in v1.1.** One continuous learning journey connects Green circulation, the planar-flux bridge, Gauss volume flux, and Stokes on a curved surface. At every stop: inspect a local quantity, sum cells, cancel internal oriented boundaries, and retain the outer boundary. Adjust the same polynomial field, mesh, domain, orientation, volume layer, and fixed-boundary surface height. Interior integrals and individual edge/face integrals are evaluated independently and analytically; rendered samples never determine equality.
+Four smooth examples, the three requested counterexamples, the original continuous-but-nondifferentiable bridge, and three transfer tasks are implemented. Surface, two-sided sections, candidate/tangent planes, shrinking-scale errors and derivative sequences use the same mathematical model. Undefined derivatives remain null; sampled trends never certify a universal theorem.
 
-The proof notebook derives the rectangular and box cases from the fundamental theorem of calculus and Fubini, then pulls a curved patch back to the parameter plane. Eight new diagnostic questions and a punctured-domain example distinguish theorem hypotheses from visual evidence. See the [learning guide](docs/FIELD-GUIDE.md) and [mathematical specification](docs/FIELD-MATHEMATICS.md).
+![Actual relation-map screenshot](docs/images/relations-map-desktop.png)
 
-![The new Stokes experiment, captured from the running application](docs/images/field-stokes-surface.png)
+## Existing experiments remain
 
-Finite samples are never presented as a proof. Candidate planes are not mislabeled as tangent planes. The one-sided radial exploration is distinguished from two-sided directional derivatives.
+1. Multivariable limits: checking every straight line is insufficient.
+2. Differential properties: the new relation experiment. The original two-function UI is retained under `#lab=differentiability&mode=classic` for compatibility and regression coverage.
+3. Green–Gauss–Stokes: local quantities, subdivision, shared-boundary cancellation and the exterior boundary. Its mathematics and interactions were not changed in this release.
 
 ## Run
 
-Node.js 22+ is sufficient; there are no npm dependencies.
+Open `dist/relations-lab.html` for the complete offline application starting at the new experiment. `dist/standalone.html` and `dist/field-lab.html` are alternative complete starting points. No backend, CDN, external fonts, API key or installation is required for these files.
 
-```bash
+For development, use Node.js 22+ in the source directory:
+
+```sh
 npm run dev
 npm run verify
 npm run preview
 ```
 
-`npm run build` produces both an ES-module static site and `dist/standalone.html`, a self-contained offline version that can be opened directly. A second complete offline entry, `dist/field-lab.html`, opens the new experiment immediately; both entries retain all three labs. No external scripts, fonts, API keys, or services are required.
+The ordinary ES-module `index.html` should be served over HTTP. There are no npm runtime or build dependencies.
 
-For real browser regression tests:
+Browser tests use Python and Playwright only during development:
 
-```bash
+```sh
 python -m pip install -r tests/requirements.txt
 python -m playwright install chromium
-npm run build
 npm run test:ui
 ```
 
-The normal test mode exercises the served ES-module site under `/MA_playground/`. The explicitly named offline harness injects the generated standalone version without changing browser policies; its narrower coverage is documented rather than equated with a deployed-site test.
+Default browser tests exercise served ES modules. An explicit `--offline-harness` mode loads the actual generated single-file application when browser navigation is prohibited; it does not change browser policies or claim served-module validation. See [verification](docs/VERIFICATION.md) for actual results and limitations.
 
-## Deploy
+## Engineering and delivery
 
-The GitHub Actions workflow validates the site and deploys `main` to GitHub Pages once the repository's Pages source is set to **GitHub Actions**. The intended URL is `https://xby474-dev.github.io/MA_playground/`; see [delivery status](docs/STATUS.md) for whether publication actually happened.
+All new state, mathematics, content, drawing and lifecycle handling live in `src/relations-*.js`, integrated into the existing second experiment. The original mathematical tests are retained, and the legacy UI suite explicitly opens its compatibility route before exercising the old assertions. New tests cover the relation UI separately.
 
-The UI supports parameterized share links, CSV exports, native MathML, pointer and keyboard-controlled diagrams, mobile layouts, reduced-motion preferences, and proof-page printing. Screenshots in the Chinese README are captured from the actual application, not mockups.
+Build output supports both a root deployment and a GitHub Pages repository subpath. The workflow runs all tests before deployment. This delivery is a local update restored from the v1.1 bundle, not a claim that the remote repository or public Pages site was updated. Preserve the real remote history when merging the supplied patch; do not force-push the local bundle.
 
-MIT-licensed. No analytics. No third-party font files included.
+MIT. Authored mathematical details and reference distinctions are in [RELATIONS-MATHEMATICS.md](docs/RELATIONS-MATHEMATICS.md), [guide](docs/RELATIONS-GUIDE.md), and [references](docs/REFERENCES.md). No user answers, telemetry or credentials are transmitted.
