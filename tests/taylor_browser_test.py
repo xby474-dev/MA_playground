@@ -96,7 +96,7 @@ try:
   ok('All sixteen proof steps and four full proofs render complete inequalities with no accidental HTML elements')
   screen(page,'grow');expect(page.locator('#ty-function')).to_have_value('flat');expect(page.locator('#ty-n')).to_have_value('8')
   ok('Returning from proofs keeps the exact same function, order and experimental parameters')
-  route(page,'#lab=taylor&fn=log&a=.25&n=7&p=2.5&h=.8&span=3');page.locator('[data-action="share"]').click()
+  route(page,'#lab=taylor&fn=log&a=.25&n=7&p=2.5&h=.8&span=3');page.locator('[data-action="share"]').click();page.wait_for_timeout(250)
   if page.locator('#share-dialog').is_visible():
    url=page.locator('#share-url').input_value();assert 'lab=taylor' in url and 'p=2.5' in url and 'a=0.25' in url;page.locator('#share-dialog [data-action="close-dialog"]').click();page.locator('#share-dialog').evaluate('(d)=>d.close()');expect(page.locator('#share-dialog')).to_be_hidden()
   else:assert 'p=2.5' in page.url
