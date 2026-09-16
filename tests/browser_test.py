@@ -166,6 +166,8 @@ try:
         assert 'pins=' in url and 'lab=limits' in url
         page.keyboard.press('Escape')
         expect(page.locator('#share-dialog')).not_to_be_visible()
+        page.locator('#share-dialog').evaluate('(d)=>{if(d.open)d.close()}')
+        expect(page.locator('#share-dialog')).to_be_hidden()
         ok('Sharing preserves experiment inputs and has a keyboard-dismissable clipboard fallback')
 
         page.locator('[data-action="reset"]').click()
