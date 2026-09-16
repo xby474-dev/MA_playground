@@ -1,46 +1,46 @@
-<div align="center">
+# MA Playground · v1.5
 
-# MA Playground
-### Mathematical Analysis Visual Lab
+**Mathematical intuition, accountable to proof.** Six complete experiments. No backend, account, CDN, external fonts, or runtime API. Main interface and proof pages are Chinese; this README does not imply a translated UI.
 
-**Build intuition. Then inspect the proof.**
+[中文](README.md) · [Series guide](docs/SERIES-GUIDE.md) · [Mathematics](docs/SERIES-MATHEMATICS.md) · [Actual verification](docs/VERIFICATION-v1.5.md)
 
-Five complete, offline-capable experiments. No backend, CDN, account, external API or runtime dependencies.
+![Actual condition-map screenshot](docs/images/series-map-desktop.png)
 
-[中文](README.md) · [Taylor guide (中文)](docs/TAYLOR-GUIDE.md) · [Mathematics (中文)](docs/TAYLOR-MATHEMATICS.md) · [Verification](docs/VERIFICATION.md)
+## New: convergence-test conditions, not a leaderboard
 
-</div>
+Follow **condition map → investigate the same series → prove the relationship → check understanding**.
 
-![Recorded from the actual app: Taylor growth](docs/images/taylor-growth.gif)
+Nine nodes, eight valid implications, eight failed-converse/incomparability investigations. Green arrows express fixed general implications; node status changes with the selected series. A failed sufficient condition is not labeled divergence. Each investigation retains parameters and has examples, counterexamples and a four-step authored proof. Eight explained questions complete the route.
 
-## v1.4 — A curve, one derivative at a time
+Eight term families: geometric, p-series, telescoping, jagged geometric, oscillatory bounded coefficients, logarithmic boundary, sparse nonnegative, and nonmonotone cancellation. Change p/q, alternating signs, a fixed comparison reference, finite window and playback position. Views include finite ratios/roots, logarithmic comparison quotients, justified integral rectangles and two separate accounts S_N=Σa_n and A_N=Σ|a_n|. Analytic conclusions never read finite samples.
 
-Starting with the horizontal line T₀, build a local polynomial from the derivatives at one point. The learning path is **grow → examine errors → test the limits → inspect proofs → transfer questions**.
+### Scope matters
 
-Choose exp, sin, cos, ln(1+x), 1/(1−x), or the smooth nonanalytic example exp(−1/x²) extended by zero. Move the expansion center and probe with sliders, direct SVG dragging or keyboard controls. Select orders 0…12 and watch terms grow continuously. Pause or scrub inside a term: `T₂+0.4c₃h³` is explicitly an intermediate curve Q, not an already completed T₃.
+- Ordinary ratio limit L<1 versus root limsup ρ<1 (including undefined ordinary root limits).
+- Standard two-sided limit comparison 0<c<∞, with valid one-sided 0/∞ extensions separately retained.
+- Comparisons use the same **fixed** independently known reference, not a hidden existential choice.
+- The integral route requires a positive, continuous, eventually nonincreasing interpolation. Jagged terms do not receive a fictitious monotone interpolation.
+- Divergence of Σ|a_n| does not by itself imply divergence of Σa_n. Alternating form is not conditional convergence.
+- Incomparability has witnesses in both directions and a compatible intersection. All results concern explicit parameter ranges and tails.
 
-A live derivative table distinguishes guaranteed matching, partial correction and coincidental zeros. The second derivative is not mislabeled as geometric curvature. Coefficients are analytical, not finite differences or a fit to sampled points.
+See [the independent derivations and cited textbooks](docs/SERIES-MATHEMATICS.md). This is a proved catalogue, not an arbitrary-series solver or a formal proof assistant.
 
-Two error views independently hold the order or the observation point fixed. The remainder panel uses a bound over the entire connecting interval, never a sampled maximum. A conservative dyadic neighborhood is selected using the analytical bound; floating evaluation is not presented as certified interval arithmetic.
+## Run all six labs
 
-Four boundary presets expose real counterexamples: increasing order can worsen error; a function's domain is not its series' convergence interval; the logarithm's right endpoint requires a separate check; and a smooth function may differ from its Taylor series. The flat example's zero series has **infinite** radius but agrees with the function only at zero.
+Double-click `dist/series-lab.html` in the delivery archive. Every offline entry contains the whole application:
 
-Four complete four-step proofs and eight explained, balanced-position questions finish the route. State sharing preserves fractional growth. CSV contains complete T₀…T₁₂ evaluations, assumptions and numerical-method metadata, not a mislabeled intermediate animation.
+| Entry | Initial experiment |
+|---|---|
+| `standalone.html` | Multivariable limits |
+| `relations-lab.html` | Continuity / partial derivatives / differentiability |
+| `field-lab.html` | Green–Gauss–Stokes |
+| `completeness-lab.html` | Real completeness and ℝ/ℚ |
+| `taylor-lab.html` | Progressive Taylor growth |
+| `series-lab.html` | Convergence-test condition graph |
 
-## Earlier labs remain intact
+The old two-function view remains at `#lab=differentiability&mode=classic`. No prior mathematical or interaction tests were removed.
 
-1. Multivariable limits: every straight line is not enough.
-2. Partial derivatives, continuity, differentiability and continuous partials: a theorem/counterexample map.
-3. Green, Gauss and Stokes: local accumulation and boundary effects.
-4. Real completeness: a directed equivalence-proof cycle, exact rational bisection and ℝ/ℚ comparison.
-
-The old two-function comparison also remains at `#lab=differentiability&mode=classic`. No prior mathematical or interactive tests were removed.
-
-## Run
-
-Double-click **`dist/taylor-lab.html`** from the delivery archive. It contains all five labs. `standalone.html`, `field-lab.html`, `relations-lab.html` and `completeness-lab.html` are complete offline entries with different starting views. A source-only Git checkout requires a build first.
-
-For development, Node.js 22+:
+For source development (Node.js 22+, no npm runtime/build dependencies):
 
 ```bash
 npm run dev
@@ -48,34 +48,28 @@ npm run verify
 npm run preview
 ```
 
-No npm runtime or build-framework dependencies. Serve modular `index.html` over HTTP; use an inlined build for offline files. Sharing a local URL does not upload a file.
+Serve modular `index.html` over HTTP; use a built inlined HTML for offline files. Source-only Git clones need `npm run build` first. Sharing a local URL does not upload a file.
 
-## Test and scope
+## Test
 
 ```bash
 npm test
-npm run check
-npm run build
 python -m pip install -r tests/requirements.txt
 python -m playwright install chromium
 npm run test:ui
-npm run test:ui:taylor
+npm run test:ui:series
 ```
 
-Actual v1.4 result: **203 Node tests** and **168 Chromium checks** (29+37+27+38+37). The new completeness and Taylor pages include a stage-aware “Start here” guide card. Browser scripts normally use the production HTTP build. Managed browser policy blocked HTTP navigation here, so the real built HTML was injected with explicit `--offline-harness`; policies were not altered. HTTP resources and subpaths were independently checked with a real Node server.
+Actual v1.5 results: **267 Node checks; 203 Chromium checks** (29+37+27+38+37+35). Browser scripts default to the production HTTP build. Managed policy blocked URL navigation in this environment; explicit `--offline-harness` injected the real fully built offline HTML. No browser policies were changed or bypassed. HTTP resources/subpaths were independently exercised through a real Node server.
+The new completeness, Taylor and series pages include stage-aware “Start here” guide cards. This is not browser HTTP-module-loading E2E, OS file-policy validation, public deployment, Safari/Firefox coverage, or a complete screen-reader audit. Numerical tests are not proofs. See [verification](docs/VERIFICATION-v1.5.md).
 
-This is not browser HTTP module-loading E2E, OS file-policy validation, public deployment, a Safari/Firefox test, or a complete screen-reader audit. Numerical tests are not general mathematical proofs. See [verification](docs/VERIFICATION.md).
+The usual explicit animation takes about 1.2 seconds per order. Reduced-motion preference uses completed-step playback instead. Navigation, hidden-page events and reset clean up animation and local handlers. Mobile layouts retain controls and textual alternatives.
 
-The usual explicit animation takes about 1.2 seconds per order. Reduced-motion preference uses completed-step playback instead. Navigation, hidden-page events and reset clean up animation and local handlers. Mobile layouts retain controls and textual/derivative alternatives.
+Not claimed: browser HTTP-module-loading E2E, operating-system file policy validation, public deployment, Safari/Firefox coverage, or a full screen-reader audit. Numerical tests are not proofs. Detailed limits and actual reports: [verification](docs/VERIFICATION-v1.5.md).
 
-## Architecture
+## Engineering / delivery
 
-Pure formulas (`taylor-math`), validated state (`taylor-state`), SVG views (`taylor-plots`), authored lessons/proofs (`taylor-content`) and lifecycle-managed interaction (`taylor-lab`) follow the existing separation. The custom no-dependency bundler inlines the same source modules, not a separate demo.
+The new `series-math`, `series-state`, `series-content`, `series-plots` and `series-lab` preserve the existing separation of analytic models, whitelist state, authored explanations, SVG and lifecycle-managed interaction. User-started animation stops on navigation/hidden pages; mobile layouts reflow the map and support keyboard controls.
+The no-dependency bundler inlines the same modules, not a separate demo. `npm run build` emits static dist for both root and repository subpaths. The existing Pages workflow runs all six UI suites. Patch, full local-history bundle and reports are in `delivery/`. Read the real remote before merging; do not force-overwrite its history. See [status](docs/STATUS.md).
 
-## Delivery and deployment
-
-`npm run build` produces static `dist/` for root or repository subpaths. The existing Pages workflow now runs all five browser suites. This iteration was developed from the supplied v1.3 local history; **v1.4 was pushed normally, GitHub Actions Run #13 passed, and the public GitHub Pages site was verified.** Incremental patch and full local bundle are in `delivery/`. Inspect the actual remote before merging; do not force-overwrite its history. See [status](docs/STATUS.md).
-
-## Contribute / license
-
-MIT. Main UI and authored proof pages are Chinese; this README is not a claim of full interface translation. No arbitrary-expression parser, CAS, tracking or automatic proof engine. New content needs explicit assumptions, proof/counterexample, pedagogical purpose and tests. See [contributing](CONTRIBUTING.md) and [references](docs/REFERENCES.md).
+MIT. No tracking, arbitrary-expression evaluator, distributed system fonts or embedded credentials. New material needs explicit hypotheses, proof/counterexample, pedagogical purpose and tests.

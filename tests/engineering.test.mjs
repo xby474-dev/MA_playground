@@ -125,3 +125,13 @@ test('Taylor offline entry retains all five labs without remote runtime download
  for(const name of ['taylor-math','taylor-lab','completeness-lab','relations-lab','field-lab'])assert.ok(html.includes(`__modules["${name}"]`));
  assert.ok(!/<script[^>]+src=/.test(html));assert.ok(!/<link[^>]+rel="stylesheet"/.test(html));assert.ok(!/url\(['"]?https?:\/\//.test(html));
 });
+
+test('Series condition graph, mathematical catalogue and local proofs resolve at both deployment paths',async()=>{
+ for(const prefix of ['/','/MA_playground/'])for(const file of ['src/series-math.js','src/series-state.js','src/series-content.js','src/series-plots.js','src/series-lab.js','styles/series.css','docs/SERIES-MATHEMATICS.md','docs/SERIES-GUIDE.md']){const r=await fetch(base+prefix+file);assert.equal(r.status,200,file);assert.ok((await r.text()).length>50);}
+});
+test('Sixth offline entry includes all previous experiments and no remote runtime dependency',async()=>{
+ const response=await fetch(base+'/MA_playground/series-lab.html');assert.equal(response.status,200);const html=await response.text();assert.ok(html.includes('data-initial-lab="series"'));
+ for(const lab of ['limits','differentiability','fields','completeness','taylor','series'])assert.ok(html.includes('nav-'+lab));
+ for(const name of ['series-math','series-content','series-plots','series-lab'])assert.ok(html.includes(`__modules["${name}"]`));
+ assert.ok(!/<script[^>]+src=/.test(html));assert.ok(!/<link[^>]+rel="stylesheet"/.test(html));assert.ok(!/url\(['"]?https?:\/\//.test(html));
+});

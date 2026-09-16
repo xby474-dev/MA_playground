@@ -57,3 +57,7 @@
 No autoplay. Explicit playback follows reduced-motion preference: continuous 1.2s-per-layer growth normally, discrete completed layers under reduced motion. Progress is also a native range; layer cards and both plot handles have keyboard alternatives. Handles use role=slider and bounds; Left/Right adjust, Shift accelerates, Home/End select defined endpoints. Focus is restored after a SVG redraw. Derivative tables and text explain the same mathematics as the plots. The route cleans up animation and listeners; hidden-page events pause playback.
 
 Checks include 360/390/768/1024px layouts, narrow tables, long proofs, actual pointer drag and keyboard interaction. This is not a complete assistive-technology audit or WCAG certification.
+
+## v1.5 condition map
+
+Series graph nodes and edges are keyboard buttons; Enter/Space activate them. At <=600px the graph becomes larger directed chains, not a shrunken desktop SVG. Shape, text and status symbols supplement color. The graph declares exactly what a node checkmark means. User-initiated animation stops on navigation and backgrounding; reduced-motion preference slows discrete additions. Proof text and numerical readouts carry the information independently of SVG visuals. This is implementation intent plus tested interactions, not a WCAG certification or a full screen-reader audit.

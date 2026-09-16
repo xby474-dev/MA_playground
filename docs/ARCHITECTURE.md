@@ -109,3 +109,14 @@ Cauchy 视角允许 m 与 j 独立落在较远尾部；精确差值不会因屏�
 `taylor-math/state/plots/content/lab.js` follow the same five-way separation. The global router handles `lab=taylor`, cleans up the active controller and supplies the common share dialog. Fractional growth is a mathematical state `p` serialized to the hash, distinct from the target order `n`. An explicit loop updates `p`; reduced-motion users receive completed-step updates. Every new listener uses an AbortController and every animation is cleaned up on unmount.
 
 Plots never choose coefficients. Analytical formulas compute data; SVG draws clipped segments and leaves singularities disconnected. During pointer dragging the coordinate window is frozen, while the numerical a or h is updated. The standalone builder inlines these exact modules; it is not a second demo codebase.
+
+
+## v1.5：级数条件图，而非判别法排行榜
+
+`series-math/state/content/plots/lab.js` 分离解析通项族、白名单路由、条件图与证明、SVG 与控制器。数学状态不读取 N、probe 或任何采样数组；有限图无法反向决定无穷敛散。固定参照与方法版本都是状态/内容的一部分，不能在比较两条条件时悄悄更换量词。
+
+图区分一般箭头与当前节点条件；实线箭头使用图结构，反推卡有明确见证，真正不可比有两方向的见证。路径几何也有浏览器检查，避免一条曲线穿过无关节点，视觉上暗示错误的推导。
+
+根值用上极限版本，比值用普通极限版。标准极限比较与单向扩展分开，不用已知最终分类冒充某个方法的实际证据。未定义比值不补零；部分和用补偿求和，仍不是区间算术。
+
+源码、模块构建与完整单文件使用同一套模块。全局旧问答监听改为只接收其拥有的两个经典实验事件，而不是对新模块逐个加黑名单；各独立控制器自行管理表单与答案。新控制器用 AbortController/RAF 清理监听和动画，切页、隐藏、重置皆可停止。

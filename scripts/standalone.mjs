@@ -3,7 +3,7 @@
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
-const order = ['math','taylor-math','taylor-state','completeness-math','completeness-state','relations-math','relations-state','field-math','field-state','state','icons','page-guide','plots','content','relations-plots','relations-content','relations-lab','field-plots','field-content','field-lab','completeness-plots','completeness-content','completeness-lab','taylor-plots','taylor-content','taylor-lab','app'];
+const order = ['math','series-math','series-state','taylor-math','taylor-state','completeness-math','completeness-state','relations-math','relations-state','field-math','field-state','state','icons','page-guide','plots','content','relations-plots','relations-content','relations-lab','field-plots','field-content','field-lab','completeness-plots','completeness-content','completeness-lab','taylor-plots','taylor-content','taylor-lab','series-content','series-plots','series-lab','app'];
 export async function makeStandalone(root, out) {
   let js='(() => {\n"use strict";\nconst __modules = {};\n';
   for (const name of order) {
@@ -27,12 +27,15 @@ export async function makeStandalone(root, out) {
   const relationsCss=await readFile(`${root}/styles/relations.css`,'utf8');
   const completenessCss=await readFile(`${root}/styles/completeness.css`,'utf8');
   const taylorCss=await readFile(`${root}/styles/taylor.css`,'utf8');
+  const seriesCss=await readFile(`${root}/styles/series.css`,'utf8');
   const favicon=await readFile(`${root}/assets/favicon.svg`,'utf8');
-  html=html.replace('<link rel="stylesheet" href="./styles/app.css">',`<style>${css}\n${fieldCss}\n${relationsCss}\n${completenessCss}\n${taylorCss}</style>`)
+  html=html.replace('<link rel="stylesheet" href="./styles/app.css">',`<style>${css}\n${fieldCss}\n${relationsCss}\n${completenessCss}\n${taylorCss}
+${seriesCss}</style>`)
     .replace('<link rel="stylesheet" href="./styles/fields.css">','')
     .replace('<link rel="stylesheet" href="./styles/relations.css">','')
     .replace('<link rel="stylesheet" href="./styles/completeness.css">','')
     .replace('<link rel="stylesheet" href="./styles/taylor.css">','')
+    .replace('<link rel="stylesheet" href="./styles/series.css">','')
     .replace('<script type="module" src="./src/app.js"></script>','')
     .replace('href="./assets/favicon.svg"',`href="data:image/svg+xml,${encodeURIComponent(favicon)}"`)
     .replace('</body>',`<script>${js.replace(/<\/script/gi,'<\\/script')}</script>\n</body>`);

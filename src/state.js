@@ -1,9 +1,11 @@
+import { seriesDefaults, parseSeriesState, serializeSeriesState } from './series-state.js';
 import { taylorDefaults, parseTaylorState, serializeTaylorState } from './taylor-state.js';
 import { completenessDefaults, parseCompletenessState, serializeCompletenessState } from './completeness-state.js';
 import { parseRelationsState, serializeRelationsState } from './relations-state.js';
 import { fieldDefaults, parseFieldState, serializeFieldState } from './field-state.js';
 import { clamp } from './math.js';
 export function defaults(lab = 'limits') {
+  if(lab === 'series') return seriesDefaults();
   if(lab === 'taylor') return taylorDefaults();
   if(lab === 'completeness') return completenessDefaults();
   if(lab === 'fields') return fieldDefaults();
@@ -13,6 +15,7 @@ const pick = (value, options, fallback) => options.includes(value) ? value : fal
 const num = (value, fallback, min, max) => value === null || value.trim() === '' || !Number.isFinite(Number(value)) ? fallback : clamp(Number(value), min, max);
 export function parseState(hash) {
   const p = new URLSearchParams(hash.replace(/^#/, ''));
+  if(p.get('lab') === 'series') return parseSeriesState(p);
   if(p.get('lab') === 'taylor') return parseTaylorState(p);
   if(p.get('lab') === 'completeness') return parseCompletenessState(p);
   if(p.get('lab') === 'fields') return parseFieldState(p);
@@ -40,6 +43,7 @@ export function parseState(hash) {
   return s;
 }
 export function serializeState(s) {
+  if(s.lab === 'series') return serializeSeriesState(s);
   if(s.lab === 'taylor') return serializeTaylorState(s);
   if(s.lab === 'completeness') return serializeCompletenessState(s);
   if(s.lab === 'fields') return serializeFieldState(s);

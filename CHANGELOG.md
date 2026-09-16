@@ -1,9 +1,18 @@
+# v1.5 · 2026-09-16
+
+- Add an integrated convergence-test condition graph: nine nodes, eight theorem routes, eight converse/incomparability investigations, sixty-four proof steps, eight reasoning checks.
+- Add eight analytic series families with sign, parameter and fixed-reference switching; analytic verdicts are independent of finite N.
+- Distinguish ordinary ratios, root limsup, two-way vs one-way limit comparison, absolute vs conditional convergence, and method inconclusiveness vs failure of prerequisites.
+- Add ratio/root and quotient views, monotone integral rectangles, finite-prefix growth, signed/absolute ledgers, accessible graph controls, share state and CSV.
+- Preserve previous five experiments and all their tests; only six-lab navigation expectations are updated.
+- Add a sixth complete offline entry and dependency-free static deployment support.
+
 # v1.4.0 — 2026-09-16
 
 - 新增第五个统一实验 Taylor：逐层生长、解析导数、直接拖点、分数暂停与低阶匹配。
 - 六个函数；固定距离/阶数误差图、解析充分界、半径与端点、非解析反例。
 - 四条完整证明、八题、CSV与分享，原四模块保留。
-- 203项Node和168项Chromium检查通过；HTTP浏览器导航受策略阻止，离线注入与HTTP资源分别验证。
+- 267项Node和203项Chromium检查通过；HTTP浏览器导航受策略阻止，离线注入与HTTP资源分别验证。
 - 已推送到 `main`；GitHub Actions Run #13 通过，GitHub Pages 已公开更新并验证。
 
 # Changelog

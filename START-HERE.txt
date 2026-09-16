@@ -1,29 +1,32 @@
-MA PLAYGROUND v1.4 — START HERE
+MA PLAYGROUND v1.5 — START HERE
 
 最快体验 / Quick start
-  双击 dist/taylor-lab.html：进入 Taylor 多项式的逐层生长实验。
-  完整应用含全部五个实验，无需网络、Node、CDN、外部字体或 API。
+  双击 dist/series-lab.html：进入“级数判别法条件图”。
+  单文件含完整六个实验，无需 Node、网络、CDN、字体下载或 API。
 
-其他完整离线入口
-  dist/standalone.html      多元极限
-  dist/relations-lab.html  偏导/连续/可微关系图
-  dist/field-lab.html       Green–Gauss–Stokes
-  dist/completeness-lab.html 实数完备性的等价命题
+推荐路线
+  在条件地图从默认 1/n² 开始：比值/根值=1，比较/积分仍能判断。
+  点击“根值 ⇏ 比值”试齿状几何，比较两个比值子列和整体根值。
+  切换交错调和，查看 S_N 与 A_N 两本账。
+  同一参数可继续进入“为什么能推出”和“自己判断”。
 
-Taylor 操作
-  先从0阶开始，点击“从0逐层生长”。播放到所选目标 n。
-  拖动生长进度能停在一项加入一半的时刻；继续播放不丢进度。
-  图上绿色 a / 橙色 x 可拖动，也可用滑块或方向键。
+其他完整离线入口（只是初始页面不同）
+  dist/standalone.html       多元极限
+  dist/relations-lab.html    偏导/连续/可微关系
+  dist/field-lab.html        Green–Gauss–Stokes
+  dist/completeness-lab.html 实数完备性
+  dist/taylor-lab.html       Taylor 逐层生长
 
 开发
   Node 22+；npm run dev / npm run verify / npm run preview
-  源码模块入口经 HTTP 打开；双击离线请用 dist/ 内的合并文件。
+  模块源码经 HTTP 打开；双击离线请用 dist/ 内的合并文件。
+  浏览器测试依赖仅用于开发，见 README。
 
 交付
   README.md / README.en.md
-  docs/TAYLOR-GUIDE.md 与 TAYLOR-MATHEMATICS.md
-  docs/VERIFICATION.md：实际验证范围与限制
-  delivery/manifest.json：本地提交、基线、补丁、bundle 与校验
+  docs/SERIES-GUIDE.md / SERIES-MATHEMATICS.md
+  docs/VERIFICATION-v1.5.md：实际测试与限制
+  delivery/manifest.json：提交、基线、补丁、bundle 与校验
 
-v1.4 已推送至 xby474-dev/MA_playground；GitHub Actions Run #13 通过，Pages 已公开更新。
-浏览器验证使用实际离线 HTML 注入；HTTP 资源另测，不等同于 Safari/Firefox 或屏幕阅读器验收。
+本轮包含第六个级数实验；推送和 Pages 验证结果以本次交付后的 `docs/STATUS.md` 与 `docs/VERIFICATION.md` 为准。
+浏览器使用真实构建离线 HTML 注入测试；HTTP 资源另测，不等于 Safari/Firefox 或屏幕阅读器验收。

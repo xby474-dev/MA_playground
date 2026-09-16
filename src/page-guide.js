@@ -54,6 +54,12 @@ const GUIDE_CONTENT = {
     proof: { title: '动画给线索，证明负责说明为什么。', question: '系数、余项和收敛半径分别由什么数学理由保证？', steps: ['先选择一条证明路线，查看它的前提。', '逐步阅读构造、估计和结论，记录每一步的对象。', '回到实验，用参数检验证明适用的范围。'], observe: '看证明使用的是导数公式、余项估计还是比值/几何级数；不要把数值读数当作证明。', takeaway: 'Taylor 展开不是一条绘图规则，而是导数信息与余项控制共同给出的定理。', warning: '一个正例不能证明一般命题；当前函数的漂亮曲线也不能替代条件检查。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/TAYLOR-GUIDE.md', guideLabel: '查看 Taylor 证明指南' },
     challenge: { title: '把局部近似的判断迁移到新问题。', question: '面对新的函数、阶数和观察点，你能判断近似保证到哪里吗？', steps: ['先独立选择答案，再说明你依赖的条件。', '查看解析反馈，区分局部、有限阶和无限展开。', '回到生长或边界实验，验证你的判断。'], observe: '重点看展开点、阶数、余项和收敛区间，而不是只看某一个数值。', takeaway: '真正理解 Taylor 展开，是知道它保证什么，也知道它没有保证什么。', warning: '不要把“误差很小”“曲线重合”或“所有导数为零”误读成恒等式。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/TAYLOR-GUIDE.md', guideLabel: '查看 Taylor 完整指南' },
   },
+  series: {
+    map: { title: '先看地图，再问哪条判别法够用。', question: '比值、根值、比较、积分和交错等条件，哪些能推出收敛，哪些不能反推？', steps: ['先点击一个节点或箭头，区分“条件”“性质”和“结论”。', '切换一个级数案例，观察同一对象经过不同判别路线时哪里成立。', '进入实验或证明页，核对前提、估计和结论，不只看最后读数。'], observe: '看箭头方向、节点前提和当前级数的满足标记；实线是蕴含，虚线需要反例支持。', takeaway: '判别法不是强弱排行榜；先固定版本和前提，再选择一条足够的证明路线。', warning: '某条判别法前提不满足，不等于原级数发散；有限项、有限窗口和图上没画出的箭头也不能替代无穷论证。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/SERIES-GUIDE.md', guideLabel: '查看级数实验指南' },
+    workshop: { title: '让同一个级数接受不同证据。', question: '改变通项、符号、参照和显示长度时，哪一种证据真正能决定敛散？', steps: ['先选一个熟悉案例，例如 1/n²、1/n 或交错调和。', '切换“条件透镜”和“两本账”，再调整参照与逐项动画。', '比较方法状态：可用、无法判断，还是前提不适用。'], observe: '重点看比值/根值、比较商、积分矩形、部分和与绝对值部分和；动画只是有限前缀证据。', takeaway: '同一结论可以有多条充分路线，但每条路线都只在明确前提下负责。', warning: '最后一项变小、有限部分和看似稳定或一个比值超过 1，都不能孤立决定原级数。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/SERIES-GUIDE.md', guideLabel: '查看级数实验指南' },
+    proof: { title: '沿一条箭头，把前提走到结论。', question: '判别法的每一步估计究竟用到了什么条件？', steps: ['先选择一条关系，读清它的假设与目标。', '逐步查看缓冲常数、比较不等式或部分和构造。', '再用案例检查反向命题为什么需要另一个见证。'], observe: '看量词、尾部条件、正性/单调性、符号和参照的敛散；不要把数值样本当作证明。', takeaway: '真正的判别不是“图像看起来收敛”，而是前提如何控制所有足够晚的尾部。', warning: '定理箭头不能自动反向；分组收敛、比值振荡和临界值都需要额外论证。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/SERIES-MATHEMATICS.md', guideLabel: '查看级数数学证明' },
+    challenge: { title: '最后判断：是方法没回答，还是级数真的发散？', question: '面对新参数，你能区分判别法失败、前提不适用和真正的敛散结论吗？', steps: ['先独立选择路线或判断，不急着看反馈。', '查看理由，标出使用的前提与被排除的误读。', '回到地图或实验，用一个反例检验你的方向。'], observe: '重点看“无法判断”“前提未满足”“原级数发散”三种不同标签，以及绝对值账本。', takeaway: '会选择一条足够的路线，并知道它没有保证什么，才是真正理解级数判别。', warning: '交错不自动等于条件收敛，绝对值发散也不自动等于原级数发散，未画箭头更不等于互不蕴含。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/SERIES-GUIDE.md', guideLabel: '查看级数完整指南' },
+  },
 };
 
 function resolveGuideContent(type, screen) {
@@ -65,6 +71,7 @@ function resolveGuideContent(type, screen) {
 function defaultTarget(type, tab, mode, screen) {
   if (type === 'completeness') return { map: '[data-cp-action="start"]', explore: '#cp-depth', proof: '[data-cp-proof-step="0"]', challenge: '#cp-quiz' }[screen] ?? '#cp-title';
   if (type === 'taylor') return { grow: '[data-ty-action="play"]', error: '#ty-h', boundary: '[data-ty-scenario="nonmonotone"]', proof: '[data-ty-proof="coefficients"]', challenge: '#ty-quiz' }[screen] ?? '#ty-title';
+  if (type === 'series') return { map: '#se-graph', workshop: '#se-main-plot', proof: '[data-se-step="0"]', challenge: '#se-quiz' }[screen] ?? '#se-title';
   if (type === 'relations') return '[data-r-stage="0"]';
   if (tab !== 'explore') return '#tab-explore';
   if (type === 'limits') return '[data-set="path"]';

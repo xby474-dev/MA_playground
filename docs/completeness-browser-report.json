@@ -35,7 +35,7 @@
     "In-session answers survive exploration, and editing invalidates stale feedback before regrading",
     "Reset clears shared parameters and session-only quiz drafts",
     "Malformed URLs are clamped and whitelisted without injecting markup or producing nonfinite graphs",
-    "Map and four-lab navigation reflow at 360, 390, 768 and 1024px without document overflow",
+    "Map and five-lab navigation reflow at 360, 390, 768 and 1024px without document overflow",
     "Mobile plot has its own synchronized depth control with focus preserved during updates",
     "Long exact rational tails, open proofs and scrollable ledgers do not overflow on a 360px phone",
     "Long proof and quiz pages remain usable on narrow screens",

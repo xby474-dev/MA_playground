@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="./styles/relations.css">
   <link rel="stylesheet" href="./styles/completeness.css">
   <link rel="stylesheet" href="./styles/taylor.css">
+  <link rel="stylesheet" href="./styles/series.css">
   <script type="module" src="./src/app.js"></script>
 </head>
 <body>
@@ -28,7 +29,7 @@
   <div class="layout">
     <aside class="sidebar" aria-label="实验导航">
       <div class="sidebar-inner">
-        <div class="sidebar-label">THE LAB NOTEBOOK <span>01—05</span></div>
+        <div class="sidebar-label">THE LAB NOTEBOOK <span>01—06</span></div>
         <div class="nav-group-title">从局部出发，理解整体。</div>
         <nav>
           <a class="lab-nav" id="nav-limits" href="#lab=limits"><span class="nav-num">01</span><span><strong>所有直线，都不够</strong><small>多元极限 · 路径陷阱</small></span><span class="nav-arrow">↗</span></a>
@@ -36,15 +37,16 @@
           <a class="lab-nav" id="nav-fields" href="#lab=fields"><span class="nav-num">03</span><span><strong>局部累积，边界回声</strong><small>Green · Gauss · Stokes</small></span><span class="nav-arrow">↗</span></a>
           <a class="lab-nav" id="nav-completeness" href="#lab=completeness"><span class="nav-num">04</span><span><strong>五种定理，同一终点</strong><small>实数完备性 · ℝ 与 ℚ</small></span><span class="nav-arrow">↗</span></a>
           <a class="lab-nav" id="nav-taylor" href="#lab=taylor"><span class="nav-num">05</span><span><strong>一点信息，长出曲线</strong><small>Taylor 展开 · 逐层逼近</small></span><span class="nav-arrow">↗</span></a>
+          <a class="lab-nav" id="nav-series" href="#lab=series"><span class="nav-num">06</span><span><strong>不是谁强，是谁够用</strong><small>级数判别 · 条件与边界</small></span><span class="nav-arrow">↗</span></a>
         </nav>
         <div class="sidebar-note"><span class="little-orbit" aria-hidden="true">↗</span><h3>别急着接受结论。</h3><p>先预测，再拖动。<br>让反例挑战直觉，<br>让证明完成理解。</p><button class="text-button" data-action="about">如何使用实验室 <span>→</span></button></div>
-        <div class="sidebar-footer"><span class="version-pill">v1.4</span> OPEN SOURCE · NO TRACKING<br><small>数学分析我爱你～</small></div>
+        <div class="sidebar-footer"><span class="version-pill">v1.5</span> OPEN SOURCE · NO TRACKING<br><small>数学分析我爱你～</small></div>
       </div>
     </aside>
     <main id="main" tabindex="-1"></main>
   </div>
   <div id="toast" role="status" aria-live="polite"></div>
-  <dialog id="about-dialog" aria-labelledby="about-title"><div class="dialog-top"><span class="eyebrow">A NOTE BEFORE YOU BEGIN</span><button class="icon-button" data-action="close-dialog" aria-label="关闭说明">×</button></div><h2 id="about-title">探索不是证明，<br>但可以成为证明的起点。</h2><p>每个实验都把三件事分开：拖动得到的<strong>数值观察</strong>、代入得到的<strong>精确公式</strong>，以及覆盖所有情况的<strong>数学证明</strong>。</p><ol><li>先在“探索”里选择一条路径或一个函数，尝试推翻自己的预测。</li><li>把尺度缩小，观察函数值和归一化误差分别怎样变化。</li><li>在第三个实验中，逐步检查局部累积、公共边界抵消与定向；到“定义与证明”核对条件，完成“检查理解”中的新问题。</li></ol><p>所有计算都在你的浏览器中完成。第四个实验用精确有理数二分连接五个完备性命题；数值与像素不会判定无限过程。第五个实验让 Taylor 多项式逐项生长，分开局部匹配、误差与级数收敛。没有登录、分析追踪、AI 问答或上传。分享链接只包含当前实验参数。</p><p class="muted">图形是有限采样。曲面高度使用独立显示比例；投影中的视觉角度不等于真实导数。浏览器数值不能代替极限的严格证明。</p><a href="https://github.com/xby474-dev/MA_playground/issues" target="_blank" rel="noopener noreferrer">发现数学或界面问题？提交 Issue ↗</a></dialog>
+  <dialog id="about-dialog" aria-labelledby="about-title"><div class="dialog-top"><span class="eyebrow">A NOTE BEFORE YOU BEGIN</span><button class="icon-button" data-action="close-dialog" aria-label="关闭说明">×</button></div><h2 id="about-title">探索不是证明，<br>但可以成为证明的起点。</h2><p>每个实验都把三件事分开：拖动得到的<strong>数值观察</strong>、代入得到的<strong>精确公式</strong>，以及覆盖所有情况的<strong>数学证明</strong>。</p><ol><li>先在“探索”里选择一条路径或一个函数，尝试推翻自己的预测。</li><li>把尺度缩小，观察函数值和归一化误差分别怎样变化。</li><li>在第三个实验中，逐步检查局部累积、公共边界抵消与定向；到“定义与证明”核对条件，完成“检查理解”中的新问题。</li></ol><p>所有计算都在你的浏览器中完成。第四个实验用精确有理数二分连接五个完备性命题；数值与像素不会判定无限过程。第五个实验让 Taylor 多项式逐项生长，分开局部匹配、误差与级数收敛。第六个实验以条件图连接级数判别，分清正项、绝对收敛与符号抵消。没有登录、分析追踪、AI 问答或上传。分享链接只包含当前实验参数。</p><p class="muted">图形是有限采样。曲面高度使用独立显示比例；投影中的视觉角度不等于真实导数。浏览器数值不能代替极限的严格证明。</p><a href="https://github.com/xby474-dev/MA_playground/issues" target="_blank" rel="noopener noreferrer">发现数学或界面问题？提交 Issue ↗</a></dialog>
   <dialog id="share-dialog" aria-labelledby="share-title"><div class="dialog-top"><h2 id="share-title">分享当前实验</h2><button class="icon-button" data-action="close-dialog" aria-label="关闭分享">×</button></div><p>复制下面的链接。对方会看到相同的函数、路径、尺度与比较项。</p><input id="share-url" type="text" readonly aria-label="实验分享链接"><p id="share-warning" class="muted"></p></dialog>
   <noscript><section class="noscript"><h1>MA Playground 需要启用 JavaScript</h1><p>交互和计算完全在浏览器中运行。你仍可阅读仓库中的 <a href="https://github.com/xby474-dev/MA_playground/blob/main/docs/MATHEMATICS.md">数学定义与完整证明</a>。</p></section></noscript>
 </body>
