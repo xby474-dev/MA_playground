@@ -67,7 +67,7 @@ npm run test:ui
 npm run test:ui:series
 ```
 
-Local v1.6 results: **275 Node checks passed**. Seven Chromium suites run in GitHub Actions after push; the actual count and run URL are recorded in [verification](docs/VERIFICATION-v1.6.md). Browser scripts default to the production HTTP build; when managed policy blocks navigation, `--offline-harness` injects the real fully built offline HTML without changing browser policy.
+Local v1.6 results: **275 Node checks passed**. GitHub Actions Run #23 passed with **214 Chromium checks** and deployed Pages; the details and run URL are recorded in [verification](docs/VERIFICATION-v1.6.md). Browser scripts default to the production HTTP build; when managed policy blocks navigation, `--offline-harness` injects the real fully built offline HTML without changing browser policy.
 The completeness, Taylor, series and uniform pages include stage-aware “Start here” guide cards. This is not browser HTTP-module-loading E2E, OS file-policy validation, Safari/Firefox coverage, or a complete screen-reader audit. Numerical tests are not proofs.
 
 The usual explicit animation takes about 1.2 seconds per order. Reduced-motion preference uses completed-step playback instead. Navigation, hidden-page events and reset clean up animation and local handlers. Mobile layouts retain controls and textual alternatives.

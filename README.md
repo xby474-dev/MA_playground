@@ -103,9 +103,9 @@ npm run test:ui:series  # 仅第六套
 npm run test:ui:uniform # 仅第七套
 ```
 
-本地 v1.6 已通过 **275 项 Node 检查**；七套 Chromium 检查由 GitHub Actions 在推送后执行并记录在 [v1.6 验证记录](docs/VERIFICATION-v1.6.md)。新增实验及 v1.5 页面均带有按页面阶段切换的本页导览卡片。
+本地 v1.6 已通过 **275 项 Node 检查**；GitHub Actions Run #23 已通过 **214 项 Chromium 检查**并完成 Pages 部署，详见 [v1.6 验证记录](docs/VERIFICATION-v1.6.md)。新增实验及 v1.5 页面均带有按页面阶段切换的本页导览卡片。
 
-当前环境的浏览器策略阻止 HTTP 导航；浏览器检查显式采用 `--offline-harness`，注入**真实构建的完整离线 HTML** 执行，没有修改或规避浏览器策略。HTTP 资源及根路径/仓库子路径另由真实 Node 服务请求检查。GitHub Actions Run #18 已通过并完成 Pages 部署，线上地址已做基本验收；仍不声称浏览器 HTTP 模块加载全链路、操作系统文件策略、Safari/Firefox 或完整屏幕阅读器验收。见 [验证记录](docs/VERIFICATION-v1.5.md)。测试不是一般数学证明。
+当前环境的浏览器策略阻止 HTTP 导航；本地浏览器检查显式采用 `--offline-harness`，注入**真实构建的完整离线 HTML** 执行，没有修改或规避浏览器策略。HTTP 资源及根路径/仓库子路径另由真实 Node 服务请求检查。远端 Actions Run #23 已通过并完成 Pages 部署，线上地址已做基本验收；仍不声称浏览器 HTTP 模块加载全链路、操作系统文件策略、Safari/Firefox 或完整屏幕阅读器验收。见 [验证记录](docs/VERIFICATION-v1.6.md)。测试不是一般数学证明。
 
 ## 工程结构
 
@@ -134,7 +134,7 @@ docs/                       操作、数学、验证和实际截图
 
 ## 部署与交付
 
-`npm run build` 输出纯静态 dist，支持根路径与 `/MA_playground/`。GitHub Actions Run #18 已通过并部署：[线上地址](https://xby474-dev.github.io/MA_playground/)。
+`npm run build` 输出纯静态 dist，支持根路径与 `/MA_playground/`。GitHub Actions Run #23 已通过并部署：[线上地址](https://xby474-dev.github.io/MA_playground/)。
 
 提交、基线、差异补丁、bundle 和核验材料见交付包 `delivery/`；后续更新仍应读取真实远端历史，不要用本地 bundle 强制覆盖。详见 [STATUS.md](docs/STATUS.md) 与 [DEPLOYMENT.md](docs/DEPLOYMENT.md)。
 

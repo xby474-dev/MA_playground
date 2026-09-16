@@ -16,10 +16,10 @@
 
 ## 验证与限制
 
-**275 项 Node 检查**；七套 Chromium 检查由本次 GitHub Actions 执行。详细范围见 [VERIFICATION-v1.6.md](VERIFICATION-v1.6.md)。不声称跨浏览器、完整屏幕阅读器或形式化数学证明。
+**275 项 Node 检查，214 项 Chromium 检查**；七套 Chromium 检查由本次 GitHub Actions 执行并全部通过。详细范围见 [VERIFICATION-v1.6.md](VERIFICATION-v1.6.md)。不声称跨浏览器、完整屏幕阅读器或形式化数学证明。
 
 ## 发布状态
 
-v1.6 提交将在本地验证后推送到 `main`；GitHub Actions 与 GitHub Pages 结果以 [VERIFICATION-v1.6.md](VERIFICATION-v1.6.md) 的本次记录为准。线上地址：[xby474-dev.github.io/MA_playground](https://xby474-dev.github.io/MA_playground/)。不得使用本地 bundle 强制覆盖远端历史。
+v1.6 已推送到 `main`，提交 `77a6514`；GitHub Actions Run #23 已通过，GitHub Pages 已部署。线上地址：[xby474-dev.github.io/MA_playground](https://xby474-dev.github.io/MA_playground/)。不得使用本地 bundle 强制覆盖远端历史。
 
 交付物不含登录凭据、令牌、环境秘密或字体文件。

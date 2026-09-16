@@ -17,9 +17,9 @@ v1.6 在 v1.5 六个实验的基础上加入第七个实验“每个点，还是
 
 ## 浏览器结果
 
-GitHub Actions 会在推送后安装 Chromium 并执行七套真实生产构建浏览器检查。v1.6 新增 `tests/uniform_browser_test.py`；它检查七项导航、默认展开导览、固定点/逃跑点切换、统一证书、反例、四步证明、六道解释型自测和分享状态。
+GitHub Actions 已安装 Chromium 并执行七套真实生产构建浏览器检查。v1.6 新增 `tests/uniform_browser_test.py`；它检查七项导航、默认展开导览、固定点/逃跑点切换、统一证书、反例、四步证明、八道解释型自测和分享状态。
 
-本地当前环境没有可调用的 Python/Playwright 命令，因此未把本地命令缺失伪装成浏览器通过；远端 Actions 的实际检查数、运行号和 Pages 结果将在推送后补入本文件。
+远端 Actions Run #23 已通过：**214 项 Chromium 检查全部通过**，其中原有六套为 206 项，一致收敛实验新增 8 项。数学/构建 job 用时 2m36s，Pages 部署 job 用时 15s；生产站点已由同一运行发布。
 
 ## 已知边界
 
@@ -29,4 +29,4 @@ GitHub Actions 会在推送后安装 Chromium 并执行七套真实生产构建�
 
 - 仓库：[xby474-dev/MA_playground](https://github.com/xby474-dev/MA_playground)
 - Pages：[xby474-dev.github.io/MA_playground](https://xby474-dev.github.io/MA_playground/)
-- v1.6 Actions 运行：推送后补记。
+- v1.6 Actions 运行：[Run #23](https://github.com/xby474-dev/MA_playground/actions/runs/35092188305) 已通过，GitHub Pages 已部署并验证。

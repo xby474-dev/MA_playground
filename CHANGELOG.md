@@ -3,7 +3,7 @@
 - 新增第七个实验“每个点，还是所有点”：用固定点/逃跑点、解析上确界、统一 N、面积、斜率和 M 预算直观区分逐点、一致、正规收敛及极限交换。
 - 新增四个一致收敛页面、四套页面导览内容、`UNIFORM-GUIDE.md`、`UNIFORM-MATHEMATICS.md`、分享/CSV/证明/自测与离线入口。
 - 保留 v1.5 六个实验及已有导览；统一导航更新为七项。
-- 本地 `npm run verify` 通过：275 项 Node 检查；浏览器七套检查由本次 GitHub Actions 执行。
+- 本地 `npm run verify` 通过：275 项 Node 检查；GitHub Actions Run #23 通过 214 项 Chromium 检查并完成 Pages 部署。
 
 # v1.5 · 2026-09-16
 
