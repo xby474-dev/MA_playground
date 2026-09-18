@@ -92,7 +92,9 @@ try:
   download=item.value;path=OUT/'linear-data.csv';download.save_as(path);assert 'proved_upper_bound' in path.read_text();assert len(path.read_text().splitlines())>34
   ok('CSV export contains stable increments, normalized errors and analytic upper bounds')
   p.locator('.lm-heading [data-action="share"]').click()
-  if p.locator('#share-dialog').is_visible():expect(p.locator('#share-url')).to_have_value(p.url);p.locator('#share-dialog [data-action="close-dialog"]').click()
+  p.wait_for_function("() => document.querySelector('#share-dialog')?.open || (document.querySelector('#toast')?.classList.contains('visible') && /已复制(?:本机)?链接/.test(document.querySelector('#toast').textContent))")
+  if p.locator('#share-dialog').is_visible():
+   expect(p.locator('#share-url')).to_have_value(p.url);p.locator('#share-dialog [data-action="close-dialog"]').click();expect(p.locator('#share-dialog')).to_be_hidden()
   h=p.evaluate('location.hash');route(p,'#lab=linear&step=chain');route(p,h);expect(p.locator('.lm-journey [data-lm-step="local"]')).to_have_attribute('aria-current','step')
   ok('Share and hash navigation preserve experiment parameters without answer data')
   p.locator('[data-lm-action="play"]').click();p.locator('#nav-limits').click();p.wait_for_timeout(600);expect(p.locator('#nav-limits')).to_have_attribute('aria-current','page');assert p.locator('.lm-stage').count()==0
