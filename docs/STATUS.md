@@ -10,15 +10,15 @@
 - **v1.8 保持约束，读出变化**：从自由变量制造约束误差，经一阶修正回到约束面；覆盖曲线、曲面、多约束向量系统、隐函数定理条件与奇异/近奇异对照。
 - 两个新实验的探索、证明、自测页均加入默认展开的「本页导览」卡片：本页问题、三步操作、重点观察、结论、常见误区及 `docs` 完整指南链接。开始实验后可收起；页面阶段分别记忆展开状态。
 
-## 当前本地验证
+## 验证结果
 
 - `npm run verify`：64 个 JavaScript 文件语法检查通过；**385 / 385 Node 测试通过**；生产构建成功，生成 88 个文件。
 - 构建包含 `linear-lab.html` 和 `implicit-lab.html` 单文件离线入口；应用无运行时 CDN、API 或外部依赖。
-- 本机 `npm run test:ui` 未能启动：当前环境没有可调用的 Python 命令，因此本地 Chromium 套件没有运行。不能把这次本机结果记作浏览器检查通过。
-- 线上 GitHub Actions 与 Pages 验收尚待推送后执行；在完成前不宣称已公开发布。
+- GitHub Actions [Run #26](https://github.com/xby474-dev/MA_playground/actions/runs/35376391971) 已通过 `npm run verify`、全部 Chromium 浏览器套件及 Pages 部署。当前 Windows 本机缺少 Playwright，所以浏览器验证由 GitHub runner 执行，而非本机执行。
+- 已检查公开首页含 `v1.8`、`nav-linear`、`nav-implicit` 和新样式入口；两个离线 HTML、源码、样式、指南与数学文档共 10 个 URL 均返回 HTTP 200。
 
 ## 发布状态
 
-本地变更在正式 `MA-Playground` 仓库的 `main` 分支上整合，保留原有 Git 历史，不强制覆盖远端。待远端推送及 Actions/Pages 验收完成后更新此节。
+v1.7/v1.8 已推送到正式仓库 `main`，保留原有 Git 历史，没有 force push。功能提交为 `7bbc715`，浏览器测试时序修复为 `153e88a`。GitHub Pages 已部署，线上地址：[xby474-dev.github.io/MA_playground](https://xby474-dev.github.io/MA_playground/)。
 
-独立版本包留下的历史测试记录见 [v1.7](VERIFICATION-v1.7.md) 与 [v1.8](VERIFICATION-v1.8.md)；它们的离线源码包测试数字不等于本次正式仓库的综合验证结果。
+独立版本源码包留下的历史测试数字仍保存在 [v1.7](VERIFICATION-v1.7.md) 与 [v1.8](VERIFICATION-v1.8.md)；正式仓库本次整合验收见 [v1.8 综合验证记录](VERIFICATION-v1.8.md#正式仓库综合发布验收)。

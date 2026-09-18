@@ -1,6 +1,18 @@
 # MA Playground v1.8 · 实际验证记录
 
-> 历史记录：以下数字来自当时独立的 v1.8-source 快照，不是本次与正式仓库合并后的综合验证结果。当前整合版本机 `npm run verify` 为 385 项 Node 测试通过、构建 88 个文件；本机 Python/Chromium 套件因缺少 `python` 命令未启动。推送后的 Actions/Pages 结果将在此记录更新。
+## 正式仓库综合发布验收
+
+2026-09-19，v1.7 与 v1.8 已整合到正式 `main`，共九个实验。
+
+- 本地 `npm run verify`：64 个 JavaScript 文件语法检查通过；**385 / 385 Node 测试通过**；生产构建成功，输出 88 个文件。
+- GitHub Actions [Run #26](https://github.com/xby474-dev/MA_playground/actions/runs/35376391971)，提交 `153e88a`：`npm ci`、`npm run verify`、Python Playwright/Chromium 环境准备、`npm run test:ui` 全部通过；GitHub Pages 部署成功。
+- 浏览器测试在 GitHub runner 对实际 HTTP 服务执行；本机没有安装 Playwright，故本机没有运行 Chromium 套件。
+- 已直接检查公开首页的 v1.8 与两项新导航标记，并确认两个单文件离线入口、两项新源码/样式、两份操作指南和两份数学文档共 10 个 URL 均返回 HTTP 200。
+- 公开地址：[https://xby474-dev.github.io/MA_playground/](https://xby474-dev.github.io/MA_playground/)。
+
+浏览器回归范围限于项目内 Chromium 脚本；不据此声称 Safari、Firefox、实体设备或完整屏幕阅读器验收。有限浏览器/数值测试也不是数学定理的替代证明。
+
+> 以下为当时独立 v1.8-source 快照的历史验证记录，和上面的正式仓库综合结果属于不同基线，不能将各自测试数字直接相加。
 
 ## 版本与来源
 
