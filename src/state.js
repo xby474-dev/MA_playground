@@ -4,6 +4,8 @@ import { taylorDefaults, parseTaylorState, serializeTaylorState } from './taylor
 import { completenessDefaults, parseCompletenessState, serializeCompletenessState } from './completeness-state.js';
 import { parseRelationsState, serializeRelationsState } from './relations-state.js';
 import { fieldDefaults, parseFieldState, serializeFieldState } from './field-state.js';
+import { linearDefaults, parseLinearState, serializeLinearState } from './linear-state.js';
+import { implicitDefaults, parseImplicitState, serializeImplicitState } from './implicit-state.js';
 import { clamp } from './math.js';
 export function defaults(lab = 'limits') {
   if(lab === 'uniform') return uniformDefaults();
@@ -11,6 +13,8 @@ export function defaults(lab = 'limits') {
   if(lab === 'taylor') return taylorDefaults();
   if(lab === 'completeness') return completenessDefaults();
   if(lab === 'fields') return fieldDefaults();
+  if(lab === 'linear') return linearDefaults();
+  if(lab === 'implicit') return implicitDefaults();
   return { lab, tab: 'explore', path: 'line', k: 1, q: 0.65, sign: 1, zoom: false, view: lab === 'limits' ? 'plane' : 'surface', model: 'counter', angle: 45, metric: 'ratio', pins: [] };
 }
 const pick = (value, options, fallback) => options.includes(value) ? value : fallback;
@@ -22,6 +26,8 @@ export function parseState(hash) {
   if(p.get('lab') === 'taylor') return parseTaylorState(p);
   if(p.get('lab') === 'completeness') return parseCompletenessState(p);
   if(p.get('lab') === 'fields') return parseFieldState(p);
+  if(p.get('lab') === 'linear') return parseLinearState(p);
+  if(p.get('lab') === 'implicit') return parseImplicitState(p);
   if(p.get('lab') === 'differentiability' && p.get('mode') === 'relations') return parseRelationsState(p);
   const s = defaults(pick(p.get('lab'), ['limits', 'differentiability'], 'limits'));
   s.tab = pick(p.get('tab'), ['explore', 'proof', 'quiz'], s.tab);
@@ -46,6 +52,8 @@ export function parseState(hash) {
   return s;
 }
 export function serializeState(s) {
+  if(s.lab === 'linear') return serializeLinearState(s);
+  if(s.lab === 'implicit') return serializeImplicitState(s);
   if(s.lab === 'uniform') return serializeUniformState(s);
   if(s.lab === 'series') return serializeSeriesState(s);
   if(s.lab === 'taylor') return serializeTaylorState(s);

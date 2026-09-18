@@ -41,6 +41,16 @@ const GUIDE_CONTENT = {
     guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/FIELD-GUIDE.md',
     guideLabel: '查看场实验指南',
   },
+  linear: {
+    explore: { title: '先把导数当作一台局部线性机器。', question: '多元函数在一点附近，怎样用一个线性映射预测输入变化带来的输出变化？', steps: ['先选映射和工作点，拖动输入位移 h，比较真实输出与线性预测。', '缩小位移并查看归一化余项；再点 Jacobian 的列，观察坐标方向如何组成任意方向。', '切到复合或投影视角，比较两次线性化与沿线段的一维中值结论。'], observe: '看输入箭头、弯曲后的真实输出、平行四边形预测和余项随 ‖h‖ 的变化；读矩阵列时留意输入/输出维数与基底。', takeaway: '可微的核心是存在一个线性映射，使真实增量减去它的一阶预测后，相对 ‖h‖ 的误差趋于零。', warning: '有限尺度上的相似不是极限定义；Jacobian 矩阵是所选坐标中的表示，不等于抽象导数本身；有限方向采样也不是全方向证明。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/LINEAR-GUIDE.md', guideLabel: '查看线性映射实验指南' },
+    proof: { title: '把图上的直觉拆成可检查的推导。', question: '局部线性化、链式法则与投影中值定理分别依赖什么条件，如何连成一个证明？', steps: ['选择局部余项、复合映射或投影路线，先读清定义域和值域。', '逐步检查余项阶、矩阵乘法顺序，或一元中值定理实际应用的标量函数。', '回到实验改变方向与尺度，核对图像只是示例而证明覆盖什么范围。'], observe: '看量词、趋零余项、Jacobian 的维数/乘法次序，以及投影方向 a 如何把向量变化变成标量。', takeaway: '这些结论不是视觉规律：它们由 Fréchet 可微定义、复合求导和一元中值定理在明确假设下推出。', warning: '一个候选中值点通常只保证当前选定的投影；不要把某条直线上的结论说成向量等式，也不要把浮点求根当作精确证明。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/LINEAR-MATHEMATICS.md', guideLabel: '查看线性映射数学证明' },
+    challenge: { title: '用理由检验你是否读懂了线性化。', question: '换函数、方向、坐标或复合顺序后，哪些预测仍成立，哪些只是在特定条件下成立？', steps: ['先独立回答每道判断，并说出你使用的定义或定理。', '提交后逐题读解释，特别检查矩阵形状、误差阶和投影量词。', '回到探索页构造一个反例或改变参数，确认结论边界。'], observe: '关注误差除以 ‖h‖ 是否趋零、Jacobian 的输入输出空间、AB 与 BA 次序，以及“存在 ξ”对谁成立。', takeaway: '真正掌握导数，是能用线性映射解释一阶变化，并准确说出结论覆盖的方向与条件。', warning: '曲线贴近、单次答案正确或某个 ξ 数值看似合适，都不能替代一般命题的假设与证明。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/LINEAR-GUIDE.md', guideLabel: '查看线性映射实验指南' },
+  },
+  implicit: {
+    explore: { title: '先看约束误差如何被依赖变量补回。', question: '在 F(x,y)=0 上，改变自由变量时，怎样调整依赖变量才能一阶保持约束？', steps: ['先选一个零集和“自由/依赖”变量，再拖动自由变量制造约束误差。', '播放一阶修正，观察 −B⁻¹A 如何抵消线性误差；再对照非线性精确分支。', '切换到曲面或多约束向量案例，比较修正方向与可逆条件。'], observe: '看自由空间、依赖空间和约束空间中各自的位移/误差；比较真实分支、蓝色一阶修正及剩余高阶误差。', takeaway: '当依赖块 B=D_yF 可逆时，保持约束的一阶变化满足 Dg=−B⁻¹A；它给的是局部变化规则，不是位置本身。', warning: '线性修正后仍可能有高阶残差；B 奇异时可能无解或不唯一，不能把伪逆或图上看似平滑当作隐函数定理结论。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/IMPLICIT-GUIDE.md', guideLabel: '查看隐函数实验指南' },
+    proof: { title: '从约束恒等式走到隐函数导数。', question: '隐函数定理怎样保证局部函数存在、唯一且可微，导数公式从何而来？', steps: ['先检查 F 的光滑性以及依赖 Jacobian B 在基点可逆。', '沿局部解 g 写出 F(x,g(x))=0，并用链式法则对等式求导。', '核对所得线性方程的尺寸与可逆性，再区分局部定理和具体例子的额外性质。'], observe: '看定理假设、局部邻域、唯一分支和 A/B 的定义域值域；重点检查 B⁻¹ 的存在及矩阵乘法顺序。', takeaway: '存在唯一的局部可微分支来自隐函数定理；公式 Dg=−B⁻¹A 是在其假设下由约束恒等式求导得到。', warning: '单独解出一条曲线不自动证明隐函数定理；某个偏导为零不等于没有隐函数；数值动画也不能证明邻域内存在唯一分支。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/IMPLICIT-MATHEMATICS.md', guideLabel: '查看隐函数数学证明' },
+    challenge: { title: '分清存在、唯一、可微和敏感性。', question: '给定一个约束和基点，何时能使用导数公式，何时只能说线性修正失败或解不唯一？', steps: ['先独立判断每道题涉及的定理条件或结论。', '提交后对照解析，区分依赖块奇异、接近奇异与精确可逆。', '返回对应案例，比较误差能否修正、解是否唯一及条件数如何变化。'], observe: '看 det B/秩、误差是否落在像空间、分支是否唯一，以及小但非零参数造成的敏感放大。', takeaway: '可逆性是标准隐函数定理给出该依赖方向局部解与公式的关键条件；近奇异会变敏感，精确奇异则须另行分析。', warning: '某条公式未定义不等于隐函数不存在；没找到定理证书不等于结论为假；数值上“很小”也不等于精确为零。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/IMPLICIT-GUIDE.md', guideLabel: '查看隐函数实验指南' },
+  },
   completeness: {
     map: { title: '先看见五条路，最后问同一个终点。', question: '上确界、单调极限、区间套、子列和 Cauchy 条件，为什么可以互相推出？', steps: ['先点击一条节点或箭头，认出它在等价环中的位置。', '从一次二分开始，观察同一个逼近构造怎样换一种语言。', '切换到 ℚ，再进入证明，检查“终点属于谁”。'], observe: '看构造目标、数系 K 与箭头方向；绿色箭头是蕴含，不是把五个命题混成一句话。', takeaway: '完备性的五种表述都在保证：满足条件的逼近不会在数系中缺一个终点。', warning: '一个构造成功不等于整个数系完备；ℚ 稠密也不等于它包含所有极限。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/COMPLETENESS-GUIDE.md', guideLabel: '查看完备性实验指南' },
     explore: { title: '沿同一条二分，换五种读法。', question: '同一组逼近数据，怎样分别读成上确界、序列、区间、子列和 Cauchy 结论？', steps: ['先选一个视角和目标，观察二分如何留下候选终点。', '拖动二分层数 n，比较 ℝ 与 ℚ 中的同一构造。', '打开精确账本，再用“下一视角”继续转换语言。'], observe: '看区间端点、误差尺度和候选终点是否仍属于 K；有限层数只是构造的截面。', takeaway: '五种语言描述的是同一个“逼近并保留终点”的结构。', warning: '有限 n 的小误差不能单独证明无限极限；空心目标也不代表数轴上有一段空白。', guide: 'https://github.com/xby474-dev/MA_playground/blob/main/docs/COMPLETENESS-GUIDE.md', guideLabel: '查看完备性实验指南' },
@@ -70,7 +80,7 @@ const GUIDE_CONTENT = {
 
 function resolveGuideContent(type, screen) {
   const content = GUIDE_CONTENT[type];
-  if (content && !Array.isArray(content.steps)) return content[screen] ?? content.map ?? content.grow;
+  if (content && !Array.isArray(content.steps)) return content[screen] ?? content.explore ?? content.map ?? content.grow;
   return content;
 }
 
@@ -79,6 +89,10 @@ function defaultTarget(type, tab, mode, screen) {
   if (type === 'taylor') return { grow: '[data-ty-action="play"]', error: '#ty-h', boundary: '[data-ty-scenario="nonmonotone"]', proof: '[data-ty-proof="coefficients"]', challenge: '#ty-quiz' }[screen] ?? '#ty-title';
   if (type === 'series') return { map: '#se-graph', workshop: '#se-main-plot', proof: '[data-se-step="0"]', challenge: '#se-quiz' }[screen] ?? '#se-title';
   if (type === 'uniform') return { map: '#uf-graph', workshop: '#uf-main-plot', proof: '[data-uf-step="0"]', challenge: '#uf-quiz' }[screen] ?? '#uf-title';
+  if (type === 'linear') return { explore: '#lm-scale', proof: '[data-lm-proof-step="0"]', challenge: '#lm-quiz' }[screen] ?? '#lm-scale';
+  if (type === 'implicit') return { explore: '#ip-progress', proof: '[data-ip-proof="0"]', challenge: '#ip-quiz-form' }[screen] ?? '#ip-progress';
+  if (type === 'linear') return { explore: '#lm-scale', proof: '[data-lm-proof-step="0"]', challenge: '#lm-quiz' }[screen] ?? '#lm-scale';
+  if (type === 'implicit') return { explore: '#ip-progress', proof: '[data-ip-proof="0"]', challenge: '#ip-quiz-form' }[screen] ?? '#ip-progress';
   if (type === 'relations') return '[data-r-stage="0"]';
   if (tab !== 'explore') return '#tab-explore';
   if (type === 'limits') return '[data-set="path"]';

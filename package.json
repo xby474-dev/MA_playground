@@ -1,9 +1,9 @@
 {
   "name": "ma-playground",
-  "version": "1.6.0",
+  "version": "1.8.0",
   "private": true,
   "type": "module",
-  "description": "Seven proof-aware analysis experiments, including function series and uniform convergence.",
+  "description": "Nine proof-aware analysis experiments, including linearization, implicit functions and uniform convergence.",
   "engines": {
     "node": ">=22"
   },
@@ -14,14 +14,16 @@
     "preview": "node scripts/serve.mjs --dir dist --port 4173",
     "test": "node --test tests/*.test.mjs",
     "check": "node scripts/check.mjs",
-    "test:ui": "python tests/browser_test.py && python tests/field_browser_test.py && python tests/relations_browser_test.py && python tests/completeness_browser_test.py && python tests/taylor_browser_test.py && python tests/series_browser_test.py && python tests/uniform_browser_test.py",
+    "test:ui": "python tests/browser_test.py && python tests/field_browser_test.py && python tests/relations_browser_test.py && python tests/completeness_browser_test.py && python tests/taylor_browser_test.py && python tests/series_browser_test.py && python tests/uniform_browser_test.py && python tests/linear_browser_test.py && python tests/implicit_browser_test.py",
     "test:ui:fields": "python tests/field_browser_test.py",
     "verify": "npm run check && npm test && npm run build",
     "test:ui:relations": "python tests/relations_browser_test.py",
     "test:ui:completeness": "python tests/completeness_browser_test.py",
     "test:ui:taylor": "python tests/taylor_browser_test.py",
     "test:ui:series": "python tests/series_browser_test.py",
-    "test:ui:uniform": "python tests/uniform_browser_test.py"
+    "test:ui:uniform": "python tests/uniform_browser_test.py",
+    "test:ui:linear": "python tests/linear_browser_test.py",
+    "test:ui:implicit": "python tests/implicit_browser_test.py"
   },
   "license": "MIT"
 }

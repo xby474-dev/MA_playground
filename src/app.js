@@ -1,5 +1,9 @@
 import { uniformPage } from './uniform-content.js';
 import { mountUniformLab } from './uniform-lab.js';
+import { linearPage } from './linear-content.js';
+import { mountLinearLab } from './linear-lab.js';
+import { implicitPage } from './implicit-content.js';
+import { mountImplicitLab } from './implicit-lab.js';
 import { seriesPage } from './series-content.js';
 import { mountSeriesLab } from './series-lab.js';
 import { taylorPage } from './taylor-content.js';
@@ -19,6 +23,8 @@ import { initializeGuide, guideStorageKey, persistGuideState, setGuideOpen } fro
 
 let state = parseState(location.hash || '#lab='+(document.body.dataset.initialLab ?? 'limits'));
 let uniformLab = null;
+let linearLab = null;
+let implicitLab = null;
 let seriesLab = null;
 let taylorLab = null;
 let completenessLab = null;
@@ -44,10 +50,12 @@ function currentGuideKey(s) {
     lab: s.lab,
     mode: s.mode,
     tab: s.tab,
-    screen: s.mode === 'relations' || s.lab === 'completeness' || s.lab === 'taylor' || s.lab === 'series' || s.lab === 'uniform' ? s.screen : '',
+    screen: s.mode === 'relations' || s.lab === 'completeness' || s.lab === 'taylor' || s.lab === 'series' || s.lab === 'uniform' || s.lab === 'linear' || s.lab === 'implicit' ? s.screen : '',
   });
 }
 function render() {
+  implicitLab?.destroy(); implicitLab = null;
+  linearLab?.destroy(); linearLab = null;
   uniformLab?.destroy(); uniformLab = null;
   seriesLab?.destroy(); seriesLab = null;
   taylorLab?.destroy(); taylorLab = null;
@@ -56,19 +64,31 @@ function render() {
   fieldLab?.destroy(); fieldLab = null;
   stopAnimation();
   surface?.destroy(); surface = null; plotType = '';
+  main.classList.toggle('ip-mode', state.lab === 'implicit');
+  main.classList.toggle('lm-mode', state.lab === 'linear');
   main.classList.toggle('se-mode', state.lab === 'series');
   main.classList.toggle('uf-mode', state.lab === 'uniform');
   main.classList.toggle('ty-mode', state.lab === 'taylor');
   main.classList.toggle('cp-mode', state.lab === 'completeness');
   main.classList.toggle('field-mode', state.lab === 'fields');
   main.classList.toggle('rel-mode', state.mode === 'relations');
-  main.innerHTML = state.lab === 'uniform' ? uniformPage(state) + footer : state.lab === 'series' ? seriesPage(state) + footer : state.lab === 'taylor' ? taylorPage(state) + footer : state.lab === 'completeness' ? completenessPage(state) + footer : state.mode === 'relations' ? relationsPage(state) + footer : state.lab === 'fields' ? fieldHeader(state) + ({explore:fieldExplore,proof:fieldProof,quiz:fieldQuiz}[state.tab])(state) + footer : header(state) + ({ explore, proof, quiz }[state.tab])(state) + footer;
-  for (const lab of ['limits', 'differentiability', 'fields', 'completeness', 'taylor', 'series', 'uniform']) {
+  main.innerHTML = state.lab === 'implicit' ? implicitPage(state) + footer : state.lab === 'linear' ? linearPage(state) + footer : state.lab === 'uniform' ? uniformPage(state) + footer : state.lab === 'series' ? seriesPage(state) + footer : state.lab === 'taylor' ? taylorPage(state) + footer : state.lab === 'completeness' ? completenessPage(state) + footer : state.mode === 'relations' ? relationsPage(state) + footer : state.lab === 'fields' ? fieldHeader(state) + ({explore:fieldExplore,proof:fieldProof,quiz:fieldQuiz}[state.tab])(state) + footer : header(state) + ({ explore, proof, quiz }[state.tab])(state) + footer;
+  for (const lab of ['limits', 'differentiability', 'fields', 'completeness', 'taylor', 'series', 'uniform', 'linear', 'implicit']) {
     const nav = $(`nav-${lab}`);
     if (state.lab === lab) nav.setAttribute('aria-current', 'page'); else nav.removeAttribute('aria-current');
   }
   document.title = `${state.lab === 'fields' ? '内部的累积，边界的回声' : state.lab === 'limits' ? '所有直线，都不够' : '偏导存在，也不够'} · MA Playground`;
   initializeGuide(main, currentGuideKey(state));
+  if(state.lab === 'implicit') {
+    document.title = '保持约束，读出变化 · MA Playground';
+    implicitLab = mountImplicitLab(main, () => state, (rebuild=false) => {syncURL(rebuild); if(rebuild) render();}, toast);
+    return;
+  }
+  if(state.lab === 'linear') {
+    document.title = '导数，是局部线性机器 · MA Playground';
+    linearLab = mountLinearLab(main, () => state, (rebuild=false) => {syncURL(rebuild); if(rebuild) render();}, toast);
+    return;
+  }
   if(state.lab === 'uniform') {
     document.title = '每个点，还是所有点 · MA Playground';
     uniformLab = mountUniformLab(main, () => state, (rebuild=false) => {syncURL(rebuild); if(rebuild) render();}, toast);

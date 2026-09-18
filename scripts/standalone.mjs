@@ -3,7 +3,7 @@
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
-const order = ['uniform-math','uniform-state','math','series-math','series-state','taylor-math','taylor-state','completeness-math','completeness-state','relations-math','relations-state','field-math','field-state','state','icons','page-guide','plots','content','relations-plots','relations-content','relations-lab','field-plots','field-content','field-lab','completeness-plots','completeness-content','completeness-lab','taylor-plots','taylor-content','taylor-lab','series-content','series-plots','series-lab','uniform-content','uniform-plots','uniform-lab','app'];
+const order = ['uniform-math','uniform-state','linear-math','linear-state','implicit-math','implicit-state','math','series-math','series-state','taylor-math','taylor-state','completeness-math','completeness-state','relations-math','relations-state','field-math','field-state','state','icons','page-guide','plots','content','relations-plots','relations-content','relations-lab','field-plots','field-content','field-lab','completeness-plots','completeness-content','completeness-lab','taylor-plots','taylor-content','taylor-lab','series-content','series-plots','series-lab','uniform-content','uniform-plots','uniform-lab','linear-content','linear-plots','linear-lab','implicit-content','implicit-plots','implicit-lab','app'];
 export async function makeStandalone(root, out) {
   let js='(() => {\n"use strict";\nconst __modules = {};\n';
   for (const name of order) {
@@ -29,16 +29,22 @@ export async function makeStandalone(root, out) {
   const taylorCss=await readFile(`${root}/styles/taylor.css`,'utf8');
   const seriesCss=await readFile(`${root}/styles/series.css`,'utf8');
   const uniformCss=await readFile(`${root}/styles/uniform.css`,'utf8');
+  const linearCss=await readFile(`${root}/styles/linear.css`,'utf8');
+  const implicitCss=await readFile(`${root}/styles/implicit.css`,'utf8');
   const favicon=await readFile(`${root}/assets/favicon.svg`,'utf8');
   html=html.replace('<link rel="stylesheet" href="./styles/app.css">',`<style>${css}\n${fieldCss}\n${relationsCss}\n${completenessCss}\n${taylorCss}
 ${seriesCss}
-${uniformCss}</style>`)
+${uniformCss}
+${linearCss}
+${implicitCss}</style>`)
     .replace('<link rel="stylesheet" href="./styles/fields.css">','')
     .replace('<link rel="stylesheet" href="./styles/relations.css">','')
     .replace('<link rel="stylesheet" href="./styles/completeness.css">','')
     .replace('<link rel="stylesheet" href="./styles/taylor.css">','')
     .replace('<link rel="stylesheet" href="./styles/series.css">','')
     .replace('<link rel="stylesheet" href="./styles/uniform.css">','')
+    .replace('<link rel="stylesheet" href="./styles/linear.css">','')
+    .replace('<link rel="stylesheet" href="./styles/implicit.css">','')
     .replace('<script type="module" src="./src/app.js"></script>','')
     .replace('href="./assets/favicon.svg"',`href="data:image/svg+xml,${encodeURIComponent(favicon)}"`)
     .replace('</body>',`<script>${js.replace(/<\/script/gi,'<\\/script')}</script>\n</body>`);

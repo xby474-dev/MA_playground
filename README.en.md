@@ -1,10 +1,18 @@
-# MA Playground · v1.6
+# MA Playground · v1.8
 
-**Mathematical intuition, accountable to proof.** Seven complete experiments. No backend, account, CDN, external fonts, or runtime API. Main interface and proof pages are Chinese; this README does not imply a translated UI.
+**Mathematical intuition, accountable to proof.** Nine complete experiments. No backend, account, CDN, external fonts, or runtime API. Main interface and proof pages are Chinese; this README does not imply a translated UI.
 
-[中文](README.md) · [Uniform convergence guide](docs/UNIFORM-GUIDE.md) · [Series mathematics](docs/SERIES-MATHEMATICS.md) · [Actual verification](docs/VERIFICATION-v1.6.md)
+[中文](README.md) · [Implicit-function guide](docs/IMPLICIT-GUIDE.md) · [Derivative as a linear map](docs/LINEAR-GUIDE.md) · [Actual verification](docs/VERIFICATION-v1.8.md)
 
 ![Actual condition-map screenshot](docs/images/series-map-desktop.png)
+
+## v1.8: hold a constraint, read the change
+
+The ninth experiment visualizes implicit differentiation as constraint correction: move the free variables, observe the constraint error, apply the first-order correction, and compare it with the exact local branch. It progresses from plane curves to surfaces and vector constraints, making the block Jacobian dimensions and invertibility condition explicit. The explore, proof, and challenge screens each have a first-open page guide with a question, three actions, observation cues, takeaway, warnings, and a full-document link.
+
+## v1.7: derivative as a linear map
+
+The eighth experiment connects local linearization, Jacobian columns and basis changes, the chain rule, and a scalar projection form of the mean value theorem. It distinguishes actual increments from first-order predictions and finite visual samples from all-direction bounds. Each screen has the same guided entry card.
 
 ## New: uniform convergence, not a grid illusion
 

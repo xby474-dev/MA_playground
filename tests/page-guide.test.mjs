@@ -11,6 +11,10 @@ import { seriesPage } from '../src/series-content.js';
 import { seriesDefaults } from '../src/series-state.js';
 import { uniformPage } from '../src/uniform-content.js';
 import { uniformDefaults } from '../src/uniform-state.js';
+import { linearPage } from '../src/linear-content.js';
+import { linearDefaults } from '../src/linear-state.js';
+import { implicitPage } from '../src/implicit-content.js';
+import { implicitDefaults } from '../src/implicit-state.js';
 import { defaults } from '../src/state.js';
 import { fieldDefaults } from '../src/field-state.js';
 import { relationsDefaults } from '../src/relations-state.js';
@@ -26,6 +30,8 @@ test('Every experiment header includes a first-entry guide with the approved lea
     taylorPage(taylorDefaults()),
     seriesPage(seriesDefaults()),
     uniformPage(uniformDefaults()),
+    linearPage(linearDefaults()),
+    implicitPage(implicitDefaults()),
   ];
   for (const html of pages) {
     assert.ok(html.includes('class="page-guide"'));
@@ -49,6 +55,8 @@ test('Guide content links the three experiments to their full documentation', ()
     ['taylor', 'TAYLOR-GUIDE.md', 'Taylor 实验'],
     ['series', 'SERIES-GUIDE.md', '级数实验'],
     ['uniform', 'UNIFORM-GUIDE.md', '一致收敛'],
+    ['linear', 'LINEAR-GUIDE.md', '线性映射'],
+    ['implicit', 'IMPLICIT-GUIDE.md', '隐函数'],
   ]) {
     const html = pageGuide(type);
     assert.ok(html.includes(doc));
@@ -87,5 +95,16 @@ test('The new completeness and Taylor screens each receive screen-specific guida
     const html = uniformPage({ ...uniformDefaults(), screen });
     assert.match(html, /data-guide="uniform"/);
     assert.match(html, new RegExp(`page-guide-uniform-${screen}`));
+  }
+  for (const screen of ['explore', 'proof', 'challenge']) {
+    for (const [page, type, defaultsFor] of [
+      [linearPage, 'linear', linearDefaults],
+      [implicitPage, 'implicit', implicitDefaults],
+    ]) {
+      const html = page({ ...defaultsFor(), screen });
+      assert.match(html, new RegExp(`data-guide="${type}"`));
+      assert.match(html, new RegExp(`page-guide-${type}-${screen}`));
+      assert.match(html, /开始第 1 步/);
+    }
   }
 });

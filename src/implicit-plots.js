@@ -1,0 +1,70 @@
+import { ipAdd, ipSub, ipScale, ipNorm, ipMV, ipNum, ipUnit, ipCurveBase, ipCurveSolve, ipSurfaceZ, ipMotion, ipErrorRows, ipClamp } from './implicit-math.js';
+const C={green:'#246853',blue:'#487ba0',orange:'#b9633d',red:'#ab5752',muted:'#829078',grid:'#e3eadc',ink:'#23382e'};
+const esc=v=>String(v).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+function frame(id,span=1.6,W=760,H=410,axes=['x','y']){const cx=W/2,cy=H/2,k=Math.min((W-95)/2,(H-70)/2)/span,pt=v=>[cx+k*v[0],cy-k*v[1]],step=span>4?Math.ceil(span/3):span>1.1?.5:.2;
+ let start=`<svg xmlns="http://www.w3.org/2000/svg" id="${id}" viewBox="0 0 ${W} ${H}" class="ip-svg" data-ip-cx="${cx}" data-ip-cy="${cy}" data-ip-unit="${k}" role="img"><defs><clipPath id="${id}-clip"><rect x="24" y="25" width="${W-48}" height="${H-52}"/></clipPath>${Object.keys(C).slice(0,4).map(c=>`<marker id="${id}-${c}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="${C[c]}"/></marker>`).join('')}</defs><rect x="9" y="9" width="${W-18}" height="${H-18}" rx="12" fill="#f8faf4"/>`;
+ for(let v=Math.ceil(-span/step)*step;v<span+.001;v+=step){const a=pt([v,v]);start+=`<path d="M${a[0]} 28V${H-35}M30 ${a[1]}H${W-30}" stroke="${Math.abs(v)<.00001?'#bccbb2':C.grid}" stroke-width="1"/>`;if(v!==0&&Math.abs(v)<span-.01)start+=`<text class="ip-tick" x="${a[0]}" y="${H-20}" text-anchor="middle">${ipNum(v,1)}</text>`;}
+ start+=`<text x="${W-31}" y="${cy-10}" class="ip-plot-label" text-anchor="end">${axes[0]}</text><text x="${cx+12}" y="24" class="ip-plot-label">${axes[1]}</text>`;
+ return {id,span,W,H,cx,cy,k,pt,start,end:'</svg>'};}
+function line(f,a,b,c='green',dash='',width=2,arrow=false){if(!a||!b||[...a,...b].some(v=>!Number.isFinite(v)))return '';const A=f.pt(a),B=f.pt(b);return `<path d="M${A.join(' ')}L${B.join(' ')}" fill="none" stroke="${C[c]||c}" stroke-width="${width}" ${dash?`stroke-dasharray="${dash}"`:''} ${arrow&&ipNorm(ipSub(b,a))>1e-9?`marker-end="url(#${f.id}-${c})"`:''}/>`;}
+function path(f,points,c='green',width=2,dash=''){let open=false,d='';for(const v of points){if(v===null||v.some(x=>!Number.isFinite(x))){open=false;continue;}const a=f.pt(v);d+=`${open?'L':'M'}${a[0].toFixed(3)} ${a[1].toFixed(3)}`;open=true;}return `<path d="${d}" fill="none" stroke="${C[c]||c}" stroke-width="${width}" ${dash?`stroke-dasharray="${dash}"`:''}/>`;}
+function dot(f,p,c='green',r=4,filled=true){if(!p)return '';const a=f.pt(p);return `<circle cx="${a[0]}" cy="${a[1]}" r="${r}" fill="${filled?C[c]:'white'}" stroke="${C[c]}" stroke-width="2"/>`;}
+function label(f,p,t,c='muted',dx=9,dy=-12){const a=f.pt(p);return `<text x="${a[0]+dx}" y="${a[1]+dy}" fill="${C[c]}" class="ip-plot-label">${esc(t)}</text>`;}
+function handle(f,p,key,title,c='orange'){const a=f.pt(p);return `<g id="ip-handle-${key}" data-ip-handle="${key}" role="button" tabindex="0" aria-label="${esc(title)}；方向键移动，Home 复位" class="ip-drag"><circle cx="${a[0]}" cy="${a[1]}" r="18" fill="transparent"/><circle cx="${a[0]}" cy="${a[1]}" r="8" fill="white" stroke="${C[c]}" stroke-width="3"/><circle cx="${a[0]}" cy="${a[1]}" r="3" fill="${C[c]}"/></g>`;}
+export function ipCurveSVG(s,m){const f=frame('ip-curve-svg',1.6),M=ipMotion(s,m),p=m.p,pts=Array.from({length:201},(_,i)=>-1.6+3.2*i/200);let html=f.start+'<title>约束零集、切线、梯度与自由变化后的修正路径</title><g clip-path="url(#ip-curve-svg-clip)">';
+ if(s.curve==='circle')html+=path(f,Array.from({length:241},(_,i)=>ipUnit(i*1.5)),'green',2.8);
+ else if(s.curve==='parabola')html+=path(f,pts.map(t=>[t,t*t]),'green',2.8);
+ else if(s.curve==='cusp')html+=path(f,pts.map(t=>[t**3,t]),'green',2.8);
+ else {html+=path(f,pts.map(t=>[t,t]),'green',2.8);if(s.curve==='cross')html+=path(f,pts.map(t=>[t,-t]),'green',2.8,'7 4');}
+ if(m.explicitDerivative)html+=line(f,ipSub(p,[.5,.5]),ipAdd(p,[.5,.5]),'blue','6 4',1.8);
+ const n=ipNorm(m.gradient);if(n>0){const tangent=ipScale([m.gradient[1],-m.gradient[0]],.65/n),normal=ipAdd(p,ipScale(m.gradient,.37/n));html+=line(f,ipSub(p,tangent),ipAdd(p,tangent),'blue','6 4',1.6)+line(f,p,normal,'blue','',1.5,true)+label(f,normal,'∇F 方向','blue',8,-6);}
+ // All ghost endpoints are previews, while the filled marker follows the actual animation.
+ html+=`<g opacity=".32">`+line(f,p,m.trial,'orange','5 4')+line(f,m.trial,m.pred,'blue','5 4')+dot(f,m.pred,'blue',6,false)+line(f,m.pred,m.exact,'green','3 3')+dot(f,m.exact,'green',6,false)+'</g>';
+ if(s.progress<=1)html+=line(f,p,M.point,'orange','',3,true);else {html+=line(f,p,m.trial,'orange','',3,true);if(s.progress<=2)html+=line(f,m.trial,M.point,'blue','',3,true);else {html+=line(f,m.trial,m.pred,'blue','',3,true);html+=line(f,m.pred||m.trial,M.point,'green','',3,true);}}
+ html+=dot(f,M.point,s.progress<=1?'orange':s.progress<=2?'blue':'green',5)+label(f,p,'p','green',-21,20);
+ if(m.pred&&Math.max(...m.pred.map(Math.abs))>1.65)html+=`<text x="30" y="38" class="ip-tick">一阶预测超出视窗；数值未截断，见读数。</text>`;
+ if(m.exact===null)html+=`<text x="${f.W/2}" y="40" text-anchor="middle" fill="${C.red}" class="ip-plot-label">当前自由变量的目标无实数分支；不能沿切线冒充真实解。</text>`;
+ html+='</g>'+handle(f,p,'curve-base','拖动约束曲线上的基点','green')+handle(f,m.trial,'curve-h','拖动自由变量目标')+label(f,m.trial,s.dep==='y'?'只改 x':'只改 y','orange',10,21);
+ html+=`<text x="30" y="${f.H-7}" class="ip-tick">坐标等比例 · 空心浅色点是参考终点 · 梯度箭头仅按方向缩放</text>`;return html+f.end;}
+export function ipInputSVG(s,m){const isS=m.kind==='surface',p=isS?m.a:m.x,h=m.h,span=isS?1.5:1.3,f=frame('ip-input-svg',span,370,330,isS?['x','y']:['x₁','x₂']);let html=f.start+'<title>拖动自由变量平面的基点与位移</title>';
+ if(isS&&s.surface==='sphere')html+=`<circle cx="${f.cx}" cy="${f.cy}" r="${f.k}" fill="#e9f0e3" stroke="#a6bb93" stroke-dasharray="5 4" opacity=".7"/>`;
+ html+=line(f,p,ipAdd(p,h),'orange','',2.6,true)+handle(f,p,'input-base','自由变量基点','green')+handle(f,ipAdd(p,h),'input-h','输入变化端点')+label(f,p,'a','green',-20,18)+label(f,ipAdd(p,h),'a+dx','orange',8,-13);
+ if(!isS&&s.coupling===0)html+=`<text x="${f.cx}" y="48" text-anchor="middle" class="ip-tick">奇异对照固定基点 a=0；仍可拖动 dx</text>`;
+ return html+f.end;}
+export function ipDependentSVG(s,m){const scale=Math.max(.35,...(m.k||[]).map(Math.abs),...(m.realK||[]).map(Math.abs))*1.25,f=frame('ip-dependent-svg',scale,370,330,['dy₁','dy₂']),motion=ipMotion(s,m),v=ipSub(motion.point,m.y);let html=f.start+'<title>依赖变化空间，比较 Dg dx 与真实依赖增量</title>';
+ if(m.k)html+=line(f,[0,0],m.k,'blue','6 4',2.5,true)+dot(f,m.k,'blue',5,false);
+ if(m.realK)html+=line(f,[0,0],m.realK,'green','',2.4,true)+dot(f,m.realK,'green',4);
+ if(m.k)html+=dot(f,v,s.progress<=2?'blue':'green',6);
+ else html+=`<text x="${f.cx}" y="${f.cy-34}" text-anchor="middle" class="ip-plot-label">B 不可逆：没有唯一的修正规则</text><text x="${f.cx}" y="${f.cy+32}" text-anchor="middle" class="ip-tick">${m.compatible?'此目标可达，但有无穷多个 y':'此目标不可达：约束方程无解'}</text>`;
+ html+=`<text x="${f.cx}" y="${f.H-6}" text-anchor="middle" class="ip-tick">${m.k?'显示增量，不是 y 的位置；本图自动缩放':'图中不伪造逆矩阵或最小范数隐函数'}</text>`;return html+f.end;}
+export function ipConstraintSVG(s,m){if(m.kind==='vector')return constraint2D(s,m);const W=760,H=173,left=65,right=695,y=93,max=Math.max(.02,Math.abs(m.E),Math.abs(m.C||0))*1.4,x=v=>W/2+v/max*(right-left)/2,e=m.E*Math.min(1,s.progress),c=(m.C||0)*ipClamp(s.progress-1,0,1),color=C.orange;
+ let html=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" class="ip-svg" role="img" aria-label="一维约束空间的一阶误差和反向修正"><defs>${['orange','blue'].map(k=>`<marker id="ip-scalar-${k}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="${C[k]}"/></marker>`).join('')}</defs><path d="M${left} ${y}H${right}" stroke="#b8c6ae"/><path d="M${x(0)} 33V132" stroke="#c4d0bc" stroke-dasharray="4 4"/><text x="${x(0)}" y="151" class="ip-tick" text-anchor="middle">0 · 满足线性化约束</text><text x="${right}" y="151" text-anchor="end" class="ip-tick">约束变化（不是依赖坐标）</text>`;
+ for(const z of [-max/2,max/2])html+=`<text x="${x(z)}" y="${y+21}" class="ip-tick" text-anchor="middle">${ipNum(z)}</text>`;
+ html+=`<path d="M${x(0)} 66H${x(e)}" stroke="${color}" stroke-width="3" ${e!==0?'marker-end="url(#ip-scalar-orange)"':''}/><text x="${W/2}" y="26" class="ip-plot-label" fill="${color}" text-anchor="middle">整步一阶误差：A d自由 = ${ipNum(m.E)}</text>`;
+ if(m.C!==null)html+=`<path d="M${x(e)} 106H${x(e+c)}" stroke="${C.blue}" stroke-width="3" ${c!==0?'marker-end="url(#ip-scalar-blue)"':''}/><circle cx="${x(e+c)}" cy="106" r="4" fill="${C.blue}"/><text x="${W/2}" y="${H-5}" class="ip-tick" text-anchor="middle">整步修正贡献 B d依赖 = ${ipNum(m.C)}（一阶）；抵消≠有限步的非线性误差恒为 0</text>`;
+ else html+=`<text x="${W/2}" y="${H-5}" class="ip-tick" text-anchor="middle">B=0：线性约束不能唯一决定修正。</text>`;
+ return html+'</svg>';}
+function constraint2D(s,m){const f=frame('ip-constraint-svg',Math.max(.85,...m.E.map(Math.abs))*1.3,760,355,['约束 1','约束 2']),t=s.progress,err=ipScale(m.E,Math.min(1,t)),corr=m.C?ipScale(m.C,ipClamp(t-1,0,1)):null;let html=f.start+'<title>约束空间：修正矩阵的像与误差抵消</title><g clip-path="url(#ip-constraint-svg-clip)">';
+ for(const r of [-.4,-.2,0,.2,.4]){html+=line(f,ipMV(m.B,[r,-.4]),ipMV(m.B,[r,.4]),'green','',1);html+=line(f,ipMV(m.B,[-.4,r]),ipMV(m.B,[.4,r]),'green','',1);}
+ html+=line(f,[0,0],ipMV(m.B,[.4,0]),'green','',2,true)+line(f,[0,0],ipMV(m.B,[0,.4]),'blue','',2,true);
+ html+=line(f,[0,0],err,'orange','',3.5,true)+dot(f,err,'orange',5)+label(f,err,'A dx','orange',12,18);
+ if(corr){const dest=ipAdd(err,corr);html+=line(f,err,dest,'blue','',3.1,true)+dot(f,dest,'blue',5,false);}
+ if(!m.guarantee){html+=line(f,[-3,-3],[3,3],'green','8 5',2);html+=label(f,[.6,.6],'Im B：只剩一条线','green',8,-12);}
+ html+=`</g><text x="30" y="${f.H-7}" class="ip-tick">网格是 B 对 [−0.4,0.4]² 的像；λ=0 时塌成直线。箭头分别是 0.4B e₁、0.4B e₂。</text>`;return html+f.end;}
+export function ipSurfaceSVG(s,m){const W=540,H=380,angle=s.camera*Math.PI/180,ca=Math.cos(angle),sa=Math.sin(angle),points=[],extent=s.surface==='bowl'?Math.max(.85,Math.abs(s.sx)+.25,Math.abs(s.sy)+.25):1;
+ const raw=([x,y,z])=>[ca*x-sa*y,.49*(sa*x+ca*y)-.82*z];
+ for(let i=0;i<=20;i++)for(let j=0;j<=20;j++){const x=-extent+2*extent*i/20,y=-extent+2*extent*j/20,z=ipSurfaceZ(s.surface,x,y);if(z!==null)points.push([x,y,z]);}
+ const available=[...points,m.p,m.trial,...(m.pred?[m.pred]:[]),...(m.exact?[m.exact]:[])],rs=available.map(raw),mn=[Math.min(...rs.map(v=>v[0]))-.15,Math.min(...rs.map(v=>v[1]))-.2],mx=[Math.max(...rs.map(v=>v[0]))+.15,Math.max(...rs.map(v=>v[1]))+.2],k=Math.min((W-68)/(mx[0]-mn[0]),(H-65)/(mx[1]-mn[1])),project=v=>{const r=raw(v);return [W/2+(r[0]-(mn[0]+mx[0])/2)*k,H/2+(r[1]-(mn[1]+mx[1])/2)*k];};
+ const poly=(vs,color,fill='none',width=1,dash='')=>`<path d="${vs.map((v,i)=>`${i?'L':'M'}${project(v).join(' ')}`).join('')}" fill="${fill}" stroke="${color}" stroke-width="${width}" ${dash?`stroke-dasharray="${dash}"`:''}/>`;
+ let html=`<svg xmlns="http://www.w3.org/2000/svg" id="ip-surface-svg" viewBox="0 0 ${W} ${H}" class="ip-svg ip-orbit" data-ip-orbit="1" role="img" aria-label="拖动旋转曲面、切平面与高度修正；坐标控制在输入平面"><rect x="7" y="7" width="${W-14}" height="${H-14}" fill="#f8faf4" rx="12"/>`;
+ const faces=[];for(let i=0;i<15;i++)for(let j=0;j<15;j++){const x=-extent+2*extent*i/15,y=-extent+2*extent*j/15,d=2*extent/15,corners=[[x,y],[x+d,y],[x+d,y+d],[x,y+d]];const p=corners.map(([u,v])=>{const z=ipSurfaceZ(s.surface,u,v);return z===null?null:[u,v,z];});if(p.every(Boolean))faces.push({p,depth:p.reduce((r,v)=>r+sa*v[0]+ca*v[1]+.6*v[2],0)});}
+ faces.sort((a,b)=>a.depth-b.depth);for(const f of faces)html+=poly([...f.p,f.p[0]],'#83a28b','#dcebdd66',.75);
+ if(m.Dg){const vs=[[-.34,-.34],[.34,-.34],[.34,.34],[-.34,.34],[-.34,-.34]].map(h=>[m.a[0]+h[0],m.a[1]+h[1],m.p[2]+ipMV(m.Dg,h)[0]]);html+=poly(vs,C.blue,'#dbe9f455',1.6,'6 3');}
+ for(const [end,txt] of [[[extent*.75,0,0],'x'],[[0,extent*.75,0],'y'],[[0,0,1.2],'z']]){html+=poly([[0,0,0],end],'#a6b69e','none',1);const p=project(end);html+=`<text x="${p[0]+7}" y="${p[1]}" class="ip-tick">${txt}</text>`;}
+ html+=poly([m.p,m.trial],C.orange,'none',2.4,'5 3');if(m.pred)html+=poly([m.trial,m.pred],C.blue,'none',2.7);if(m.exact)html+=poly([m.pred||m.trial,m.exact],C.green,'none',2.6);
+ const grad=ipAdd(m.p,ipScale(m.gradient,.35/ipNorm(m.gradient)));html+=poly([m.p,grad],C.green,'none',2);const gn=project(grad);html+=`<text x="${gn[0]+7}" y="${gn[1]-8}" class="ip-tick">∇F</text>`;
+ for(const [point,c,filled] of [[m.p,'green',true],[m.pred,'blue',false],[m.exact,'green',false],[ipMotion(s,m).point,s.progress<=1?'orange':s.progress<=2?'blue':'green',true]])if(point){const p=project(point);html+=`<circle cx="${p[0]}" cy="${p[1]}" r="5" stroke="${C[c]}" stroke-width="2" fill="${filled?C[c]:'white'}"/>`;}
+ html+=`<text x="25" y="${H-9}" class="ip-tick">拖图旋转 · 蓝色为切平面 · 三维投影不是新的坐标系</text>`;return html+'</svg>';}
+export function ipErrorSVG(s){const rows=ipErrorRows(s),valid=rows.filter(r=>r.ratio!==null&&Number.isFinite(r.ratio)),W=760,H=210,x0=60,x1=720,y0=28,y1=161,max=Math.max(.02,...valid.map(v=>v.ratio))*1.12,x=v=>x0+(-Math.log10(v.scale))/3*(x1-x0),y=v=>y1-v/max*(y1-y0);let html=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" class="ip-svg" role="img" aria-label="沿当前方向缩小输入的归一化隐函数近似误差"><path d="M${x0} ${y0}V${y1}H${x1}" stroke="#b8c6ac" fill="none"/>`;for(const q of [0,1,2,3])html+=`<text x="${x0+q/3*(x1-x0)}" y="185" text-anchor="middle" class="ip-tick">${['原步长','1/10','1/100','1/1000'][q]}</text>`;
+ let d='',open=false;for(const v of rows){if(v.ratio===null||!Number.isFinite(v.ratio)){open=false;continue;}d+=`${open?'L':'M'}${x(v)} ${y(v.ratio)}`;open=true;}
+ html+=`<path d="${d}" fill="none" stroke="${C.green}" stroke-width="2.8"/><text x="${x0-8}" y="${y0+5}" class="ip-tick" text-anchor="end">${ipNum(max,3)}</text><text x="${x0-8}" y="${y1}" class="ip-tick" text-anchor="end">0</text><text x="${x0}" y="18" class="ip-tick">归一化误差 · 当前方向 · 非证明</text>`;if(valid.length===0)html+=`<text x="${W/2}" y="100" class="ip-plot-label" text-anchor="middle">当前没有可用的 Dg 公式或非零步长；不伪造误差曲线。</text>`;return html+'</svg>';}

@@ -61,10 +61,10 @@ try:
             page.locator('#nav-uniform').click()
         expect(page.locator('#uf-title')).to_contain_text('每个点')
         expect(page.locator('#nav-uniform')).to_have_attribute('aria-current', 'page')
-        assert page.locator('.lab-nav').count() == 7
+        assert page.locator('.lab-nav').count() == 9
         expect(page.locator('.page-guide')).to_be_visible()
         expect(page.locator('.page-guide')).to_contain_text('本页要回答的问题')
-        ok('Seventh experiment mounts with seven navigation entries and an expanded start guide')
+        ok('Seventh experiment mounts with nine navigation entries and an expanded start guide')
 
         page.locator('[data-guide-action="start"]').click()
         page.locator('.uf-journey [data-uf-screen="workshop"]').click()

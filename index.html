@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#174d43">
-  <meta name="description" content="MA Playground 数学分析可视化实验室。从多元极限到函数项级数的一致收敛，动手连接几何直觉、公式、严格定义与证明。免费、开源、无需登录。">
+  <meta name="description" content="MA Playground 数学分析可视化实验室。从多元极限、Green–Gauss–Stokes 到局部线性化、隐函数与一致收敛，动手连接几何直觉、公式、定义与证明。免费、开源、无需登录。">
   <meta property="og:title" content="MA Playground · 让数学直觉，经得起证明。">
-  <meta property="og:description" content="从极限、可微性、Green–Gauss–Stokes，到一致收敛与极限交换：一个问题，连接直觉与证明。">
+  <meta property="og:description" content="从极限、Green–Gauss–Stokes 到导数作为线性映射、隐函数定理与一致收敛：一个问题，连接直觉与证明。">
   <title>MA Playground · 数学分析可视化实验室</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles/app.css">
@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="./styles/taylor.css">
   <link rel="stylesheet" href="./styles/series.css">
   <link rel="stylesheet" href="./styles/uniform.css">
+  <link rel="stylesheet" href="./styles/linear.css">
+  <link rel="stylesheet" href="./styles/implicit.css">
   <script type="module" src="./src/app.js"></script>
 </head>
 <body>
@@ -30,7 +32,7 @@
   <div class="layout">
     <aside class="sidebar" aria-label="实验导航">
       <div class="sidebar-inner">
-        <div class="sidebar-label">THE LAB NOTEBOOK <span>01—07</span></div>
+        <div class="sidebar-label">THE LAB NOTEBOOK <span>01—09</span></div>
         <div class="nav-group-title">从局部出发，理解整体。</div>
         <nav>
           <a class="lab-nav" id="nav-limits" href="#lab=limits"><span class="nav-num">01</span><span><strong>所有直线，都不够</strong><small>多元极限 · 路径陷阱</small></span><span class="nav-arrow">↗</span></a>
@@ -40,9 +42,11 @@
           <a class="lab-nav" id="nav-taylor" href="#lab=taylor"><span class="nav-num">05</span><span><strong>一点信息，长出曲线</strong><small>Taylor 展开 · 逐层逼近</small></span><span class="nav-arrow">↗</span></a>
           <a class="lab-nav" id="nav-series" href="#lab=series"><span class="nav-num">06</span><span><strong>不是谁强，是谁够用</strong><small>级数判别 · 条件与边界</small></span><span class="nav-arrow">↗</span></a>
           <a class="lab-nav" id="nav-uniform" href="#lab=uniform"><span class="nav-num">07</span><span><strong>每个点，还是所有点</strong><small>函数项级数 · 一致收敛</small></span><span class="nav-arrow">↗</span></a>
+          <a class="lab-nav" id="nav-linear" href="#lab=linear"><span class="nav-num">08</span><span><strong>导数，是局部线性机器</strong><small>Jacobian · 复合 · 中值</small></span><span class="nav-arrow">↗</span></a>
+          <a class="lab-nav" id="nav-implicit" href="#lab=implicit"><span class="nav-num">09</span><span><strong>保持约束，读出变化</strong><small>隐函数 · 一阶修正</small></span><span class="nav-arrow">↗</span></a>
         </nav>
         <div class="sidebar-note"><span class="little-orbit" aria-hidden="true">↗</span><h3>别急着接受结论。</h3><p>先预测，再拖动。<br>让反例挑战直觉，<br>让证明完成理解。</p><button class="text-button" data-action="about">如何使用实验室 <span>→</span></button></div>
-        <div class="sidebar-footer"><span class="version-pill">v1.6</span> OPEN SOURCE · NO TRACKING<br><small>数学分析我爱你～</small></div>
+        <div class="sidebar-footer"><span class="version-pill">v1.8</span> OPEN SOURCE · NO TRACKING<br><small>数学分析我爱你～</small></div>
       </div>
     </aside>
     <main id="main" tabindex="-1"></main>
